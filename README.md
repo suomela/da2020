@@ -22,3 +22,10 @@ Compilation
 
     cd book
     latexmk
+
+
+Additional illustrations
+------------------------
+
+For some additional illustrations, see:
+https://github.com/suomela/da2020-figures
