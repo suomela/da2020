@@ -1,0 +1,114 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{amsmath,amsthm,enumitem,titlesec,xcolor}
+\usepackage{microtype}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[unicode]{hyperref}
+
+\hypersetup{
+    hidelinks,
+    pdftitle={Distributed Algorithms},
+    pdfauthor={Juho Hirvonen and Jukka Suomela},
+}
+
+\definecolor{titlecolor}{HTML}{0088cc}
+\definecolor{hlcolor}{HTML}{f26924}
+
+\newcommand{\q}[2]{\paragraph{\mbox{Question #1: }#2.}}
+\newcommand{\sep}{{\centering \raisebox{-3mm}[0mm][0mm]{$*\quad*\quad*$}\par}}
+\newcommand{\hl}[1]{\textbf{\emph{#1}}}
+\newcommand{\cemph}[1]{\textcolor{hlcolor}{\emph{#1}}}
+
+\setitemize{noitemsep,leftmargin=3ex}
+
+\titleformat{\paragraph}[runin] {\normalfont\normalsize\bfseries\color{titlecolor}}{\theparagraph}{1em}{}
+
+\begin{document}
+
+\noindent
+\emph{CS-E4510 Distributed Algorithms / Juho Hirvonen, Jukka Suomela\\
+midterm exam, 21 October 2020}
+
+\paragraph{Instructions.}
+
+There are four questions, and you must answer \hl{at least three questions} in order to pass the exam. You are free to look at any source material (this includes lecture notes, textbooks, and anything you can find with Google), but you are not allowed to collaborate with anyone else or ask for anyone's help (this includes collaboration with other students and asking for help in online forums). You are free to use any results from the lecture notes directly. If you cannot solve a problem entirely, please try to at least explain what you tried and what went wrong.
+
+\paragraph{Definitions.}
+
+Let $G = (V,E)$ be a simple undirected graph and let $f\colon V \to \{1,2,\dotsc\}$ be a function that labels the nodes with positive natural numbers. We say that $f$ is a \hl{delightful labeling} of $G$ if the following holds for every node $x \in V$: there exist two other nodes $y \in V$ and $z \in V$ such that
+\begin{itemize}[noitemsep]
+    \item $\{x,y\} \in E$,
+    \item $\{y,z\} \in E$, and
+    \item $f(x) < f(y) < f(z)$ or $f(x) > f(y) > f(z)$.
+\end{itemize}
+Put otherwise, starting from any node $x$, you can find a walk of length two that follows strictly increasing or strictly decreasing labels. Note that in a delightful labeling the labels do not need to be distinct and they do not necessarily form a proper vertex coloring.
+
+We say that a graph $G$ is \hl{happy} if there exists a delightful labeling $f$ of $G$, otherwise the graph is \hl{unhappy}. A \hl{path graph} is a tree in which all nodes have degree at most $2$. A \hl{star graph} is a graph $G = (V,E)$ of the following form, for some $k = 0, 1, \dotsc$:
+\begin{align*}
+    V &= \bigl\{ u, v_1, v_2, \dotsc, v_k \bigr\}, \\
+    E &= \bigl\{ \{u, v_1\}, \{u, v_2\}, \dotsc, \{u, v_k\} \bigr\}.
+\end{align*}
+Note that a star graph is a tree, but a tree is not necessarily a star graph. We follow the convention that $n$ refers to the number of nodes in the input graph.
+
+\newpage
+
+\q{1}{Graph theory}
+
+Please answer both parts:
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+    \item Prove: \hl{all star graphs are unhappy}.
+    \item Let $G$ be a simple \hl{connected} graph that is \hl{unhappy} and that is \hl{not a star graph}. What can you say about $G$? How many nodes there can be in $G$?
+\end{enumerate}
+
+\q{2}{PN}
+
+Give a deterministic distributed algorithm that solves the following problem in the PN model (any running time is fine):
+\begin{itemize}
+    \item Graph family: \hl{path graphs} with at least $100$ nodes.
+    \item Local inputs: nothing.
+    \item Local outputs: a \hl{delightful labeling}.
+\end{itemize}
+Instructions and advice:
+\begin{itemize}
+    \item A \cemph{brief, informal description} of the algorithm is sufficient.
+    \item You do \emph{not} need to prove that the algorithm works correctly or analyze its running time.
+\end{itemize}
+
+\q{3}{LOCAL}
+
+Give a deterministic distributed algorithm that solves the following problem in the LOCAL model in {\boldmath $o(n)$} rounds:
+\begin{itemize}
+    \item Graph family: \hl{path graphs} with at least $100$ nodes.
+    \item Local inputs: each node gets as input its own unique identifier and the value of $n$.
+    \item Local outputs: a \hl{delightful labeling}.
+\end{itemize}
+Instructions and advice:
+\begin{itemize}
+    \item You can assume that the unique identifiers are numbers from the set $\{1,2,\dotsc,n^2\}$.
+    \item A \cemph{brief, informal description} of the algorithm is sufficient.
+    \item You do \emph{not} need to prove that the algorithm works correctly.
+    \item Please, however, give a brief explanation of why the running time is~$o(n)$ if it is not trivial.
+    \item If you cannot come up with a deterministic algorithm for solving this problem, how would you solve it with a \emph{randomized} algorithm, either Monte Carlo or Las Vegas?
+\end{itemize}
+
+\q{4}{CONGEST}
+
+Give a deterministic distributed algorithm that solves the following problem in the CONGEST model in $O(1)$ rounds:
+\begin{itemize}
+    \item Graph family: \hl{connected graphs}.
+    \item Local inputs: each node gets as input its own unique identifier.
+    \item Local outputs: all nodes output ``yes'' if the graph is \hl{happy}, and otherwise all nodes output ``no''.
+\end{itemize}
+Instructions and advice:
+\begin{itemize}
+    \item You can assume that the unique identifiers are numbers from the set $\{1,2,\dotsc,n^2\}$.
+    \item Note that you do not need to find a delightful labeling, it is enough to tell if such a labeling exists.
+    \item A \cemph{brief, informal description} of the algorithm is sufficient.
+    \item You do \emph{not} need to prove that the algorithm works correctly.
+    \item Please, however, give a brief explanation of why the running time is~$O(1)$ if it is not trivial.
+    \item Hint: solve question 1 first.
+\end{itemize}
+
+\end{document}
