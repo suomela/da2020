@@ -1,0 +1,266 @@
+%!TEX root = da2020.tex
+
+\usepackage[font=small,margin=1em]{caption}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[charter]{mathdesign}
+\usepackage{alphalph,amsmath,amsthm,booktabs,cite,enumitem,graphicx,hyphenat,titlesec,titletoc,url,xcolor}
+\usepackage{microtype}
+\usepackage{enotez}
+\usepackage[unicode]{hyperref}
+\renewcommand{\sfdefault}{phv}
+
+%---- Layout ----
+
+\pagestyle{plain}
+\clubpenalty=10000
+\widowpenalty=10000
+\hyphenation{auton-o-mous Hir-vo-nen Ju-ho Hir-vo-nen Kaa-si-nen Suo-me-la Tuo-mo Wawr-zyniak Ya-ma-shi-ta}
+
+%---- Colors ----
+
+\definecolor{titlecolor}{HTML}{0088cc}
+\definecolor{hlcolor}{HTML}{f26924}
+
+%---- Sections ----
+
+\titleformat{\part}[display] {\raggedright\normalfont\LARGE\color{titlecolor}}{Part \thepart}{0pt}{\Huge}
+\titleformat{\chapter}[display] {\raggedright\normalfont\Large\color{titlecolor}}{\chaptertitlename\ \thechapter}{0pt}{\Huge}[\vspace{5pt}\titlerule]
+\titleformat{\section}          {\raggedright\normalfont\Large\bfseries\color{titlecolor}}{\thesection}{1ex}{}
+\titleformat{\subsection}       {\raggedright\normalfont\large\bfseries\color{titlecolor}}{\thesubsection}{1ex}{}
+\titleformat{\paragraph}[runin] {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+
+\newcommand{\uchapter}[1]{\chapter*{#1}\phantomsection\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\usection}[1]{\section*{#1}\phantomsection\addcontentsline{toc}{section}{#1}}
+\newcommand{\longsection}[2]{\section[#1]{#1: #2}}
+
+\newcommand{\Chapter}[2]{\chapter{#2}\label{ch:#1}}
+\newcommand{\Appendix}[1]{\section{Appendix: #1}}
+
+\newcommand{\longref}[2]{\ref{#2}}
+\newcommand{\chapterref}[1]{\ref{ch:#1}}
+
+%---- TOC ----
+
+\contentsmargin{7mm}
+
+\titlecontents{part}
+              [0mm]
+              {\addvspace{7mm}\Large\bfseries\color{titlecolor}}
+              {}
+              {Part }
+              {}
+
+\titlecontents{chapter}
+              [6mm]
+              {\addvspace{4mm}\bfseries}
+              {\contentslabel{6mm}}
+              {\hspace*{-6mm}}
+              {\titlerule[0pt]\contentspage}
+              [\addvspace{2mm}]
+
+\titlecontents{section}
+              [15mm]
+              {}
+              {\contentslabel{9mm}}
+              {\hspace*{-9mm}}
+              { \titlerule*[0.7pc]{.}\contentspage}
+
+\titlecontents{subsection}
+              [27mm]
+              {}
+              {\contentslabel{12mm}}
+              {\hspace*{-12mm}}
+              { \titlerule*[0.7pc]{.}\contentspage}
+
+%---- Hyperlinks ----
+
+\def\UrlFont{\color{titlecolor}}
+\DeclareUrlCommand\path{}
+
+%---- Lists ----
+
+\setenumerate{label=(\alph*)}
+
+\newlist{descriptionb}{description}{1}
+\setlist[descriptionb]{font=\normalfont\itshape,leftmargin=0pt,itemsep=1ex,style=unboxed}
+
+\newlist{notation}{description}{1}
+\setlist[notation]{font=\normalfont,labelindent=0em,leftmargin=5.5em,itemsep=0ex,style=sameline}
+
+\newlist{algorithms}{description}{1}
+\setlist[algorithms]{font=\normalfont,labelindent=0em,leftmargin=5.5em,itemsep=0ex,style=sameline}
+
+\newlist{subex}{enumerate}{1}
+\setlist[subex]{label=(\alph*),itemsep=0.25ex}
+
+\newcommand{\algtoprule}{\rule{\columnwidth}{\heavyrulewidth}{}}
+\newcommand{\algbottomrule}{\rule[1ex]{\columnwidth}{\heavyrulewidth}{}}
+
+%---- Theorems ----
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}[chapter]
+\newtheorem{exs}[ex]{$\star$ Exercise}
+\newtheorem{exss}[ex]{$\star\star$ Exercise}
+
+%---- Notation ----
+
+\DeclareMathOperator{\ball}{ball}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\outdegree}{outdegree}
+\DeclareMathOperator{\indegree}{indegree}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\re}{re}
+
+\DeclareMathOperator{\Input}{Input}
+\DeclareMathOperator{\Output}{Output}
+\DeclareMathOperator{\States}{States}
+\DeclareMathOperator{\Msg}{Msg}
+\DeclareMathOperator{\Init}{init}
+\DeclareMathOperator{\Send}{send}
+\DeclareMathOperator{\Receive}{receive}
+\DeclareMathOperator{\Id}{id}
+
+\DeclareMathOperator{\GF}{GF}
+\DeclareMathOperator{\Poly}{Poly}
+\DeclareMathOperator{\poly}{poly}
+
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\NNpos}{\mathbb{Z}^+}
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\mybox}[1]{\mspace{2mu}{\setlength{\fboxsep}{1.5pt}\color{lightgray}\boxed{\color{black}\scriptstyle #1}}\mspace{2mu}}
+\newcommand{\lH}{\mathsf{H}}
+\newcommand{\lT}{\mathsf{T}}
+\newcommand{\lTH}{\mathsf{TH}}
+\newcommand{\blH}{\mybox{\lH}}
+\newcommand{\blT}{\mybox{\lT}}
+\newcommand{\blTH}{\mybox{\lTH}}
+
+\newcommand{\collA}{\ensuremath{\mathbf{A}}}
+\newcommand{\collP}{\ensuremath{\mathbf{P}}}
+\newcommand{\collC}{\ensuremath{\mathbf{C}}}
+\newcommand{\mone}{\ensuremath{\mathsf{1}}}
+\newcommand{\mtwo}{\ensuremath{\mathsf{2}}}
+\newcommand{\mthr}{\ensuremath{\mathsf{3}}}
+\newcommand{\mX}{\ensuremath{\mathsf{X}}}
+\newcommand{\mY}{\ensuremath{\mathsf{Y}}}
+
+\newcommand{\mA}{\ensuremath{\mathsf{A}}}
+\newcommand{\mB}{\ensuremath{\mathsf{B}}}
+\newcommand{\mC}{\ensuremath{\mathsf{C}}}
+\newcommand{\mD}{\ensuremath{\mathsf{D}}}
+\newcommand{\mE}{\ensuremath{\mathsf{E}}}
+\newcommand{\mF}{\ensuremath{\mathsf{F}}}
+
+\newcommand{\mI}{\ensuremath{\mathsf{I}}}
+\newcommand{\mO}{\ensuremath{\mathsf{O}}}
+\newcommand{\mM}{\ensuremath{\mathsf{M}}}
+\newcommand{\mU}{\ensuremath{\mathsf{U}}}
+\newcommand{\mP}{\ensuremath{\mathsf{P}}}
+
+\newcommand{\mysf}[1]{\textup{\sffamily #1}}
+\newcommand{\tmysf}[1]{\texorpdfstring{\mysf{#1}}{#1}}
+
+\newcommand{\algo}[1]{\mysf{#1}}
+\newcommand{\state}[1]{\mysf{#1}}
+\newcommand{\msg}[1]{`\emph{#1}'}
+\newcommand{\bin}[1]{\langle #1 \rangle}
+
+\newcommand{\tmodel}{\tmysf}
+\newcommand{\talgo}{\tmysf}
+
+\newcommand{\PN}{\mysf{PN}}
+\newcommand{\LOCAL}{\mysf{LOCAL}}
+\newcommand{\CONGEST}{\mysf{CONGEST}}
+\newcommand{\tPN}{\tmodel{PN}}
+\newcommand{\tLOCAL}{\tmodel{LOCAL}}
+\newcommand{\tCONGEST}{\tmodel{CONGEST}}
+
+% https://tex.stackexchange.com/a/573605/100
+\makeatletter
+\renewcommand{\nsim}{\mathrel{\mathpalette\n@sim\relax}}
+\newcommand{\n@sim}[2]{%
+  \ooalign{%
+    $\m@th#1\sim$\cr
+    \hidewidth$\m@th#1\rotatebox[origin=c]{60}{$#1-$}$\hidewidth\cr
+  }%
+}
+\makeatother
+
+%---- Macros ----
+
+\newcommand{\Set}[1]{\{\, #1 \,\}}
+\newcommand{\bigSet}[1]{\bigl\{\, #1 \,\bigr\}}
+\newcommand{\Apx}[1]{$#1$\hyp approximation}
+\newcommand{\Fact}[1]{$#1$\hyp factorization}
+\newcommand{\Reg}[1]{$#1$-regular}
+\newcommand{\Dpocol}{$(\Delta+\nobreak 1)$-coloring}
+\newcommand{\mydash}{\allowbreak\textemdash\allowbreak}
+\newcommand{\mysep}{\begin{center}$* \quad * \quad *$\end{center}}
+
+%---- Figures ----
+
+\newcounter{myexternalpagenum}
+\newcommand{\definepage}[1]{\stepcounter{myexternalpagenum}\edef#1{\arabic{myexternalpagenum}}}
+\input{figlist.tex}
+
+%---- Hints ----
+
+\setenotez{
+    list-name = {Hints},
+    backref = true,
+    mark-cs = {\hintnumber},
+    totoc = chapter
+}
+\def\theendnote{\AlphAlph{\value{endnote}}}
+
+\DeclareInstance{enotez-list}{custom}{list}
+{
+    format = \normalfont,
+    number-format = \normalfont,
+    list-type = itemize
+}
+
+\newcommand{\hint}[1]{\par\hfill{\footnotesize\em $\triangleright$ hint \endnote{#1}\par}}
+\newcommand{\hintnumber}[1]{#1}
+
+%---- Cover ----
+
+\makeatletter
+\renewcommand\maketitle{%
+\pagenumbering{Alph}
+\begin{titlepage}
+    \begin{flushleft}
+      \vspace*{\stretch{2}}
+        {\color{titlecolor}\fontsize{45}{38}\selectfont Distributed\\Algorithms 2020 \par}%
+        \vspace{1.5mm}%
+        {\color{titlecolor}\rule[0mm]{\textwidth}{3pt}\par}%
+        {\fontsize{18}{22}\selectfont Juho Hirvonen and Jukka Suomela \par}%
+        {\fontsize{12}{16}\selectfont\em Aalto University, Finland \par}%
+        \vspace*{\stretch{2}}
+        {\fontsize{12}{16}\selectfont \url{https://jukkasuomela.fi/da2020/} \par}%
+        \vspace{1mm}
+        {\fontsize{12}{16}\selectfont\em \today \par}%
+    \end{flushleft}%
+    \vspace*{\stretch{1}}
+\end{titlepage}
+\pagenumbering{roman}
+}
+\makeatother
+
+\hypersetup{
+    hidelinks,
+    pdftitle={Distributed Algorithms 2020},
+    pdfauthor={Juho Hirvonen and Jukka Suomela},
+}
+

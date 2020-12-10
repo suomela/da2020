@@ -1,0 +1,37 @@
+%!TEX root = da2020-04.tex
+
+\Appendix{Finite Fields} \label{app:finite-fields}
+
+For our purposes, finite field of size $q$ can be seen as the set $\{0,\dots,q-1\}$ equipped with modular arithmetic, for any prime $q$. Fields support addition, subtraction, multiplication, and division with the usual rules. We denote the finite field with $q$ elements (also known as a Galois field) by $\GF(q)$.
+
+Our proofs will use the following two properties of finite fields.
+\begin{enumerate}
+  \item Each element $a$ of the field has a unique multiplicative inverse element, denoted by $a^{-1}$, such that $a\cdot a^{-1} = 1$.
+  \item The product $ab$ of two elements is zero if and only if $a = 0$ or $b = 0$.
+\end{enumerate}
+
+We can define polynomials over $\GF(q)$. A polynomial $f[X]$ of degree $d$ can be represented as
+\[
+  f_0 + f_1 X + f_2 X^2 + \dots + f_d X^d,
+\]
+where the coefficients $f_i$ are elements of $\GF(q)$. A polynomial is non-trivial if there exists some $f_i \neq 0$. An element $a \in \GF(q)$ is a zero of a polynomial $f$ if $f(a) = 0$.
+
+\begin{proof}[Proof of Lemma~\ref{lem:poly-roots}]
+  We will prove the lemma by proving a related statement: any non-trivial polynomial of degree $d$ has at most $d$ zeros. Since $f(x) - g(x)$ is a polynomial of degree at most $d$, Lemma~\ref{lem:poly-roots} follows.
+  
+  The proof is by induction on $d$. Let $f[X] = f_0 + f_1 X$ denote an arbitrary polynomial of degree 1 over some finite field of size $q$. Since each element $a$ of a field has a unique inverse $a^{-1}$, there is a unique zero of $f[X]$: $X = -(f_0)(f_1)^{-1}$.
+  
+  Now assume that $d \geq 2$ and that the claim holds for smaller degrees. If polynomial $f$ has no zeros, the claim holds. Therefore assume that $f$ has at least one zero $a \in \GF(q)$. We will show that there exists a polynomial $g$ of degree $d-1$ such that $f = (X-a)g$. By the induction hypothesis $g$ has at most $d-1$ zeros, $X-a$ has one zero, and we know that the product equals zero if and only if either $X-a = 0$ or $g[X] = 0$.
+  
+  We show that $g$ exits by induction. If $d=1$, we can select $a = -(f_0)(f_1)^{-1}$ and $g = f_1$ to get $f[X] = (X + (f_0)(f_1)^{-1})f_1$.
+  
+  For $d \geq 2$, we again make the induction assumption. Define
+  \[
+  f' = f - f_d X^{d-1} (X-a),
+  \]
+  where $f_d$ is the $d$th coefficient of $f$. This polynomial has degree less than $d$, since the terms of degree $d$ cancel out. We also have that $f'(a) = 0$ since $f(a) = 0$ by assumption. By induction hypothesis there exists a $g'$ such that $f' = (X-a)g'$ and degree of $g'$ is at most $d-2$. By substituting $f' = (X-a)g'$ we get
+  \[
+    f = (X-a)g' + (X-a)f_d X^{d-1} = (X-a)(g' + f_d X^{d-1}).
+  \]
+  Therefore $f = (X-a)g$ for the polynomial $g = g' + f_d X^{d-1}$, a polynomial of degree at most $d-1$.
+\end{proof}

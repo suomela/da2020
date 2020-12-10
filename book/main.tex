@@ -1,0 +1,53 @@
+%!TEX root = da2020.tex
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\uchapter{Foreword}
+\input{foreword}
+
+\mainmatter
+\part{Informal Introduction}
+
+\input{ch01}
+\input{ch01a}
+
+\part{Graphs}
+
+\input{ch02}
+
+\part{Models of Computing}
+
+\input{ch03}
+\input{ch04}
+\input{ch04a}
+\input{ch05}
+\input{ch06}
+
+\part{Proving Impossibility Results}
+
+\input{ch07}
+\input{ch08}
+\input{ch09}
+\input{ch10}
+\input{ch11}
+
+\part{Conclusions}
+
+\input{ch12}
+
+\backmatter
+
+\printendnotes[custom]
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plainurl}
+{\def\UrlFont{\small\color{titlecolor}}
+\bibliography{articles}}
+
+\end{document}

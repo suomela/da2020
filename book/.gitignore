@@ -1,0 +1,12 @@
+da2020.pdf
+da2020-??.pdf
+*.aux
+*.bbl
+*.blg
+*.fls
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.synctex.gz
+Makefile
