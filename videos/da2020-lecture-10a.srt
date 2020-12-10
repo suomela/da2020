@@ -1,0 +1,525 @@
+1
+00:00:01,069 --> 00:00:02,940
+Hello everybody!
+
+2
+00:00:02,940 --> 00:00:06,429
+Last week we introduced
+the round elimination technique,
+
+3
+00:00:06,429 --> 00:00:11,790
+but we didn't yet see that many
+exciting applications of it.
+
+4
+00:00:11,790 --> 00:00:15,610
+We showed that some problems
+require, for example,
+
+5
+00:00:15,610 --> 00:00:18,590
+at least two rounds,
+but usually we care
+
+6
+00:00:18,590 --> 00:00:24,519
+about asymptotics,
+not so much about constants.
+
+7
+00:00:24,519 --> 00:00:27,519
+Now we will get to
+the real applications
+
+8
+00:00:27,519 --> 00:00:30,480
+of the round elimination
+technique.
+
+9
+00:00:30,480 --> 00:00:32,710
+One of the highlights is this:
+
+10
+00:00:32,710 --> 00:00:37,600
+with round elimination we can
+prove that a problem called
+
+11
+00:00:37,600 --> 00:00:42,460
+sinkless orientation
+cannot be solved fast.
+
+12
+00:00:42,460 --> 00:00:43,460
+For example,
+
+13
+00:00:43,460 --> 00:00:47,789
+if we look at the deterministic
+port-numbering model, then it is
+
+14
+00:00:47,789 --> 00:00:53,649
+not possible to solve it
+faster than in logarithmic time.
+
+15
+00:00:53,649 --> 00:00:57,960
+And this result has got
+tons of consequences.
+
+16
+00:00:57,960 --> 00:00:59,070
+Many other problems are known
+
+17
+00:00:59,070 --> 00:01:04,290
+to be at least as hard to solve
+as sinkless orientation.
+
+18
+00:01:04,290 --> 00:01:07,390
+And this idea is also guiding us
+when we define
+
+19
+00:01:07,390 --> 00:01:09,950
+the sinkless orientation
+problem.
+
+20
+00:01:09,950 --> 00:01:12,390
+We want to make it
+as simple as possible,
+
+21
+00:01:12,390 --> 00:01:16,439
+so that it can be reduced
+to many other problems.
+
+22
+00:01:16,439 --> 00:01:19,939
+And then once we show that
+sinkless orientation is hard,
+
+23
+00:01:19,939 --> 00:01:23,740
+we know that all these other
+problems are hard as well.
+
+24
+00:01:23,740 --> 00:01:27,810
+So let's now first define
+the sinkless orientation problem.
+
+25
+00:01:27,810 --> 00:01:32,200
+It's enough for now to
+consider 3-regular trees
+
+26
+00:01:32,200 --> 00:01:36,899
+in which all nodes have
+degree 1 or 3.
+
+27
+00:01:36,899 --> 00:01:40,520
+And just like last week,
+we assume that the nodes
+
+28
+00:01:40,520 --> 00:01:45,560
+are split in two classes,
+active and passive.
+
+29
+00:01:45,560 --> 00:01:49,520
+So we have a 2-coloring
+of the tree.
+
+30
+00:01:49,520 --> 00:01:52,369
+And the problem is simply this:
+orient the edges
+
+31
+00:01:52,369 --> 00:01:57,530
+so that all degree-3 nodes
+have at least one outgoing edge.
+
+32
+00:01:57,530 --> 00:01:59,950
+So this is good.
+
+33
+00:01:59,950 --> 00:02:04,440
+And so is this.
+
+34
+00:02:04,440 --> 00:02:06,390
+But this is wrong,
+
+35
+00:02:06,390 --> 00:02:12,050
+we have here got a node that
+doesn't have any outgoing edges.
+
+36
+00:02:12,050 --> 00:02:16,250
+Now this problem is easy to
+solve in logarithmic time.
+
+37
+00:02:16,250 --> 00:02:18,500
+Basically, within
+a logarithmic distance
+
+38
+00:02:18,500 --> 00:02:20,850
+there has to be at least
+one leaf node.
+
+39
+00:02:20,850 --> 00:02:25,250
+And if everyone points towards
+the nearest leaf node,
+
+40
+00:02:25,250 --> 00:02:27,550
+we get a sinkless orientation.
+
+41
+00:02:27,550 --> 00:02:34,160
+But the interesting thing is that
+this is the best that you can do.
+
+42
+00:02:34,160 --> 00:02:35,630
+We will show it this week
+
+43
+00:02:35,630 --> 00:02:39,110
+for deterministic algorithms
+in the port-numbering model,
+
+44
+00:02:39,110 --> 00:02:43,430
+but one can use similar ideas
+to show that the same problem
+
+45
+00:02:43,430 --> 00:02:46,950
+is hard to solve also
+in the LOCAL model,
+
+46
+00:02:46,950 --> 00:02:49,590
+and also for randomized
+algorithms.
+
+47
+00:02:49,590 --> 00:02:53,030
+Now why does that matter?
+
+48
+00:02:53,030 --> 00:02:55,130
+It turns out that
+many relevant problems
+
+49
+00:02:55,130 --> 00:02:58,700
+are at least as hard as
+the sinkless orientation problem.
+
+50
+00:02:58,700 --> 00:03:01,420
+Let's give just
+one simple example.
+
+51
+00:03:01,420 --> 00:03:03,200
+Let's look at graph coloring.
+
+52
+00:03:03,200 --> 00:03:07,280
+We already know that if we have
+a graph of maximum degree 2,
+
+53
+00:03:07,280 --> 00:03:10,620
+that is, a path or cycle,
+
+54
+00:03:10,620 --> 00:03:13,820
+then vertex coloring with
+3 colors can be done fast
+
+55
+00:03:13,820 --> 00:03:15,200
+in the LOCAL model,
+
+56
+00:03:15,200 --> 00:03:19,470
+while coloring with 2 colors
+is much harder.
+
+57
+00:03:19,470 --> 00:03:21,700
+Now what happens if we look at,
+
+58
+00:03:21,700 --> 00:03:25,410
+for example,
+graphs of maximum degree 4?
+
+59
+00:03:25,410 --> 00:03:27,620
+Again, we know that
+
+60
+00:03:27,620 --> 00:03:30,810
+vertex coloring with 5 colors
+can be done fast.
+
+61
+00:03:30,810 --> 00:03:33,650
+Remember that this is
+Delta+1 coloring,
+
+62
+00:03:33,650 --> 00:03:39,480
+something we learned to do fast
+in week 4 of this course.
+
+63
+00:03:39,480 --> 00:03:41,800
+But is this the best
+that we can do?
+
+64
+00:03:41,800 --> 00:03:45,280
+Could we also find
+a 4-coloring fast?
+
+65
+00:03:45,280 --> 00:03:47,330
+Well, if we could find
+
+66
+00:03:47,330 --> 00:03:52,230
+a 4-coloring of the vertices
+in graphs of maximum degree 4,
+
+67
+00:03:52,230 --> 00:03:56,940
+we could also find a 4-coloring
+of the edges in 3-regular trees.
+
+68
+00:03:56,940 --> 00:03:58,570
+Like this.
+
+69
+00:03:58,570 --> 00:04:01,310
+Take a 3-regular tree.
+
+70
+00:04:01,310 --> 00:04:03,430
+Switch to the line graph:
+
+71
+00:04:03,430 --> 00:04:08,910
+edges become nodes, and adjacent
+edges become adjacent nodes.
+
+72
+00:04:08,910 --> 00:04:12,250
+This is a graph of
+degree at most 4.
+
+73
+00:04:12,250 --> 00:04:16,180
+So we can find
+a 4-coloring of the vertices.
+
+74
+00:04:16,180 --> 00:04:18,450
+And this will directly give
+
+75
+00:04:18,450 --> 00:04:24,490
+a 4-coloring of the edges
+of the original tree.
+
+76
+00:04:24,490 --> 00:04:26,720
+But now this is something
+we could use
+
+77
+00:04:26,720 --> 00:04:30,510
+to find a sinkless orientation!
+
+78
+00:04:30,510 --> 00:04:35,470
+Let's put back active
+and passive nodes here.
+
+79
+00:04:35,470 --> 00:04:40,280
+And then, just pick two colors,
+like orange and blue,
+
+80
+00:04:40,280 --> 00:04:45,630
+and orient them away from
+the active nodes.
+
+81
+00:04:45,630 --> 00:04:49,060
+And orient the remaining
+two color classes
+
+82
+00:04:49,060 --> 00:04:52,650
+towards the active nodes.
+
+83
+00:04:52,650 --> 00:04:56,220
+Note that degree-3 nodes
+were incident to
+
+84
+00:04:56,220 --> 00:04:59,480
+at least one of
+orange and blue.
+
+85
+00:04:59,480 --> 00:05:02,450
+And at least one of
+green and black.
+
+86
+00:05:02,450 --> 00:05:06,760
+So they got at least
+one outgoing edge.
+
+87
+00:05:06,760 --> 00:05:09,600
+So it's a sinkless orientation.
+
+88
+00:05:09,600 --> 00:05:12,180
+So if we now know that
+
+89
+00:05:12,180 --> 00:05:14,880
+sinkless orientation
+is hard to solve,
+
+90
+00:05:14,880 --> 00:05:16,120
+we also know that
+
+91
+00:05:16,120 --> 00:05:22,730
+edge coloring of 3-regular trees
+with 4 colors is hard to solve.
+
+92
+00:05:22,730 --> 00:05:27,130
+And therefore 4-coloring
+the vertices in graphs
+
+93
+00:05:27,130 --> 00:05:32,540
+of maximum degree 4
+is also hard to solve,
+
+94
+00:05:32,540 --> 00:05:35,190
+exactly what we wanted to know.
+
+95
+00:05:35,190 --> 00:05:40,670
+How do we show that sinkless
+orientation is a hard problem?
+
+96
+00:05:40,670 --> 00:05:42,980
+We apply the round elimination
+technique,
+
+97
+00:05:42,980 --> 00:05:46,420
+familiar from the previous week.
+
+98
+00:05:46,420 --> 00:05:48,250
+Remember that round elimination
+
+99
+00:05:48,250 --> 00:05:51,850
+turns a given problem
+to another problem
+
+100
+00:05:51,850 --> 00:05:55,510
+that can be solved exactly
+one round faster.
+
+101
+00:05:55,510 --> 00:05:58,540
+But if you do this repeatedly,
+
+102
+00:05:58,540 --> 00:06:01,620
+starting from the sinkless
+orientation problem,
+
+103
+00:06:01,620 --> 00:06:05,180
+you will quickly reach
+a fixed point!
+
+104
+00:06:05,180 --> 00:06:10,170
+You get a contradiction:
+the output problem can be solved
+
+105
+00:06:10,170 --> 00:06:14,370
+exactly one round faster
+than itself.
+
+106
+00:06:14,370 --> 00:06:17,110
+Which is clearly
+a contradiction.
+
+107
+00:06:17,110 --> 00:06:21,750
+And the only escape is that
+round elimination fails here.
+
+108
+00:06:21,750 --> 00:06:23,690
+And why would it fail?
+
+109
+00:06:23,690 --> 00:06:27,060
+It turns out that the only
+possibility is that
+
+110
+00:06:27,060 --> 00:06:30,200
+this problem cannot be
+solved fast.
+
+111
+00:06:30,200 --> 00:06:34,720
+And hence sinkless orientation
+cannot be solved fast, either.
+

@@ -1,0 +1,1174 @@
+1
+00:00:02,290 --> 00:00:05,520
+Our course is about
+distributed algorithms,
+
+2
+00:00:05,520 --> 00:00:07,790
+but this week we won't talk
+
+3
+00:00:07,790 --> 00:00:12,320
+about distributed things or
+algorithmic things.
+
+4
+00:00:12,320 --> 00:00:14,670
+We will study graph theory,
+
+5
+00:00:14,670 --> 00:00:18,790
+because we will later need
+plenty of it in this course.
+
+6
+00:00:18,790 --> 00:00:23,160
+In this lecture,
+I'll introduce some basic
+
+7
+00:00:23,160 --> 00:00:28,540
+graph-theoretic concepts
+with the help of an example.
+
+8
+00:00:28,540 --> 00:00:31,930
+In the course material you'll
+find the formal definitions
+
+9
+00:00:31,930 --> 00:00:35,770
+of everything we use here,
+but I hope you can follow
+
+10
+00:00:35,770 --> 00:00:39,440
+this presentation as long as
+you are familiar with
+
+11
+00:00:39,440 --> 00:00:43,260
+the basic concepts
+like graphs, nodes, and edges.
+
+12
+00:00:43,260 --> 00:00:46,810
+I'd like to emphasize that here
+
+13
+00:00:46,810 --> 00:00:51,829
+all graphs are simple,
+undirected graphs.
+
+14
+00:00:51,829 --> 00:00:54,870
+There is a finite,
+nonempty set of nodes,
+
+15
+00:00:54,870 --> 00:01:02,500
+and a set of edges, and each
+edge is a set of 2 nodes.
+
+16
+00:01:02,500 --> 00:01:09,190
+To illustrate some key ideas,
+I'll prove the following theorem:
+
+17
+00:01:09,190 --> 00:01:14,700
+In any d-regular graph
+(where d is at least 1),
+
+18
+00:01:14,700 --> 00:01:17,580
+a minimum vertex cover is always
+
+19
+00:01:17,580 --> 00:01:24,440
+a d-approximation of
+a minimum dominating set.
+
+20
+00:01:24,440 --> 00:01:28,490
+Let me decompose this and
+explain all words here,
+
+21
+00:01:28,490 --> 00:01:33,250
+so that we understand
+what we claim here.
+
+22
+00:01:33,250 --> 00:01:38,380
+The degree of a node
+is the number of neighbors.
+
+23
+00:01:38,380 --> 00:01:44,030
+And a graph is d-regular if
+all nodes have degree d.
+
+24
+00:01:44,030 --> 00:01:47,090
+So we are focusing here
+on graphs in which
+
+25
+00:01:47,090 --> 00:01:51,549
+all nodes have the same
+number of neighbors.
+
+26
+00:01:51,549 --> 00:01:56,090
+Here are some examples
+of 1-regular graphs,
+
+27
+00:01:56,090 --> 00:02:00,090
+2-regular graphs,
+and 3-regular graphs.
+
+28
+00:02:00,090 --> 00:02:05,630
+For example, this graph here is
+3-regular: if you look at
+
+29
+00:02:05,630 --> 00:02:12,019
+any node, you'll see that
+it has got exactly 3 neighbors.
+
+30
+00:02:12,019 --> 00:02:16,389
+Good, so now we
+understand this part.
+
+31
+00:02:16,389 --> 00:02:21,189
+Then what about vertex covers?
+
+32
+00:02:21,189 --> 00:02:25,760
+Let's assume C is
+a subset of nodes.
+
+33
+00:02:25,760 --> 00:02:29,200
+We say that C is a vertex cover
+
+34
+00:02:29,200 --> 00:02:37,230
+if, for each edge, we have got
+at least 1 endpoint in set C.
+
+35
+00:02:37,230 --> 00:02:42,879
+For example, here this set of
+nodes is a vertex cover.
+
+36
+00:02:42,879 --> 00:02:44,749
+If you take any edge,
+
+37
+00:02:44,749 --> 00:02:51,079
+you will see that at least one
+endpoint is in set C.
+
+38
+00:02:51,079 --> 00:02:56,169
+You can have both endpoints in C.
+But you must have at least 1.
+
+39
+00:02:56,169 --> 00:03:00,879
+For example, this set of nodes
+is not a vertex cover, as we've
+
+40
+00:03:00,879 --> 00:03:05,900
+got this edge here that doesn't
+have any endpoint selected.
+
+41
+00:03:05,900 --> 00:03:10,159
+So you can think about
+vertex covers so that
+
+42
+00:03:10,159 --> 00:03:15,150
+each node covers all
+of its incident edges.
+
+43
+00:03:15,150 --> 00:03:21,480
+And a set of nodes is a vertex
+cover if it covers all edges.
+
+44
+00:03:21,480 --> 00:03:24,980
+And we say that C is
+a minimum vertex cover
+
+45
+00:03:24,980 --> 00:03:27,079
+if it is a vertex cover
+
+46
+00:03:27,079 --> 00:03:32,109
+that has the smallest
+possible number of nodes.
+
+47
+00:03:32,109 --> 00:03:36,930
+So for example this one here
+is a minimum vertex cover.
+
+48
+00:03:36,930 --> 00:03:39,760
+It is a vertex cover
+with 2 nodes,
+
+49
+00:03:39,760 --> 00:03:45,949
+and for this graph there is no
+vertex cover with fewer nodes.
+
+50
+00:03:45,949 --> 00:03:49,099
+This one is not
+a minimum vertex cover,
+
+51
+00:03:49,099 --> 00:03:50,599
+because it has got 3 nodes,
+
+52
+00:03:50,599 --> 00:03:54,040
+while 2 nodes are enough
+to cover the graph.
+
+53
+00:03:54,040 --> 00:04:00,409
+Good, so now we know
+what this part means.
+
+54
+00:04:00,409 --> 00:04:04,589
+Then let's look at this part,
+dominating sets.
+
+55
+00:04:04,589 --> 00:04:09,329
+Let's assume that D
+is a subset of nodes.
+
+56
+00:04:09,329 --> 00:04:13,839
+We say that D is
+a dominating set
+
+57
+00:04:13,839 --> 00:04:20,570
+if each node is in D or has got
+at least one neighbors in D.
+
+58
+00:04:20,570 --> 00:04:25,790
+For example, here this set of
+nodes is a dominating set.
+
+59
+00:04:25,790 --> 00:04:30,900
+If you take any node, either
+it is already selected,
+
+60
+00:04:30,900 --> 00:04:35,690
+or at least 1 of its neighbors
+is selected.
+
+61
+00:04:35,690 --> 00:04:40,150
+For example, this set of nodes
+is not a dominating set,
+
+62
+00:04:40,150 --> 00:04:42,370
+as we've got this node here
+
+63
+00:04:42,370 --> 00:04:47,560
+that is not selected, and none
+of its neighbors are selected.
+
+64
+00:04:47,560 --> 00:04:49,700
+The intuition here is that
+
+65
+00:04:49,700 --> 00:04:53,100
+a node can dominate
+all of its neighbors.
+
+66
+00:04:53,100 --> 00:04:54,400
+And a set of nodes is
+
+67
+00:04:54,400 --> 00:04:57,600
+a dominating set if
+all nodes are dominated.
+
+68
+00:04:57,600 --> 00:05:02,130
+And now D is
+a minimum dominating set
+
+69
+00:05:02,130 --> 00:05:03,680
+if it is a dominating set
+
+70
+00:05:03,680 --> 00:05:07,840
+that has the smallest possible
+number of nodes.
+
+71
+00:05:07,840 --> 00:05:13,010
+So for example this one here is
+a minimum dominating set.
+
+72
+00:05:13,010 --> 00:05:15,460
+It is a dominating set
+with 2 nodes,
+
+73
+00:05:15,460 --> 00:05:21,530
+and for this graph there is no
+dominating set with fewer nodes.
+
+74
+00:05:21,530 --> 00:05:26,330
+And this one is not
+a minimum dominating set,
+
+75
+00:05:26,330 --> 00:05:28,180
+because it has got 3 nodes,
+
+76
+00:05:28,180 --> 00:05:32,050
+while 2 nodes are enough
+to dominate the graph.
+
+77
+00:05:32,050 --> 00:05:39,150
+Good, we are making progress, we
+know also what this part means.
+
+78
+00:05:39,150 --> 00:05:43,760
+Finally, we need to understand
+approximations.
+
+79
+00:05:43,760 --> 00:05:48,530
+When we say that set D is
+
+80
+00:05:48,530 --> 00:05:52,740
+a k-approximation of
+a minimum dominating set,
+
+81
+00:05:52,740 --> 00:05:55,140
+we mean the following.
+
+82
+00:05:55,140 --> 00:06:00,030
+First, D is a dominating set.
+
+83
+00:06:00,030 --> 00:06:04,020
+Second, the size of D is
+
+84
+00:06:04,020 --> 00:06:09,960
+at most k times the size of
+the minimum dominating set.
+
+85
+00:06:09,960 --> 00:06:11,590
+That's it.
+
+86
+00:06:11,590 --> 00:06:14,600
+That's the full
+definition, nothing more.
+
+87
+00:06:14,600 --> 00:06:15,640
+Please note that
+
+88
+00:06:15,640 --> 00:06:19,990
+approximations have to be
+feasible dominating sets.
+
+89
+00:06:19,990 --> 00:06:23,100
+It isn't roughly
+a dominating set.
+
+90
+00:06:23,100 --> 00:06:26,710
+It has to be exactly
+a dominating set.
+
+91
+00:06:26,710 --> 00:06:29,460
+The only sloppiness is
+in the size.
+
+92
+00:06:29,460 --> 00:06:34,430
+It doesn't need to be
+a minimum-size dominating set,
+
+93
+00:06:34,430 --> 00:06:38,470
+it can be larger by some factor.
+
+94
+00:06:38,470 --> 00:06:41,060
+For example, this is an example
+
+95
+00:06:41,060 --> 00:06:47,530
+of a 2-approximation of
+a minimum dominating set.
+
+96
+00:06:47,530 --> 00:06:53,950
+In this graph the minimum
+dominating set is 3 nodes.
+
+97
+00:06:53,950 --> 00:06:59,230
+And here we have
+a dominating set with 6 nodes.
+
+98
+00:06:59,230 --> 00:07:01,950
+Six is at most 2 times 3.
+
+99
+00:07:01,950 --> 00:07:05,170
+So this is a 2-approximation.
+
+100
+00:07:05,170 --> 00:07:07,980
+So now we understand all terms.
+
+101
+00:07:07,980 --> 00:07:13,990
+Let's rephrase the claim
+so that it is easier to follow.
+
+102
+00:07:13,990 --> 00:07:18,330
+We can take any
+positive integer d.
+
+103
+00:07:18,330 --> 00:07:23,550
+And we can take any graph G
+that is d-regular.
+
+104
+00:07:23,550 --> 00:07:27,780
+And we can take any
+minimum vertex cover X.
+
+105
+00:07:27,780 --> 00:07:31,810
+And the claim is that X is also
+
+106
+00:07:31,810 --> 00:07:37,330
+a d-approximation of
+a minimum dominating set.
+
+107
+00:07:37,330 --> 00:07:43,690
+And to make it more clear,
+let's expand it a bit.
+
+108
+00:07:43,690 --> 00:07:46,940
+Consider any minimum
+vertex cover X and
+
+109
+00:07:46,940 --> 00:07:50,400
+any minimum dominating set Y.
+
+110
+00:07:50,400 --> 00:07:55,580
+Then we claim that X is
+also a dominating set,
+
+111
+00:07:55,580 --> 00:08:02,980
+and its size is not more than
+d times the size of Y.
+
+112
+00:08:02,980 --> 00:08:04,670
+Does this claim make any sense?
+
+113
+00:08:04,670 --> 00:08:08,350
+Let's quickly go through
+some examples.
+
+114
+00:08:08,350 --> 00:08:11,720
+Here d = 1.
+
+115
+00:08:11,720 --> 00:08:13,970
+We have a 1-regular graph.
+
+116
+00:08:13,970 --> 00:08:17,980
+Here is a minimum vertex cover X
+with 1 node,
+
+117
+00:08:17,980 --> 00:08:22,160
+and a minimum dominating set Y
+with 1 node.
+
+118
+00:08:22,160 --> 00:08:26,880
+It's easy to check that X is
+also a dominating set,
+
+119
+00:08:26,880 --> 00:08:32,610
+and indeed its size is
+1 times the size of Y.
+
+120
+00:08:32,610 --> 00:08:34,139
+Here d = 2.
+
+121
+00:08:34,139 --> 00:08:36,569
+We have a 2-regular graph.
+
+122
+00:08:36,569 --> 00:08:39,329
+Here is a minimum vertex cover X
+with 2 nodes,
+
+123
+00:08:39,329 --> 00:08:42,909
+and a minimum dominating set Y
+with 1 node.
+
+124
+00:08:42,909 --> 00:08:47,319
+We can check that X is
+also a dominating set,
+
+125
+00:08:47,319 --> 00:08:53,209
+and its size is 2 times the size
+of Y, just like it should be.
+
+126
+00:08:53,209 --> 00:08:55,449
+And another example for d = 2.
+
+127
+00:08:55,449 --> 00:08:58,130
+Another 2-regular graph.
+
+128
+00:08:58,130 --> 00:09:01,540
+A minimum vertex cover X
+with 3 nodes,
+
+129
+00:09:01,540 --> 00:09:07,579
+and a minimum dominating set Y
+with 2 nodes.
+
+130
+00:09:07,579 --> 00:09:11,170
+Again, X is a also
+a dominating set,
+
+131
+00:09:11,170 --> 00:09:16,100
+and its size is at most
+2 times the size of Y.
+
+132
+00:09:16,100 --> 00:09:18,709
+Please note that here we are
+doing a bit better,
+
+133
+00:09:18,709 --> 00:09:25,500
+the size of X is only 1.5 times
+the size of Y, but that's fine.
+
+134
+00:09:25,500 --> 00:09:26,930
+And here d is 3.
+
+135
+00:09:26,930 --> 00:09:30,079
+And here is an example of
+a graph where
+
+136
+00:09:30,079 --> 00:09:32,529
+a minimum vertex cover
+has 3 nodes
+
+137
+00:09:32,529 --> 00:09:36,470
+and a minimum dominating set
+has got 1 node.
+
+138
+00:09:36,470 --> 00:09:41,290
+Again, the size of X is
+at most 3 times the size of Y,
+
+139
+00:09:41,290 --> 00:09:45,860
+and X is also a dominating set.
+
+140
+00:09:45,860 --> 00:09:48,449
+And a yet another example here.
+
+141
+00:09:48,449 --> 00:09:51,970
+A minimum vertex cover
+with 4 nodes.
+
+142
+00:09:51,970 --> 00:09:55,300
+A minimum dominating set
+with 2 nodes.
+
+143
+00:09:55,300 --> 00:09:59,709
+Factor-2 difference,
+which is at most 3.
+
+144
+00:09:59,709 --> 00:10:05,300
+Good, so the claim
+at least seems to make sense
+
+145
+00:10:05,300 --> 00:10:09,759
+in these examples,
+and we know also that
+
+146
+00:10:09,759 --> 00:10:13,680
+the claim is basically
+the strongest possible.
+
+147
+00:10:13,680 --> 00:10:15,569
+In the previous examples we saw
+
+148
+00:10:15,569 --> 00:10:21,889
+that sometimes the ratio is
+exactly d, sometimes less.
+
+149
+00:10:21,889 --> 00:10:25,769
+Now let's prove this claim!
+
+150
+00:10:25,769 --> 00:10:29,180
+We need to prove 2 things.
+
+151
+00:10:29,180 --> 00:10:32,059
+First, we need to prove that
+
+152
+00:10:32,059 --> 00:10:36,560
+a minimum vertex cover
+is also a dominating set.
+
+153
+00:10:36,560 --> 00:10:41,279
+Second, we need to prove that
+a minimum vertex cover is not
+
+154
+00:10:41,279 --> 00:10:46,550
+that much larger than
+the smallest dominating set.
+
+155
+00:10:46,550 --> 00:10:49,070
+Let's start with the first part.
+
+156
+00:10:49,070 --> 00:10:53,829
+Let X be any vertex cover.
+
+157
+00:10:53,829 --> 00:10:54,829
+We don't need to use
+
+158
+00:10:54,829 --> 00:10:57,639
+the property that it is
+a minimum vertex cover here,
+
+159
+00:10:57,639 --> 00:11:00,490
+so we can just look at
+any vertex cover.
+
+160
+00:11:00,490 --> 00:11:06,000
+We need to show that
+X dominates all nodes, that is,
+
+161
+00:11:06,000 --> 00:11:12,079
+all nodes not in X have at
+least one neighbor in X.
+
+162
+00:11:12,079 --> 00:11:16,730
+To do this, consider any node u.
+
+163
+00:11:16,730 --> 00:11:20,579
+The graph is d-regular and
+d is at least 1,
+
+164
+00:11:20,579 --> 00:11:25,990
+so node u has got at least one
+neighbor, let's call it v.
+
+165
+00:11:25,990 --> 00:11:28,690
+So in the graph there is
+an edge {u,v}.
+
+166
+00:11:28,690 --> 00:11:32,129
+And X is a vertex cover,
+
+167
+00:11:32,129 --> 00:11:36,740
+so it contains at least one
+of the endpoints of this edge.
+
+168
+00:11:36,740 --> 00:11:39,290
+So u is in X, or
+
+169
+00:11:39,290 --> 00:11:44,459
+if this is not the case,
+its neighbor v is in X.
+
+170
+00:11:44,459 --> 00:11:49,910
+So we are done:
+X is a dominating set.
+
+171
+00:11:49,910 --> 00:11:53,040
+Now comes the more
+interesting part.
+
+172
+00:11:53,040 --> 00:12:00,379
+We need to bound the size of X
+in comparison with the size of Y.
+
+173
+00:12:00,379 --> 00:12:03,939
+We don't need to use
+the property that Y is
+
+174
+00:12:03,939 --> 00:12:08,839
+a minimum dominating set here,
+it is enough to show that X
+
+175
+00:12:08,839 --> 00:12:13,850
+is at most d times as large as
+any dominating set,
+
+176
+00:12:13,850 --> 00:12:16,790
+and then it of course also holds
+
+177
+00:12:16,790 --> 00:12:22,769
+for the specific case of
+a minimum dominating set.
+
+178
+00:12:22,769 --> 00:12:27,060
+Let's use n to denote the total
+number of nodes in the graph.
+
+179
+00:12:27,060 --> 00:12:31,620
+We will first compare
+the size of Y with n,
+
+180
+00:12:31,620 --> 00:12:35,230
+and then compare
+the size of X with n,
+
+181
+00:12:35,230 --> 00:12:39,190
+and this will give what we want.
+
+182
+00:12:39,190 --> 00:12:43,010
+Let's start by analyzing set Y,
+
+183
+00:12:43,010 --> 00:12:48,519
+which is assumed to be
+some dominating set.
+
+184
+00:12:48,519 --> 00:12:52,990
+Let's put some tokens on
+the nodes as follows.
+
+185
+00:12:52,990 --> 00:12:59,699
+Each node in Y puts
+one token on itself and
+
+186
+00:12:59,699 --> 00:13:05,319
+one token on each of
+its neighbors.
+
+187
+00:13:05,319 --> 00:13:13,069
+Because Y is a dominating set,
+each node got at least 1 token.
+
+188
+00:13:13,069 --> 00:13:17,000
+And because all nodes in Y
+have exactly d neighbors,
+
+189
+00:13:17,000 --> 00:13:22,350
+we used d+1 tokens
+per node in Y.
+
+190
+00:13:22,350 --> 00:13:25,629
+So in total the number of
+tokens we used
+
+191
+00:13:25,629 --> 00:13:31,029
+was d+1 times the size of Y.
+
+192
+00:13:31,029 --> 00:13:35,260
+And because each node
+got at least 1 token,
+
+193
+00:13:35,260 --> 00:13:39,869
+we must have used
+at least n tokens.
+
+194
+00:13:39,869 --> 00:13:44,160
+So n is at most d+1 times
+size of Y.
+
+195
+00:13:44,160 --> 00:13:53,309
+Good, let's keep this inequality
+in mind, we'll use it soon.
+
+196
+00:13:53,309 --> 00:13:55,959
+Let's next analyze set X,
+
+197
+00:13:55,959 --> 00:13:59,769
+which is assumed to be
+a minimum vertex cover.
+
+198
+00:13:59,769 --> 00:14:05,660
+We'll again put some tokens
+but with a twist.
+
+199
+00:14:05,660 --> 00:14:08,079
+Let's define set A that
+
+200
+00:14:08,079 --> 00:14:15,540
+consists of those nodes that
+are not in the vertex cover.
+
+201
+00:14:15,540 --> 00:14:20,319
+Now each node in A puts
+one token on itself
+
+202
+00:14:20,319 --> 00:14:23,759
+and one on each neighbor.
+
+203
+00:14:23,759 --> 00:14:30,339
+So the total number of tokens
+is d+1 times the size of A.
+
+204
+00:14:30,339 --> 00:14:35,259
+And I'm claiming that each node
+got at least one token,
+
+205
+00:14:35,259 --> 00:14:39,410
+so we had to use
+at least n tokens.
+
+206
+00:14:39,410 --> 00:14:41,709
+Why is this the case?
+
+207
+00:14:41,709 --> 00:14:44,540
+Well, let's image that
+
+208
+00:14:44,540 --> 00:14:50,410
+there was a node v
+that didn't get any tokens.
+
+209
+00:14:50,410 --> 00:14:53,250
+So v itself has to be
+in the vertex cover,
+
+210
+00:14:53,250 --> 00:14:55,990
+otherwise it would give
+a token to itself.
+
+211
+00:14:55,990 --> 00:15:01,069
+And all neighbors of v have to
+be also in the vertex cover,
+
+212
+00:15:01,069 --> 00:15:04,410
+otherwise they would
+give us tokens.
+
+213
+00:15:04,410 --> 00:15:07,519
+But what would this mean?
+
+214
+00:15:07,519 --> 00:15:10,309
+All of these edges incident to v
+
+215
+00:15:10,309 --> 00:15:14,339
+have both endpoints
+in the vertex cover X.
+
+216
+00:15:14,339 --> 00:15:19,790
+If X is a vertex cover,
+we could remove v from X,
+
+217
+00:15:19,790 --> 00:15:23,850
+and it would still be
+a vertex cover.
+
+218
+00:15:23,850 --> 00:15:25,189
+So we could construct
+
+219
+00:15:25,189 --> 00:15:31,209
+another vertex cover
+that is smaller than X.
+
+220
+00:15:31,209 --> 00:15:35,089
+But we assumed X is
+a minimum vertex cover,
+
+221
+00:15:35,089 --> 00:15:37,970
+so this cannot happen.
+
+222
+00:15:37,970 --> 00:15:42,769
+So it has to be the case that
+all nodes got at least 1 token,
+
+223
+00:15:42,769 --> 00:15:49,079
+and the number of tokens
+is therefore at least n.
+
+224
+00:15:49,079 --> 00:15:55,069
+So we have that the size of A
+is at least n over d+1.
+
+225
+00:15:55,069 --> 00:16:01,240
+And now we know enough about
+the size of X.
+
+226
+00:16:01,240 --> 00:16:06,139
+It's the complement of A, so its
+size is n minus the size of A.
+
+227
+00:16:06,139 --> 00:16:10,029
+And using this gives this,
+
+228
+00:16:10,029 --> 00:16:18,290
+so the size of X is at most
+d over d+1 times n.
+
+229
+00:16:18,290 --> 00:16:23,089
+Now let's recall what
+I told you to remember.
+
+230
+00:16:23,089 --> 00:16:29,759
+We already proved that n is
+at most d+1 times the size of Y.
+
+231
+00:16:29,759 --> 00:16:35,839
+So the size of X is
+at most d times the size of Y,
+
+232
+00:16:35,839 --> 00:16:41,189
+which is exactly what
+we were supposed to prove!
+
+233
+00:16:41,189 --> 00:16:43,389
+So a theorem proved.
+
+234
+00:16:43,389 --> 00:16:46,670
+Why did we do this?
+
+235
+00:16:46,670 --> 00:16:49,970
+Not because this is an important
+result in graph theory,
+
+236
+00:16:49,970 --> 00:16:52,249
+it certainly isn't.
+
+237
+00:16:52,249 --> 00:16:57,360
+But because this proof
+demonstrates both key concepts
+
+238
+00:16:57,360 --> 00:17:02,100
+and some useful proof techniques
+that we will use in this course.
+
+239
+00:17:02,100 --> 00:17:07,940
+By the way, it's good to note
+that we didn't really ever need
+
+240
+00:17:07,940 --> 00:17:13,260
+the property that
+X is a minimum vertex cover.
+
+241
+00:17:13,260 --> 00:17:15,079
+We only need to assume that
+
+242
+00:17:15,079 --> 00:17:20,480
+if you remove any node from X,
+it is no longer a vertex cover.
+
+243
+00:17:20,480 --> 00:17:26,940
+So it was enough to assume that
+X is a minimal vertex cover,
+
+244
+00:17:26,940 --> 00:17:30,980
+that is, you can't remove
+any nodes from it.
+
+245
+00:17:30,980 --> 00:17:34,340
+On the other hand,
+if you only assumed
+
+246
+00:17:34,340 --> 00:17:39,380
+that X is a vertex cover,
+this claim is no longer true.
+
+247
+00:17:39,380 --> 00:17:41,520
+Can you see why?
+
+248
+00:17:41,520 --> 00:17:43,090
+What's the simplest
+counterexample?
+

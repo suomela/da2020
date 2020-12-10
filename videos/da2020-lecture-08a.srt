@@ -1,0 +1,340 @@
+1
+00:00:01,630 --> 00:00:05,400
+Today we will look
+at the following question:
+
+2
+00:00:05,400 --> 00:00:10,600
+what can you do at best
+in T rounds in the LOCAL model?
+
+3
+00:00:10,600 --> 00:00:13,180
+We didn't restrict
+message size,
+
+4
+00:00:13,180 --> 00:00:16,270
+we didn't restrict
+local computation.
+
+5
+00:00:16,270 --> 00:00:19,789
+So in each round everyone
+
+6
+00:00:19,789 --> 00:00:24,589
+could tell everything they know
+to all of their neighbors!
+
+7
+00:00:24,589 --> 00:00:28,310
+And this is also the best thing
+that you could do,
+
+8
+00:00:28,310 --> 00:00:30,220
+you can't tell something
+you don't know,
+
+9
+00:00:30,220 --> 00:00:32,989
+and telling less won't help.
+
+10
+00:00:32,989 --> 00:00:35,410
+Let's see what this means.
+
+11
+00:00:35,410 --> 00:00:39,090
+Before the first round
+each node knows only
+
+12
+00:00:39,090 --> 00:00:42,450
+its own identifier
+and its own degree and
+
+13
+00:00:42,450 --> 00:00:44,890
+whatever local inputs it had.
+
+14
+00:00:44,890 --> 00:00:50,470
+So basically you know
+only your radius-0 neighborhood.
+
+15
+00:00:50,470 --> 00:00:54,440
+And this is all that you can
+tell your neighbors in round 1.
+
+16
+00:00:54,440 --> 00:00:58,120
+But now if everyone
+tells this to each neighbor,
+
+17
+00:00:58,120 --> 00:01:00,940
+everyone will know
+who their neighbors are.
+
+18
+00:01:00,940 --> 00:01:02,180
+So after 1 round,
+
+19
+00:01:02,180 --> 00:01:06,079
+all nodes are aware of their
+radius-1 neighborhoods.
+
+20
+00:01:06,079 --> 00:01:07,619
+And in the second round
+
+21
+00:01:07,619 --> 00:01:11,100
+everyone will tell this
+to all their neighbors.
+
+22
+00:01:11,100 --> 00:01:12,289
+So everyone will learn
+
+23
+00:01:12,289 --> 00:01:16,369
+what is the radius-1
+neighborhood of each neighbor.
+
+24
+00:01:16,369 --> 00:01:18,869
+And if you put together
+this information,
+
+25
+00:01:18,869 --> 00:01:23,390
+you will have a full picture
+of your radius-2 neighborhood!
+
+26
+00:01:23,390 --> 00:01:25,350
+And you can continue this way.
+
+27
+00:01:25,350 --> 00:01:29,280
+After round 3, everyone knows
+their radius-3 neighborhood.
+
+28
+00:01:29,280 --> 00:01:33,640
+After round 4, everyone knows
+their radius-4 neighborhood.
+
+29
+00:01:33,640 --> 00:01:35,520
+And so on.
+
+30
+00:01:35,520 --> 00:01:39,859
+So at best in T rounds
+you can learn everything
+
+31
+00:01:39,859 --> 00:01:43,759
+up to distance T,
+and nothing more.
+
+32
+00:01:43,759 --> 00:01:47,810
+And if you stop after T rounds
+and announce your local output,
+
+33
+00:01:47,810 --> 00:01:51,159
+then whatever you output
+has to be a function
+
+34
+00:01:51,159 --> 00:01:53,770
+of the information
+that was there
+
+35
+00:01:53,770 --> 00:01:58,200
+in the network within
+distant T from you.
+
+36
+00:01:58,200 --> 00:02:01,869
+So now we have another
+equivalent way
+
+37
+00:02:01,869 --> 00:02:05,219
+to define algorithms
+in the LOCAL model:
+
+38
+00:02:05,219 --> 00:02:10,670
+an algorithm that runs
+in time T is simply a mapping
+
+39
+00:02:10,670 --> 00:02:15,420
+from radius-T neighborhoods
+to local outputs!
+
+40
+00:02:15,420 --> 00:02:19,080
+This means that
+time and distance are
+
+41
+00:02:19,080 --> 00:02:22,560
+interchangeable
+in the LOCAL model.
+
+42
+00:02:22,560 --> 00:02:23,560
+And therefore
+
+43
+00:02:23,560 --> 00:02:29,470
+fast distributed algorithms
+are also highly localized.
+
+44
+00:02:29,470 --> 00:02:30,870
+If we have a fast algorithm,
+
+45
+00:02:30,870 --> 00:02:34,700
+each node makes decisions
+based on the information
+
+46
+00:02:34,700 --> 00:02:39,170
+that was available
+in its local neighborhood.
+
+47
+00:02:39,170 --> 00:02:42,130
+So let's recap,
+
+48
+00:02:42,130 --> 00:02:46,570
+all these notions are
+the same in the LOCAL model:
+
+49
+00:02:46,570 --> 00:02:47,840
+What is the running time?
+
+50
+00:02:47,840 --> 00:02:51,040
+Or how many communication
+rounds are needed?
+
+51
+00:02:51,040 --> 00:02:54,770
+Or what is the locality
+of the problem?
+
+52
+00:02:54,770 --> 00:03:00,090
+Or how far do you need
+to see in the graph?
+
+53
+00:03:00,090 --> 00:03:03,400
+Something as simple as
+coloring a path with 2 colors
+
+54
+00:03:03,400 --> 00:03:06,610
+is an example of
+a global problem.
+
+55
+00:03:06,610 --> 00:03:08,870
+Let's quickly prove it.
+
+56
+00:03:08,870 --> 00:03:15,850
+Assume you had some way of
+solving it in sublinear time.
+
+57
+00:03:15,850 --> 00:03:19,150
+So along a long path,
+
+58
+00:03:19,150 --> 00:03:22,430
+these two nodes could pick
+their own colors based on
+
+59
+00:03:22,430 --> 00:03:25,730
+the information in their
+local neighborhood only.
+
+60
+00:03:25,730 --> 00:03:28,900
+Let's assume the distance
+between the nodes is even,
+
+61
+00:03:28,900 --> 00:03:33,230
+so they pick the same color,
+let's say black.
+
+62
+00:03:33,230 --> 00:03:38,120
+But let's then modify
+the input graph like this.
+
+63
+00:03:38,120 --> 00:03:41,780
+We just move this one node
+to a new place,
+
+64
+00:03:41,780 --> 00:03:47,340
+keep everything else the same,
+including all unique identifiers.
+
+65
+00:03:47,340 --> 00:03:50,960
+These two local neighborhoods
+don't change.
+
+66
+00:03:50,960 --> 00:03:55,710
+So the local outputs of these
+two nodes won't change, either.
+
+67
+00:03:55,710 --> 00:04:00,820
+So both nodes will still output
+the same color.
+
+68
+00:04:00,820 --> 00:04:03,930
+But the distance between
+the nodes is now odd,
+
+69
+00:04:03,930 --> 00:04:08,260
+so somewhere along the path
+the coloring can't be right.
+
+70
+00:04:08,260 --> 00:04:12,130
+So any sublinear-time
+algorithm will fail.
+
+71
+00:04:12,130 --> 00:04:16,400
+Linear-time brute force algorithms
+are the only possibility here.
+

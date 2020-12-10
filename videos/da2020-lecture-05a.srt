@@ -1,0 +1,682 @@
+1
+00:00:01,010 --> 00:00:02,050
+Hello everyone,
+
+2
+00:00:02,050 --> 00:00:03,830
+Today we will talk about
+
+3
+00:00:03,830 --> 00:00:09,040
+the all-pairs shortest path
+problem, or APSP for short.
+
+4
+00:00:09,040 --> 00:00:11,240
+The problem is simply this:
+
+5
+00:00:11,240 --> 00:00:16,109
+everyone needs to know
+their distance to everyone else.
+
+6
+00:00:16,109 --> 00:00:18,190
+This is the ultimate
+routing primitive.
+
+7
+00:00:18,190 --> 00:00:22,160
+You have got some data
+to send to any destination,
+
+8
+00:00:22,160 --> 00:00:26,530
+you now know how far
+the destination is from you.
+
+9
+00:00:26,530 --> 00:00:27,859
+And if you also have got
+
+10
+00:00:27,859 --> 00:00:30,700
+this information
+for all of your neighbors,
+
+11
+00:00:30,700 --> 00:00:35,239
+then you'll also immediately know
+which way to forward the data
+
+12
+00:00:35,239 --> 00:00:39,440
+so that you move it
+closer to the destination.
+
+13
+00:00:39,440 --> 00:00:40,979
+It will be useful to contrast
+
+14
+00:00:40,979 --> 00:00:45,070
+the all-pairs shortest path
+problem with a much easier task,
+
+15
+00:00:45,070 --> 00:00:49,539
+single-source shortest path
+problem, or SSSP for short.
+
+16
+00:00:49,539 --> 00:00:52,949
+Here you've got a special
+starting node s,
+
+17
+00:00:52,949 --> 00:00:56,039
+and it is enough that everyone
+knows their distance to s.
+
+18
+00:00:56,039 --> 00:00:57,319
+This is enough if you are
+
+19
+00:00:57,319 --> 00:01:01,170
+for example only routing data
+towards some sink node s.
+
+20
+00:01:01,170 --> 00:01:06,650
+Now how do we solve these problems
+in a distributed setting?
+
+21
+00:01:06,650 --> 00:01:09,190
+In the familiar LOCAL model,
+we could trivially solve
+
+22
+00:01:09,190 --> 00:01:13,320
+both of these problems
+in O(diameter) many rounds.
+
+23
+00:01:13,320 --> 00:01:14,370
+Just gather everything and
+
+24
+00:01:14,370 --> 00:01:17,070
+then all nodes know
+the entire input graph
+
+25
+00:01:17,070 --> 00:01:21,120
+and they can locally compute
+distances to all other nodes.
+
+26
+00:01:21,120 --> 00:01:24,730
+But this is heavily
+abusing the assumption
+
+27
+00:01:24,730 --> 00:01:30,360
+that in one round we can send
+arbitrarily large messages.
+
+28
+00:01:30,360 --> 00:01:33,950
+This week we're studying
+a new model, the CONGEST model,
+
+29
+00:01:33,950 --> 00:01:36,160
+which is exactly the same as
+the LOCAL model,
+
+30
+00:01:36,160 --> 00:01:41,780
+except for one restriction:
+messages have to be small.
+
+31
+00:01:41,780 --> 00:01:44,700
+So we can no longer send
+messages that contain,
+
+32
+00:01:44,700 --> 00:01:49,340
+for example, a full description
+of the entire input graph.
+
+33
+00:01:49,340 --> 00:01:52,000
+We can only send around
+small numbers,
+
+34
+00:01:52,000 --> 00:01:54,870
+for example, unique identifiers
+or distances.
+
+35
+00:01:54,870 --> 00:01:59,140
+So how to solve APSP
+in the CONGEST model fast?
+
+36
+00:01:59,140 --> 00:02:01,200
+As a warm-up,
+
+37
+00:02:01,200 --> 00:02:04,930
+let's look at single-source
+shortest paths first.
+
+38
+00:02:04,930 --> 00:02:09,280
+This turns out to be really
+simple also with small messages.
+
+39
+00:02:09,280 --> 00:02:12,409
+If you have specified
+one node as the source,
+
+40
+00:02:12,409 --> 00:02:15,579
+you can simply flood
+information about distances
+
+41
+00:02:15,579 --> 00:02:17,409
+from this node to everyone.
+
+42
+00:02:17,409 --> 00:02:21,430
+The node itself knows
+it's at distance 0, and
+
+43
+00:02:21,430 --> 00:02:24,959
+it just sends a small message
+to each neighbor
+
+44
+00:02:24,959 --> 00:02:29,349
+informing that they are
+at distance 1,
+
+45
+00:02:29,349 --> 00:02:32,650
+they inform their neighbors that
+they are at distance at most 2,
+
+46
+00:02:32,650 --> 00:02:34,180
+and so on.
+
+47
+00:02:34,180 --> 00:02:37,590
+When a node first receives
+message x from any neighbor,
+
+48
+00:02:37,590 --> 00:02:40,150
+it knows it is at distance x,
+
+49
+00:02:40,150 --> 00:02:42,840
+it can inform its
+other neighbors and stop.
+
+50
+00:02:42,840 --> 00:02:47,109
+Basically, we create waves
+that propagate at constant speed
+
+51
+00:02:47,109 --> 00:02:52,510
+in the graph outwards, until
+they have reached all nodes.
+
+52
+00:02:52,510 --> 00:02:56,230
+This works fine,
+for any given starting point,
+
+53
+00:02:56,230 --> 00:02:59,379
+and it takes only
+O(diameter) many rounds
+
+54
+00:02:59,379 --> 00:03:04,719
+until everyone knows
+their distances to the source.
+
+55
+00:03:04,719 --> 00:03:08,779
+Now what we could try to do
+is to do the same thing
+
+56
+00:03:08,779 --> 00:03:12,290
+for every possible source,
+in sequence.
+
+57
+00:03:12,290 --> 00:03:14,099
+The first challenge
+would be figuring out
+
+58
+00:03:14,099 --> 00:03:16,939
+how to coordinate this,
+as we'd need to take turns
+
+59
+00:03:16,939 --> 00:03:18,620
+in some distributed manner.
+
+60
+00:03:18,620 --> 00:03:21,859
+But even worse,
+even if we could do this,
+
+61
+00:03:21,859 --> 00:03:24,790
+it would take
+n times diameter many rounds
+
+62
+00:03:24,790 --> 00:03:28,900
+if we initiate one wave,
+wait for it to reach everyone,
+
+63
+00:03:28,900 --> 00:03:32,819
+and only then launch
+the second wave.
+
+64
+00:03:32,819 --> 00:03:38,749
+Now another idea would be to
+try to do all this in parallel.
+
+65
+00:03:38,749 --> 00:03:44,719
+Just initiate a wave starting
+from each node simultaneously.
+
+66
+00:03:44,719 --> 00:03:49,019
+Each node tells all its neighbors
+the distance to itself,
+
+67
+00:03:49,019 --> 00:03:52,879
+plus its identifier, and
+this information is forwarded.
+
+68
+00:03:52,879 --> 00:03:57,109
+We'd have n waves
+in progress simultaneously.
+
+69
+00:03:57,109 --> 00:04:02,760
+Well, if this was the LOCAL
+model, it would be just fine.
+
+70
+00:04:02,760 --> 00:04:05,079
+But in the CONGEST model
+this won't work.
+
+71
+00:04:05,079 --> 00:04:06,079
+There would be
+
+72
+00:04:06,079 --> 00:04:10,359
+potentially huge congestion
+at some communication links.
+
+73
+00:04:10,359 --> 00:04:13,139
+We might have almost n waves
+that would like to
+
+74
+00:04:13,139 --> 00:04:16,019
+make progress
+over the same edge.
+
+75
+00:04:16,019 --> 00:04:19,600
+And if we somehow take turns
+between different waves,
+
+76
+00:04:19,600 --> 00:04:22,200
+we'd increase the running time
+by a factor of n
+
+77
+00:04:22,200 --> 00:04:25,840
+and we are back to something
+like n times diameter.
+
+78
+00:04:25,840 --> 00:04:27,870
+But we can do better!
+
+79
+00:04:27,870 --> 00:04:29,030
+There is a linear-time algorithm
+
+80
+00:04:29,030 --> 00:04:32,560
+for finding all-pairs shortest
+paths in the CONGEST model,
+
+81
+00:04:32,560 --> 00:04:33,610
+and it's really simple.
+
+82
+00:04:33,610 --> 00:04:38,380
+I'd like to emphasize we won't
+get diameter time this way,
+
+83
+00:04:38,380 --> 00:04:41,260
+but at least the running time
+will be linear in n,
+
+84
+00:04:41,260 --> 00:04:44,030
+and not something like
+n times diameter.
+
+85
+00:04:44,030 --> 00:04:45,590
+So what do we do.
+
+86
+00:04:45,590 --> 00:04:50,770
+We first pick a leader s and
+construct a tree rooted at s.
+
+87
+00:04:50,770 --> 00:04:54,750
+This is pretty easy to do fast
+in the CONGEST model,
+
+88
+00:04:54,750 --> 00:04:56,000
+as we can for example first
+
+89
+00:04:56,000 --> 00:04:58,810
+find the node s with
+the smallest identifier,
+
+90
+00:04:58,810 --> 00:05:03,210
+and then initiate a wave
+from s to form the tree.
+
+91
+00:05:03,210 --> 00:05:07,560
+Here is a neat way to do
+both of these in one step.
+
+92
+00:05:07,560 --> 00:05:10,520
+Everyone first thinks
+they are leaders and
+
+93
+00:05:10,520 --> 00:05:13,890
+start to construct trees
+rooted at them.
+
+94
+00:05:13,890 --> 00:05:17,310
+And then we just ignore messages
+coming from one root if we have
+
+95
+00:05:17,310 --> 00:05:21,150
+already seen messages coming from
+a root with a smaller identifier.
+
+96
+00:05:21,150 --> 00:05:24,260
+Basically we initiate n waves,
+
+97
+00:05:24,260 --> 00:05:29,120
+but other waves just die out
+as they get ignored and the one
+
+98
+00:05:29,120 --> 00:05:33,620
+initiated by the node with
+the smallest identifier wins.
+
+99
+00:05:33,620 --> 00:05:36,020
+There's no congestion
+on any link:
+
+100
+00:05:36,020 --> 00:05:39,030
+in each round each node only
+forwards the wave
+
+101
+00:05:39,030 --> 00:05:43,060
+related to the smallest root
+it has seen so far.
+
+102
+00:05:43,060 --> 00:05:46,460
+Good, we have now somehow
+
+103
+00:05:46,460 --> 00:05:49,910
+picked a leader and
+formed a tree rooted at it.
+
+104
+00:05:49,910 --> 00:05:52,370
+Now how do we use this?
+
+105
+00:05:52,370 --> 00:05:54,400
+The basic idea is simple.
+
+106
+00:05:54,400 --> 00:05:57,760
+We create n waves,
+one starting at each node.
+
+107
+00:05:57,760 --> 00:06:01,150
+But we do it so that
+many waves can be
+
+108
+00:06:01,150 --> 00:06:06,550
+in progress simultaneously,
+without any congestion!
+
+109
+00:06:06,550 --> 00:06:13,590
+To do this, we initiate a token
+and move it around in the tree.
+
+110
+00:06:13,590 --> 00:06:19,070
+The token will traverse the tree
+in a depth-first manner.
+
+111
+00:06:19,070 --> 00:06:22,540
+Visit new children
+if any are left.
+
+112
+00:06:22,540 --> 00:06:25,380
+Otherwise come back
+towards the root.
+
+113
+00:06:25,380 --> 00:06:29,060
+And we do this at half speed.
+
+114
+00:06:29,060 --> 00:06:30,380
+Move token.
+
+115
+00:06:30,380 --> 00:06:31,560
+Wait for one round.
+
+116
+00:06:31,560 --> 00:06:33,120
+Move token.
+
+117
+00:06:33,120 --> 00:06:34,550
+Wait for one round.
+
+118
+00:06:34,550 --> 00:06:36,140
+This will be important.
+
+119
+00:06:36,140 --> 00:06:37,930
+Now please note that
+
+120
+00:06:37,930 --> 00:06:43,020
+this token will traverse
+the entire tree in linear time.
+
+121
+00:06:43,020 --> 00:06:50,060
+Roughly 4n steps are needed
+until we have visited all nodes.
+
+122
+00:06:50,060 --> 00:06:52,830
+And what do we do
+with this token?
+
+123
+00:06:52,830 --> 00:06:55,640
+The idea is really simple.
+
+124
+00:06:55,640 --> 00:07:00,610
+When we visit a new node,
+we initiate a wave there.
+
+125
+00:07:00,610 --> 00:07:02,830
+And that's it.
+
+126
+00:07:02,830 --> 00:07:05,900
+We create n waves,
+one per node.
+
+127
+00:07:05,900 --> 00:07:11,110
+And we managed to create
+all the waves in linear time.
+
+128
+00:07:11,110 --> 00:07:14,590
+And each wave takes only
+diameter time
+
+129
+00:07:14,590 --> 00:07:17,490
+to propagate through
+the network.
+
+130
+00:07:17,490 --> 00:07:21,730
+So if there are no collisions
+between the wavefronts,
+
+131
+00:07:21,730 --> 00:07:24,200
+everything will be nice and
+smooth and everyone will
+
+132
+00:07:24,200 --> 00:07:29,990
+learn their distance to
+everyone else in linear time.
+
+133
+00:07:29,990 --> 00:07:32,170
+And if you look at
+this animation,
+
+134
+00:07:32,170 --> 00:07:33,510
+you'll see something curious.
+
+135
+00:07:33,510 --> 00:07:37,280
+The wavefronts are always
+properly nested.
+
+136
+00:07:37,280 --> 00:07:41,910
+A new wave will never cross
+a wave created earlier.
+
+137
+00:07:41,910 --> 00:07:46,130
+There is no congestion, we have
+always got enough bandwidth
+
+138
+00:07:46,130 --> 00:07:50,820
+on each edge to forward
+new distance information.
+
+139
+00:07:50,820 --> 00:07:53,500
+And this was just
+a random network,
+
+140
+00:07:53,500 --> 00:07:57,020
+not specifically constructed
+so that this would happen.
+
+141
+00:07:57,020 --> 00:07:58,950
+The algorithm guarantees that
+
+142
+00:07:58,950 --> 00:08:03,330
+two wavefronts that it creates
+will never collide.
+
+143
+00:08:03,330 --> 00:08:05,780
+Can you see why this is
+always the case?
+

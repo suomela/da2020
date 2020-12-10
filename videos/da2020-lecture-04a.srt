@@ -1,0 +1,531 @@
+1
+00:00:02,300 --> 00:00:03,460
+Hi everyone,
+
+2
+00:00:03,460 --> 00:00:07,359
+Today I'll present
+a simple and efficient
+
+3
+00:00:07,359 --> 00:00:10,660
+distributed algorithm
+for graph coloring.
+
+4
+00:00:10,660 --> 00:00:13,410
+Or more precisely,
+one algorithm that you can use
+
+5
+00:00:13,410 --> 00:00:19,329
+as a subroutine when designing
+fast graph coloring algorithms.
+
+6
+00:00:19,329 --> 00:00:24,269
+Let q be any prime number.
+The only requirement is that
+
+7
+00:00:24,269 --> 00:00:28,609
+q is more than 2 times
+the maximum degree of the graph.
+
+8
+00:00:28,609 --> 00:00:30,899
+We will show how to reduce
+
+9
+00:00:30,899 --> 00:00:38,190
+the number of colors from
+q² to q in only q rounds.
+
+10
+00:00:38,190 --> 00:00:41,050
+So for example, if q is 7,
+we can reduce
+
+11
+00:00:41,050 --> 00:00:45,969
+the number of colors
+from 49 to 7 in only 7 rounds.
+
+12
+00:00:45,969 --> 00:00:51,070
+I'll use q = 7 to
+illustrate the idea.
+
+13
+00:00:51,070 --> 00:00:54,399
+Our input colors are
+pairs (a, b), where
+
+14
+00:00:54,399 --> 00:00:59,030
+both a and b are numbers
+between 0 and 6.
+
+15
+00:00:59,030 --> 00:01:03,589
+So we can handle 7 × 7
+possible input colors.
+
+16
+00:01:03,589 --> 00:01:07,400
+And our output colors are
+pairs of the form (0, b).
+
+17
+00:01:07,400 --> 00:01:12,220
+So there are only 7 possible
+output colors when we are done.
+
+18
+00:01:12,220 --> 00:01:16,210
+Color reduction from 49 to 7.
+
+19
+00:01:16,210 --> 00:01:20,810
+It's best to visualize nodes
+as clocks with one hand.
+
+20
+00:01:20,810 --> 00:01:24,150
+Value (a, b) means that the hand
+
+21
+00:01:24,150 --> 00:01:30,350
+is moving at speed a and
+it is currently in position b.
+
+22
+00:01:30,350 --> 00:01:37,880
+So in each step we change
+(a, b) to (a, b + a mod 7).
+
+23
+00:01:37,880 --> 00:01:40,240
+And the algorithm is
+really simple:
+
+24
+00:01:40,240 --> 00:01:44,950
+you stop the clock when you can
+do it in a conflict-free manner.
+
+25
+00:01:44,950 --> 00:01:51,440
+You just switch from (a, b)
+to (0, b) whenever this is safe,
+
+26
+00:01:51,440 --> 00:01:53,860
+when no neighbor is
+in position b.
+
+27
+00:01:53,860 --> 00:01:55,640
+And that's it.
+
+28
+00:01:55,640 --> 00:01:58,640
+So our possible input colors are
+
+29
+00:01:58,640 --> 00:02:03,340
+these 49 configurations,
+7 speeds, 7 positions.
+
+30
+00:02:03,340 --> 00:02:07,230
+And when the nodes are running,
+their colors change like this.
+
+31
+00:02:07,230 --> 00:02:08,340
+Clocks are ticking.
+
+32
+00:02:08,340 --> 00:02:11,710
+Hands are moving at
+constant speed.
+
+33
+00:02:11,710 --> 00:02:16,110
+And neighbors have by assumption
+different input colors
+
+34
+00:02:16,110 --> 00:02:19,880
+so they will start in
+different configurations.
+
+35
+00:02:19,880 --> 00:02:22,320
+Either they start in
+different positions.
+
+36
+00:02:22,320 --> 00:02:26,620
+Or move at different speeds.
+Or both.
+
+37
+00:02:26,620 --> 00:02:31,680
+And our final configurations
+are these 7 possibilities.
+
+38
+00:02:31,680 --> 00:02:38,580
+Clocks are stopped, hands are
+in one of 7 possible position.
+
+39
+00:02:38,580 --> 00:02:40,290
+This is what we are
+trying to achieve.
+
+40
+00:02:40,290 --> 00:02:45,160
+A proper coloring where
+all clocks are stopped.
+
+41
+00:02:45,160 --> 00:02:47,760
+Let's see how the algorithm
+works in practice.
+
+42
+00:02:47,760 --> 00:02:49,850
+Here is a complete graph
+with four nodes.
+
+43
+00:02:49,850 --> 00:02:55,190
+Our input configuration might
+look for example like this.
+
+44
+00:02:55,190 --> 00:02:58,490
+First round.
+Check for conflicts.
+
+45
+00:02:58,490 --> 00:03:02,240
+The top two nodes have their
+hands in the same positions,
+
+46
+00:03:02,240 --> 00:03:05,510
+but the bottom nodes
+don't have any conflicts.
+
+47
+00:03:05,510 --> 00:03:11,640
+Bottom nodes can stop, they set
+their speeds to 0, they are done.
+
+48
+00:03:11,640 --> 00:03:16,000
+Nodes that are still running
+move to the next position.
+
+49
+00:03:16,000 --> 00:03:19,340
+Second round.
+Check for conflicts.
+
+50
+00:03:19,340 --> 00:03:20,340
+Bad luck,
+
+51
+00:03:20,340 --> 00:03:23,230
+both of the running nodes are
+still in conflict with someone,
+
+52
+00:03:23,230 --> 00:03:25,820
+this time with the nodes
+that are already stopped.
+
+53
+00:03:25,820 --> 00:03:29,349
+No progress.
+Advance to the next position.
+
+54
+00:03:29,349 --> 00:03:32,610
+Third round.
+Check for conflicts.
+
+55
+00:03:32,610 --> 00:03:35,490
+No conflicts left.
+Both of the nodes can stop.
+
+56
+00:03:35,490 --> 00:03:37,270
+We are done.
+
+57
+00:03:37,270 --> 00:03:44,130
+We have got a new coloring from
+a color palette of only 7 colors.
+
+58
+00:03:44,130 --> 00:03:46,130
+Let's look at another example.
+
+59
+00:03:46,130 --> 00:03:50,430
+We start like this.
+Check for conflicts,
+
+60
+00:03:50,430 --> 00:03:55,260
+everyone has got conflicts,
+everyone moves their hands.
+
+61
+00:03:55,260 --> 00:03:56,660
+Check for conflicts,
+
+62
+00:03:56,660 --> 00:03:59,610
+two nodes on the right
+conflict with each other,
+
+63
+00:03:59,610 --> 00:04:01,940
+but the nodes on the left
+can stop.
+
+64
+00:04:01,940 --> 00:04:06,280
+Move hands,
+check for conflicts, still bad!
+
+65
+00:04:06,280 --> 00:04:13,010
+Move hands, check for conflicts,
+still bad for the top right node!
+
+66
+00:04:13,010 --> 00:04:14,770
+The bottom right node can stop.
+
+67
+00:04:14,770 --> 00:04:18,500
+Move hands, check for conflicts,
+now we are finally done.
+
+68
+00:04:18,500 --> 00:04:23,360
+Good, you get the algorithm.
+But does it work correctly?
+
+69
+00:04:23,360 --> 00:04:26,590
+In the previous example
+it already took a while;
+
+70
+00:04:26,590 --> 00:04:27,789
+could it be the case
+
+71
+00:04:27,789 --> 00:04:32,210
+that we just keep getting
+conflicts forever?
+
+72
+00:04:32,210 --> 00:04:33,819
+Let's think about this.
+
+73
+00:04:33,819 --> 00:04:37,830
+Let's look at a node and
+one of its neighbors.
+
+74
+00:04:37,830 --> 00:04:40,590
+Let's first assume that
+both of the nodes are running.
+
+75
+00:04:40,590 --> 00:04:42,719
+As these are neighbors,
+
+76
+00:04:42,719 --> 00:04:47,419
+their starting positions
+or speeds must differ.
+
+77
+00:04:47,419 --> 00:04:51,460
+Now no matter what are
+the speeds of these nodes,
+
+78
+00:04:51,460 --> 00:04:56,629
+in 7 rounds their hands
+are aligned at most once!
+
+79
+00:04:56,629 --> 00:04:58,210
+If they have different speeds
+
+80
+00:04:58,210 --> 00:05:01,099
+their hands are aligned
+exactly once.
+
+81
+00:05:01,099 --> 00:05:02,800
+If they run at the same speed,
+
+82
+00:05:02,800 --> 00:05:05,650
+their hands will be
+never aligned.
+
+83
+00:05:05,650 --> 00:05:10,430
+So if you and your neighbor
+are both running, in 7 rounds
+
+84
+00:05:10,430 --> 00:05:15,330
+you'll have conflicts with
+this neighbor at most once.
+
+85
+00:05:15,330 --> 00:05:17,409
+But what if your neighbor
+has stopped?
+
+86
+00:05:17,409 --> 00:05:18,650
+Well, the same thing,
+
+87
+00:05:18,650 --> 00:05:24,280
+in 7 rounds you'll have
+conflicts with it only once.
+
+88
+00:05:24,280 --> 00:05:26,800
+So in 7 rounds,
+you'll have conflicts
+
+89
+00:05:26,800 --> 00:05:31,039
+with any specific neighbor
+at most twice,
+
+90
+00:05:31,039 --> 00:05:33,659
+even if it happens to stop
+in the middle.
+
+91
+00:05:33,659 --> 00:05:37,939
+You'll get conflicts at most once
+while your neighbor is running.
+
+92
+00:05:37,939 --> 00:05:41,089
+And at most once
+when it's stopped.
+
+93
+00:05:41,089 --> 00:05:44,949
+And for example here
+each node had 3 neighbors.
+
+94
+00:05:44,949 --> 00:05:49,479
+So let's think about this from
+the perspective of any given node.
+
+95
+00:05:49,479 --> 00:05:52,710
+In 7 rounds,
+you'll have conflicts
+
+96
+00:05:52,710 --> 00:05:56,589
+with each of your neighbors
+at most twice.
+
+97
+00:05:56,589 --> 00:05:57,589
+So there can be
+
+98
+00:05:57,589 --> 00:06:02,909
+at most 6 rounds in which you
+have conflicts with someone.
+
+99
+00:06:02,909 --> 00:06:04,599
+In 7 rounds you'll find
+
+100
+00:06:04,599 --> 00:06:08,400
+at least one round that is
+completely conflict-free.
+
+101
+00:06:08,400 --> 00:06:11,779
+And then we are done
+and we can stop!
+
+102
+00:06:11,779 --> 00:06:13,259
+That's the whole algorithm.
+
+103
+00:06:13,259 --> 00:06:14,819
+Pick any prime number q
+
+104
+00:06:14,819 --> 00:06:19,199
+that is more than two times
+the maximum number of neighbors.
+
+105
+00:06:19,199 --> 00:06:22,139
+And in q rounds, you can turn
+
+106
+00:06:22,139 --> 00:06:28,979
+a coloring with q² colors into
+a coloring with only q colors.
+
+107
+00:06:28,979 --> 00:06:32,960
+And if we combine this with
+the other building blocks
+
+108
+00:06:32,960 --> 00:06:36,089
+that we have in this week's
+course material,
+
+109
+00:06:36,089 --> 00:06:37,770
+we will get an algorithm that
+
+110
+00:06:37,770 --> 00:06:44,169
+finds a coloring with Δ+1 colors
+in any graph of maximum degree Δ,
+
+111
+00:06:44,169 --> 00:06:47,849
+and the running time is
+O(log* n + Δ).
+

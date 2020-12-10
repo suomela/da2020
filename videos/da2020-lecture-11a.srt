@@ -1,0 +1,497 @@
+1
+00:00:01,040 --> 00:00:01,840
+Hi everyone,
+
+2
+00:00:02,480 --> 00:00:06,800
+Already in the first week of
+this course we saw that
+
+3
+00:00:06,800 --> 00:00:10,160
+in the LOCAL model
+it is possible to color
+
+4
+00:00:10,160 --> 00:00:16,000
+a directed cycle with 3 colors
+in log-star many rounds.
+
+5
+00:00:16,000 --> 00:00:18,160
+We can start with
+the unique identifiers,
+
+6
+00:00:18,160 --> 00:00:22,080
+which form a coloring with
+a polynomial number of colors.
+
+7
+00:00:23,040 --> 00:00:27,840
+And then we repeatedly
+reduce the number of colors.
+
+8
+00:00:29,120 --> 00:00:31,120
+In one round we can reduce
+
+9
+00:00:31,120 --> 00:00:37,280
+the number of colors from
+2^k colors to only 2k colors.
+
+10
+00:00:38,480 --> 00:00:41,760
+And if we repeat this for
+log-star many times,
+
+11
+00:00:41,760 --> 00:00:44,160
+the number of colors will be
+a small constant.
+
+12
+00:00:45,680 --> 00:00:48,960
+But is this the best
+that we can do?
+
+13
+00:00:49,760 --> 00:00:51,680
+For example, could there be
+
+14
+00:00:51,680 --> 00:00:55,840
+a clever way to find
+a 3-coloring in constant time,
+
+15
+00:00:55,840 --> 00:00:58,560
+independent of the number
+of nodes in the network?
+
+16
+00:00:59,840 --> 00:01:03,200
+This week we will see
+that the answer is "no".
+
+17
+00:01:04,240 --> 00:01:06,960
+And we will use round
+elimination to show that.
+
+18
+00:01:07,520 --> 00:01:09,520
+In a sense, we will show
+
+19
+00:01:09,520 --> 00:01:14,720
+almost the exact opposite of
+what we saw in the first week.
+
+20
+00:01:16,400 --> 00:01:17,440
+In the first week,
+
+21
+00:01:17,440 --> 00:01:21,280
+we saw that if you can
+find a coloring
+
+22
+00:01:21,280 --> 00:01:25,760
+with 2^k colors
+in T − 1 rounds, then
+
+23
+00:01:25,760 --> 00:01:30,080
+you can find a coloring with
+2k colors in T rounds.
+
+24
+00:01:31,360 --> 00:01:35,520
+Now using round elimination
+we can work backwards,
+
+25
+00:01:36,400 --> 00:01:38,800
+we just lose
+a factor of two here.
+
+26
+00:01:39,680 --> 00:01:42,960
+Basically we show that
+if you can find
+
+27
+00:01:42,960 --> 00:01:46,160
+a coloring with k colors
+in T rounds,
+
+28
+00:01:47,760 --> 00:01:49,360
+then you can also find
+
+29
+00:01:49,360 --> 00:01:54,160
+a coloring with 2^k colors
+in T − 1 rounds.
+
+30
+00:01:56,480 --> 00:02:00,240
+And now the high-level
+idea is this.
+
+31
+00:02:01,520 --> 00:02:04,640
+We start with
+some hypothetical algorithm
+
+32
+00:02:04,640 --> 00:02:08,000
+that finds a proper
+3-coloring in T rounds,
+
+33
+00:02:08,000 --> 00:02:11,440
+where T is much less
+than log-star.
+
+34
+00:02:13,200 --> 00:02:17,600
+Then we repeat round
+elimination for T times,
+
+35
+00:02:17,600 --> 00:02:23,360
+and we get an algorithm that
+finds a c-coloring in 0 rounds.
+
+36
+00:02:24,640 --> 00:02:29,840
+Here c is, roughly speaking
+a power tower of height T, and
+
+37
+00:02:29,840 --> 00:02:36,080
+if T is much less than log-star,
+then c will be much less than n.
+
+38
+00:02:36,080 --> 00:02:39,280
+Notice that this is
+a nontrivial coloring.
+
+39
+00:02:40,000 --> 00:02:43,760
+For example, unique identifiers
+won't give such a coloring.
+
+40
+00:02:45,200 --> 00:02:50,240
+So we can show that this
+isn't possible in 0 rounds.
+
+41
+00:02:51,120 --> 00:02:54,080
+So we have a contradiction
+and conclude that
+
+42
+00:02:54,080 --> 00:02:59,120
+3-coloring cannot be done in
+less than log-star many rounds.
+
+43
+00:03:00,880 --> 00:03:04,160
+Well, that's the idea at least.
+
+44
+00:03:04,160 --> 00:03:08,080
+Too bad we can't do it
+directly like this.
+
+45
+00:03:09,040 --> 00:03:13,120
+The way we described round
+elimination in the previous weeks,
+
+46
+00:03:13,120 --> 00:03:16,400
+it can only be applied
+in the PN model.
+
+47
+00:03:17,600 --> 00:03:21,440
+We can't do round elimination
+in the LOCAL model.
+
+48
+00:03:21,440 --> 00:03:23,520
+And there is a good
+reason for that.
+
+49
+00:03:25,600 --> 00:03:29,920
+Round elimination heavily
+relies on independence.
+
+50
+00:03:31,520 --> 00:03:34,080
+You consider
+all possible inputs here.
+
+51
+00:03:35,120 --> 00:03:40,880
+And all possible inputs here.
+And conclude that also
+
+52
+00:03:40,880 --> 00:03:45,840
+all possible combinations
+of these inputs are possible.
+
+53
+00:03:47,360 --> 00:03:51,200
+But if you have unique
+identifiers, this no longer holds.
+
+54
+00:03:52,000 --> 00:03:53,760
+Identifier 1 might be here,
+
+55
+00:03:54,800 --> 00:03:55,440
+or here,
+
+56
+00:03:56,480 --> 00:03:59,840
+but not in both places
+simultaneously.
+
+57
+00:04:02,800 --> 00:04:07,920
+So we can't directly do round
+elimination in the LOCAL model.
+
+58
+00:04:08,720 --> 00:04:11,120
+We have to get there indirectly.
+
+59
+00:04:12,560 --> 00:04:16,560
+We will first consider randomized
+algorithms in the PN model.
+
+60
+00:04:17,360 --> 00:04:19,360
+In the lecture notes,
+we will see how to do
+
+61
+00:04:19,360 --> 00:04:22,800
+round elimination
+for randomized PN algorithms.
+
+62
+00:04:23,600 --> 00:04:25,840
+We will need to be
+a bit more careful.
+
+63
+00:04:26,480 --> 00:04:31,760
+A randomized algorithm A0
+for solving problem X0 still
+
+64
+00:04:31,760 --> 00:04:37,760
+implies a randomized algorithm A1
+that solves X1 one round faster.
+
+65
+00:04:38,560 --> 00:04:45,280
+But we lost something,
+the probability that A1 fails
+
+66
+00:04:45,280 --> 00:04:50,160
+will be somewhat higher than
+the probability that A0 fails.
+
+67
+00:04:52,080 --> 00:04:55,600
+Fortunately it isn't
+too bad in our application.
+
+68
+00:04:55,600 --> 00:04:57,200
+We can still conclude that
+
+69
+00:04:57,200 --> 00:05:00,160
+if we had a randomized algorithm
+that finds a 3-coloring
+
+70
+00:05:00,160 --> 00:05:04,000
+in less than log-star time
+and works with high probability,
+
+71
+00:05:04,560 --> 00:05:06,160
+then we will get
+a randomized algorithm
+
+72
+00:05:06,160 --> 00:05:10,800
+that finds a coloring with
+less than n colors in 0 rounds
+
+73
+00:05:10,800 --> 00:05:14,880
+and still has got a pretty good
+success probability.
+
+74
+00:05:14,880 --> 00:05:20,400
+So good that we can rule out
+the existence of such algorithms.
+
+75
+00:05:21,520 --> 00:05:25,280
+So we have now a negative result
+for 3-coloring
+
+76
+00:05:25,280 --> 00:05:28,400
+in the randomized PN model.
+
+77
+00:05:29,200 --> 00:05:32,960
+But we wanted to understand it
+in the LOCAL model.
+
+78
+00:05:34,720 --> 00:05:36,800
+Well, if you had
+
+79
+00:05:36,800 --> 00:05:40,160
+a fast randomized algorithm A
+for the LOCAL model
+
+80
+00:05:40,960 --> 00:05:43,600
+that you would like to run
+in the PN model,
+
+81
+00:05:43,600 --> 00:05:46,960
+you could first pick large
+enough random labels
+
+82
+00:05:46,960 --> 00:05:49,120
+and use them as
+unique identifiers.
+
+83
+00:05:50,160 --> 00:05:54,960
+So you could simulate A
+in the randomized PN model.
+
+84
+00:05:56,000 --> 00:06:00,240
+And you would get an equally fast
+randomized PN algorithm this way,
+
+85
+00:06:00,240 --> 00:06:03,360
+with almost the same
+success probability.
+
+86
+00:06:04,000 --> 00:06:05,200
+And we concluded that
+
+87
+00:06:05,200 --> 00:06:10,080
+randomized PN algorithms
+can't run in sub-log-star time,
+
+88
+00:06:10,080 --> 00:06:14,320
+so the same has to hold for
+randomized LOCAL algorithms, too!
+
+89
+00:06:15,120 --> 00:06:18,160
+And now we are already done.
+
+90
+00:06:18,880 --> 00:06:20,320
+Deterministic LOCAL algorithms
+
+91
+00:06:20,320 --> 00:06:24,400
+are just a special case of
+randomized LOCAL algorithms,
+
+92
+00:06:24,400 --> 00:06:29,360
+so they can't find coloring
+in sub-log-star time, either.
+
+93
+00:06:31,280 --> 00:06:35,920
+So this is the high-level plan
+that we are following this week.
+
+94
+00:06:36,800 --> 00:06:40,320
+There are fairly many technicalities
+we need to worry about,
+
+95
+00:06:41,200 --> 00:06:46,000
+but the good news is that once
+you learn to use these tools,
+
+96
+00:06:46,000 --> 00:06:50,160
+you can apply the same ideas in
+the study of many other problems:
+
+97
+00:06:51,520 --> 00:06:54,080
+First use round elimination
+
+98
+00:06:54,080 --> 00:06:59,440
+to prove a negative result
+in the deterministic PN model.
+
+99
+00:06:59,440 --> 00:07:02,160
+Then take into account
+probabilities
+
+100
+00:07:02,720 --> 00:07:07,200
+to prove the same result
+for randomized PN algorithms.
+
+101
+00:07:09,040 --> 00:07:12,000
+And then you can easily conclude
+
+102
+00:07:12,000 --> 00:07:17,120
+that the same result also holds
+for the LOCAL model,
+
+103
+00:07:17,920 --> 00:07:23,440
+both for randomized and
+deterministic algorithms.
+

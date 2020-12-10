@@ -1,0 +1,425 @@
+1
+00:00:00,800 --> 00:00:01,600
+Hi everyone,
+
+2
+00:00:02,320 --> 00:00:04,480
+Two weeks ago
+we learned how to find
+
+3
+00:00:04,480 --> 00:00:08,240
+a coloring with Δ+1 colors
+with a deterministic algorithm.
+
+4
+00:00:08,880 --> 00:00:13,280
+The running time was
+O(Δ + log* n).
+
+5
+00:00:14,160 --> 00:00:18,240
+Now we will solve the same problem
+with a randomized algorithm.
+
+6
+00:00:19,360 --> 00:00:23,920
+The running time will be simply
+O(log n), with high probability.
+
+7
+00:00:24,640 --> 00:00:28,320
+The algorithm and
+its analysis are really easy.
+
+8
+00:00:29,360 --> 00:00:33,280
+Let's start with the simplest
+possible idea one could imagine.
+
+9
+00:00:34,400 --> 00:00:36,560
+Each node just checks
+
+10
+00:00:36,560 --> 00:00:40,320
+which colors are currently free
+in its local neighborhood.
+
+11
+00:00:41,360 --> 00:00:46,240
+Then each node picks a random
+color from the set of free colors.
+
+12
+00:00:46,960 --> 00:00:49,680
+And then it checks
+if there were any conflicts.
+
+13
+00:00:50,240 --> 00:00:52,960
+If I managed to pick a color
+
+14
+00:00:52,960 --> 00:00:56,080
+different from the colors
+of my neighbors, I can stop.
+
+15
+00:00:56,960 --> 00:00:59,280
+Now this sounds
+really promising,
+
+16
+00:00:59,280 --> 00:01:03,760
+but when you try to analyze it,
+it's not so simple any more.
+
+17
+00:01:03,760 --> 00:01:06,800
+So let's make a tiny change
+in the algorithm.
+
+18
+00:01:08,160 --> 00:01:10,080
+Running nodes flip coins
+
+19
+00:01:10,080 --> 00:01:13,680
+to decide if they are active
+in this round.
+
+20
+00:01:14,560 --> 00:01:18,720
+And only active nodes try
+to pick random free colors.
+
+21
+00:01:19,440 --> 00:01:21,920
+And you keep your color
+if you are successful.
+
+22
+00:01:23,520 --> 00:01:26,640
+That's it,
+this is the whole algorithm!
+
+23
+00:01:27,360 --> 00:01:29,120
+And it's clear that
+
+24
+00:01:29,120 --> 00:01:31,680
+if it ever stops,
+coloring has to be proper.
+
+25
+00:01:33,120 --> 00:01:36,400
+But why does it stop fast,
+with high probability?
+
+26
+00:01:37,520 --> 00:01:40,880
+It turns out it's enough
+to prove the following claim:
+
+27
+00:01:41,760 --> 00:01:46,640
+if at any point you consider
+any node that is still running,
+
+28
+00:01:47,760 --> 00:01:52,000
+it will stop in this round
+with probability at least 1/4.
+
+29
+00:01:54,000 --> 00:01:55,840
+This holds for any graph,
+
+30
+00:01:55,840 --> 00:01:59,280
+for any node, and
+for any communication round,
+
+31
+00:01:59,280 --> 00:02:03,040
+no matter what other nodes
+have already done!
+
+32
+00:02:04,400 --> 00:02:06,400
+And this means that
+
+33
+00:02:06,400 --> 00:02:09,280
+the probability that
+a given node is still running
+
+34
+00:02:09,280 --> 00:02:12,480
+after T rounds gets
+exponentially small.
+
+35
+00:02:13,520 --> 00:02:16,000
+And then it isn't hard to see
+
+36
+00:02:16,000 --> 00:02:19,040
+that after only a logarithmic
+number of rounds,
+
+37
+00:02:19,040 --> 00:02:20,480
+with high probability
+
+38
+00:02:20,480 --> 00:02:24,880
+not only this node but also
+all other nodes have stopped.
+
+39
+00:02:26,480 --> 00:02:29,680
+So the interesting part
+is this lemma.
+
+40
+00:02:30,240 --> 00:02:31,520
+How to prove it?
+
+41
+00:02:31,520 --> 00:02:32,960
+Well, let's imagine
+
+42
+00:02:32,960 --> 00:02:35,840
+I'm a node somewhere
+in the middle of the graph.
+
+43
+00:02:36,560 --> 00:02:39,920
+Let's say I have got k neighbors
+that are still running.
+
+44
+00:02:40,800 --> 00:02:44,560
+But because I had originally
+more colors than neighbors,
+
+45
+00:02:45,200 --> 00:02:50,240
+there have to be still more than
+k colors left to choose from.
+
+46
+00:02:50,240 --> 00:02:54,560
+Now what's the probability
+that I can stop in this round?
+
+47
+00:02:55,680 --> 00:02:58,400
+Let's first consider
+what happens if I'm active.
+
+48
+00:02:59,200 --> 00:03:05,520
+Now the only reason why I might
+not stop is that I would pick
+
+49
+00:03:05,520 --> 00:03:09,680
+a random free color that
+conflicts with one of my neighbors.
+
+50
+00:03:11,120 --> 00:03:14,560
+We will first consider
+one specific neighbor v.
+
+51
+00:03:15,680 --> 00:03:18,240
+We have no idea
+how many neighbors and
+
+52
+00:03:18,240 --> 00:03:20,480
+how many free colors
+v has got.
+
+53
+00:03:21,360 --> 00:03:23,760
+But we don't care
+about that, either.
+
+54
+00:03:24,880 --> 00:03:27,440
+In the algorithm,
+I'm making my random choices
+
+55
+00:03:27,440 --> 00:03:29,680
+simultaneously
+in parallel with v.
+
+56
+00:03:30,240 --> 00:03:32,560
+But to analyze what happens,
+we can imagine that
+
+57
+00:03:32,560 --> 00:03:35,840
+I roll dice first and
+v rolls dice after that,
+
+58
+00:03:35,840 --> 00:03:36,720
+or vice versa.
+
+59
+00:03:37,920 --> 00:03:44,240
+So let's do the analysis so that
+v makes its random choices first,
+
+60
+00:03:44,240 --> 00:03:49,440
+and see what's the probability
+that my choice conflicts with it.
+
+61
+00:03:50,640 --> 00:03:52,160
+With probability one half,
+
+62
+00:03:52,160 --> 00:03:55,920
+v is passive and doesn't
+do anything, no conflicts.
+
+63
+00:03:57,280 --> 00:03:58,960
+With probability one half,
+
+64
+00:03:58,960 --> 00:04:01,840
+v is active
+and it picks some color.
+
+65
+00:04:02,560 --> 00:04:06,000
+But I had more than
+k free colors to choose from.
+
+66
+00:04:06,960 --> 00:04:11,280
+At most one of those can be
+the color picked by v.
+
+67
+00:04:12,160 --> 00:04:15,280
+So the probability
+that I make a choice
+
+68
+00:04:15,280 --> 00:04:19,360
+that conflicts with v
+is less than 1/k.
+
+69
+00:04:20,960 --> 00:04:25,680
+So overall the probability that
+v is active and managed to pick
+
+70
+00:04:25,680 --> 00:04:30,560
+a color that conflicts with me
+is less than 1/(2k).
+
+71
+00:04:31,920 --> 00:04:34,720
+This was for
+a specific neighbor v.
+
+72
+00:04:35,840 --> 00:04:38,880
+I have got k neighbors, and
+using the union bound
+
+73
+00:04:38,880 --> 00:04:41,840
+we quickly get that
+the probability that
+
+74
+00:04:41,840 --> 00:04:44,880
+at least one of them conflicts
+with me is
+
+75
+00:04:44,880 --> 00:04:49,440
+less than k times 1/(2k),
+which is less than one half.
+
+76
+00:04:50,560 --> 00:04:53,440
+So if I'm active,
+
+77
+00:04:53,440 --> 00:04:56,640
+I'll have a conflict with
+probability less than one half.
+
+78
+00:04:56,640 --> 00:05:00,480
+So I'll stop with probability
+more than one half.
+
+79
+00:05:01,440 --> 00:05:04,400
+And I was active
+with probability one half,
+
+80
+00:05:04,400 --> 00:05:08,400
+so overall I'll stop with
+probability more than 1/4.
+
+81
+00:05:09,840 --> 00:05:12,640
+And this is exactly
+what we wanted to prove!
+
+82
+00:05:14,400 --> 00:05:17,280
+So the algorithm was this,
+flip coins to decide
+
+83
+00:05:17,280 --> 00:05:20,080
+if you are active, and
+then pick a random free color.
+
+84
+00:05:21,600 --> 00:05:27,040
+Now I recommend that you go back
+to this earlier algorithm idea
+
+85
+00:05:27,040 --> 00:05:29,520
+that I showed first
+where everyone is active.
+
+86
+00:05:30,800 --> 00:05:33,600
+What would happen
+if your tried to do
+
+87
+00:05:33,600 --> 00:05:37,760
+exactly the same analysis
+for this algorithm?
+
+88
+00:05:37,760 --> 00:05:42,160
+What kind of a running time
+would you get?
+

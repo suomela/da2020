@@ -1,0 +1,880 @@
+1
+00:00:01,760 --> 00:00:06,300
+Let's say we want to prove that
+solving some problem X requires,
+
+2
+00:00:06,300 --> 00:00:09,190
+for example,
+at least 5 communication rounds.
+
+3
+00:00:09,190 --> 00:00:14,580
+We could, in principle,
+do this as follows:
+
+4
+00:00:14,580 --> 00:00:18,760
+Consider any algorithm A
+that runs in 4 rounds.
+
+5
+00:00:18,760 --> 00:00:24,600
+Then show that algorithm A
+fails to solve X.
+
+6
+00:00:24,600 --> 00:00:28,400
+But it's often very hard
+to reason about
+
+7
+00:00:28,400 --> 00:00:33,300
+what an algorithm might do
+in 4 rounds.
+
+8
+00:00:33,300 --> 00:00:35,739
+Of course a 4-round algorithm
+is just a mapping
+
+9
+00:00:35,739 --> 00:00:39,309
+from radius-4 neighborhoods
+to local outputs.
+
+10
+00:00:39,309 --> 00:00:42,329
+But there is a huge number
+of possible mappings.
+
+11
+00:00:42,329 --> 00:00:46,960
+How could we argue that
+all of them will fail?
+
+12
+00:00:46,960 --> 00:00:47,960
+It would be much easier
+
+13
+00:00:47,960 --> 00:00:51,510
+to argue that X can't be
+solved in 0 rounds.
+
+14
+00:00:51,510 --> 00:00:53,670
+0-round algorithms are
+very restrictive.
+
+15
+00:00:53,670 --> 00:00:56,989
+There are not
+that many possibilities;
+
+16
+00:00:56,989 --> 00:00:59,139
+it is often very quick to show
+
+17
+00:00:59,139 --> 00:01:03,289
+that a 0-round algorithm
+will necessarily fail.
+
+18
+00:01:03,289 --> 00:01:07,180
+But how do we connect these two?
+
+19
+00:01:07,180 --> 00:01:12,220
+We'd like to prove that
+4-round algorithms will fail.
+
+20
+00:01:12,220 --> 00:01:17,420
+We can easily prove that
+0-round algorithms will fail.
+
+21
+00:01:17,420 --> 00:01:23,830
+We will apply here a technique
+called round elimination.
+
+22
+00:01:23,830 --> 00:01:27,280
+We start with problem X0.
+
+23
+00:01:27,280 --> 00:01:28,280
+We assume that
+
+24
+00:01:28,280 --> 00:01:33,310
+there is an algorithm A0
+that solves X0 in 4 rounds.
+
+25
+00:01:33,310 --> 00:01:37,520
+We apply round elimination to X0.
+
+26
+00:01:37,520 --> 00:01:40,330
+We get a new problem X1.
+
+27
+00:01:40,330 --> 00:01:42,100
+And if our assumption is right,
+
+28
+00:01:42,100 --> 00:01:48,170
+we also get an algorithm A1
+that solves X1 in 3 rounds.
+
+29
+00:01:48,170 --> 00:01:53,000
+We eliminated one round
+in the running time.
+
+30
+00:01:53,000 --> 00:01:57,060
+Notice that X1 is
+a different problem.
+
+31
+00:01:57,060 --> 00:02:01,960
+We are interested in X0,
+but we got a new problem X1.
+
+32
+00:02:01,960 --> 00:02:04,240
+But let's not worry about this.
+
+33
+00:02:04,240 --> 00:02:06,290
+We can just continue.
+
+34
+00:02:06,290 --> 00:02:08,890
+We apply round elimination to X1.
+
+35
+00:02:08,890 --> 00:02:11,900
+We get a new problem X2.
+
+36
+00:02:11,900 --> 00:02:13,530
+And if our assumptions are right,
+
+37
+00:02:13,530 --> 00:02:18,430
+we also get an algorithm A2
+that solves X2 in 2 rounds.
+
+38
+00:02:18,430 --> 00:02:19,430
+Repeat.
+
+39
+00:02:19,430 --> 00:02:21,200
+We get a new problem X3.
+
+40
+00:02:21,200 --> 00:02:25,310
+And we also get an algorithm A3
+that solves X3 in 1 round.
+
+41
+00:02:25,310 --> 00:02:26,310
+Repeat.
+
+42
+00:02:26,310 --> 00:02:28,480
+We get a new problem X4.
+
+43
+00:02:28,480 --> 00:02:33,969
+And we also get an algorithm A4
+that solves X4 in 0 rounds.
+
+44
+00:02:33,969 --> 00:02:38,019
+And now this is what we wanted.
+
+45
+00:02:38,019 --> 00:02:42,459
+Assuming X0 can be solved
+in 4 rounds,
+
+46
+00:02:42,459 --> 00:02:46,579
+we can solve X4 in 0 rounds.
+
+47
+00:02:46,579 --> 00:02:52,769
+And now it is enough to show that
+X4 can't be solved in 0 rounds.
+
+48
+00:02:52,769 --> 00:02:59,379
+If we can show that all possible
+0-round algorithms for X4 fail,
+
+49
+00:02:59,379 --> 00:03:01,959
+then we have a contradiction.
+
+50
+00:03:01,959 --> 00:03:05,969
+Therefore
+X3 can't be solved in 1 round.
+
+51
+00:03:05,969 --> 00:03:08,879
+X2 can't be solved in 2 rounds.
+
+52
+00:03:08,879 --> 00:03:11,890
+X1 can't be solved in 3 rounds.
+
+53
+00:03:11,890 --> 00:03:16,109
+X0 can't be solved in 4 rounds.
+
+54
+00:03:16,109 --> 00:03:20,340
+And this is exactly
+what we wanted to prove.
+
+55
+00:03:20,340 --> 00:03:23,910
+Of course there is nothing magic
+about the value 4 here.
+
+56
+00:03:23,910 --> 00:03:28,159
+If we can do 10 steps of
+round elimination and
+
+57
+00:03:28,159 --> 00:03:32,780
+still arrive at a problem that
+is not 0-round solvable, we know
+
+58
+00:03:32,780 --> 00:03:36,379
+that the original problem
+cannot be solved in 10 rounds.
+
+59
+00:03:36,379 --> 00:03:40,110
+If we can do any number of
+round elimination steps,
+
+60
+00:03:40,110 --> 00:03:45,439
+then the original problem cannot
+be solved in constant time.
+
+61
+00:03:45,439 --> 00:03:46,590
+And so on.
+
+62
+00:03:46,590 --> 00:03:53,319
+So to recap, round elimination
+is a technique that turns
+
+63
+00:03:53,319 --> 00:04:01,790
+a problem X0 into a new problem X1
+that can be solved 1 round faster.
+
+64
+00:04:01,790 --> 00:04:05,659
+It can only be used when
+a problem is in the right form.
+
+65
+00:04:05,659 --> 00:04:11,689
+We must have a so-called bipartite
+locally verifiable problem.
+
+66
+00:04:11,689 --> 00:04:15,709
+Few problems are directly
+given in this form,
+
+67
+00:04:15,709 --> 00:04:19,000
+but many problems can be turned
+into this form,
+
+68
+00:04:19,000 --> 00:04:21,890
+and then
+round elimination works.
+
+69
+00:04:21,890 --> 00:04:24,640
+Informally, if the problem is
+
+70
+00:04:24,640 --> 00:04:31,040
+defined in terms of local
+constraints, it is good.
+
+71
+00:04:31,040 --> 00:04:34,130
+For example, graph coloring
+is such a problem.
+
+72
+00:04:34,130 --> 00:04:37,510
+There is a constraint
+on each edge:
+
+73
+00:04:37,510 --> 00:04:40,970
+the endpoints must have
+different colors.
+
+74
+00:04:40,970 --> 00:04:44,250
+And there are
+no other constraints.
+
+75
+00:04:44,250 --> 00:04:48,540
+If a coloring looks good
+in all local neighborhoods,
+
+76
+00:04:48,540 --> 00:04:52,000
+then it is indeed
+a valid solution.
+
+77
+00:04:52,000 --> 00:04:55,810
+A maximal independent set
+is also something you can
+
+78
+00:04:55,810 --> 00:04:58,950
+define using local constraints.
+
+79
+00:04:58,950 --> 00:05:03,380
+Independence can be checked
+by looking at each edge.
+
+80
+00:05:03,380 --> 00:05:05,430
+Maximality can be checked
+by looking
+
+81
+00:05:05,430 --> 00:05:09,060
+at the local neighborhood
+of each node.
+
+82
+00:05:09,060 --> 00:05:10,510
+On the other hand,
+
+83
+00:05:10,510 --> 00:05:15,560
+connectivity and acyclicity
+are global properties,
+
+84
+00:05:15,560 --> 00:05:20,530
+so we can't study problems like
+spanning trees using these tools.
+
+85
+00:05:20,530 --> 00:05:21,990
+OK, so
+
+86
+00:05:21,990 --> 00:05:26,960
+what does a "bipartite locally
+verifiable problem" look like?
+
+87
+00:05:26,960 --> 00:05:31,360
+We will look at problems
+in regular trees.
+
+88
+00:05:31,360 --> 00:05:34,430
+But this isn't usually
+any real restriction,
+
+89
+00:05:34,430 --> 00:05:36,500
+as we are trying
+to prove negative results.
+
+90
+00:05:36,500 --> 00:05:41,420
+If we can show that
+the problem can't be solved
+
+91
+00:05:41,420 --> 00:05:44,720
+fast in regular trees,
+then certainly
+
+92
+00:05:44,720 --> 00:05:47,510
+it can't be solved fast
+in general graphs.
+
+93
+00:05:47,510 --> 00:05:49,020
+And it turns out that
+
+94
+00:05:49,020 --> 00:05:54,700
+regular trees are the worst case
+for many problems.
+
+95
+00:05:54,700 --> 00:05:58,450
+In the lecture notes you'll
+find the general definitions,
+
+96
+00:05:58,450 --> 00:06:00,650
+here I'll just give one example.
+
+97
+00:06:00,650 --> 00:06:05,430
+This is a problem
+that we call weak 3-labeling.
+
+98
+00:06:05,430 --> 00:06:09,970
+This problem is defined in trees
+in which nodes are partitioned
+
+99
+00:06:09,970 --> 00:06:14,710
+in two roles:
+active and passive.
+
+100
+00:06:14,710 --> 00:06:19,690
+These roles form a proper
+2-coloring of the tree.
+
+101
+00:06:19,690 --> 00:06:24,680
+Each edge is connecting
+an active node and a passive node.
+
+102
+00:06:24,680 --> 00:06:26,250
+We will ignore the leaf nodes.
+
+103
+00:06:26,250 --> 00:06:27,490
+They are unconstrained.
+
+104
+00:06:27,490 --> 00:06:32,520
+We only care about what happens
+in the middle of the tree.
+
+105
+00:06:32,520 --> 00:06:37,510
+And here all active nodes
+have degree 3, and
+
+106
+00:06:37,510 --> 00:06:40,490
+all passive nodes
+have degree 2.
+
+107
+00:06:40,490 --> 00:06:42,280
+And what is the task.
+
+108
+00:06:42,280 --> 00:06:46,990
+Each active node has to label
+its incident edges
+
+109
+00:06:46,990 --> 00:06:50,560
+with colors red, green, and blue.
+
+110
+00:06:50,560 --> 00:06:53,450
+And there are two constraints.
+
+111
+00:06:53,450 --> 00:06:56,630
+Active nodes must
+not be monochromatic.
+
+112
+00:06:56,630 --> 00:07:01,021
+That is, all three edges
+around an active node
+
+113
+00:07:01,021 --> 00:07:04,130
+can't have the same color.
+
+114
+00:07:04,130 --> 00:07:06,180
+For example, this is good.
+
+115
+00:07:06,180 --> 00:07:07,710
+And so is this.
+
+116
+00:07:07,710 --> 00:07:10,530
+But this is forbidden.
+
+117
+00:07:10,530 --> 00:07:14,910
+Conversely, passive nodes must
+be monochromatic.
+
+118
+00:07:14,910 --> 00:07:18,140
+Both of the edges
+around a passive node
+
+119
+00:07:18,140 --> 00:07:21,670
+must have the same color.
+
+120
+00:07:21,670 --> 00:07:23,530
+For example, this is good.
+
+121
+00:07:23,530 --> 00:07:26,570
+But this is forbidden.
+
+122
+00:07:26,570 --> 00:07:31,560
+Now this is problem X0.
+
+123
+00:07:31,560 --> 00:07:36,810
+We would like to understand
+how fast this can be solved.
+
+124
+00:07:36,810 --> 00:07:41,690
+It's easy to check that this
+can't be solved in 0 rounds.
+
+125
+00:07:41,690 --> 00:07:44,610
+Active nodes must use
+at least two different colors.
+
+126
+00:07:44,610 --> 00:07:47,740
+But then if you do it
+without any coordination,
+
+127
+00:07:47,740 --> 00:07:50,770
+there is a risk that
+a passive node gets
+
+128
+00:07:50,770 --> 00:07:54,920
+two incident edges
+with different colors.
+
+129
+00:07:54,920 --> 00:08:03,180
+Let's do round elimination once
+and see what's the problem X1 we get.
+
+130
+00:08:03,180 --> 00:08:07,010
+You can look at the lecture notes
+for how to do it with pen and paper,
+
+131
+00:08:07,010 --> 00:08:09,570
+or you can just ask computers.
+
+132
+00:08:09,570 --> 00:08:13,890
+Either way,
+we will get this problem.
+
+133
+00:08:13,890 --> 00:08:16,700
+It's very similar
+to what we already had;
+
+134
+00:08:16,700 --> 00:08:19,370
+it turns out we basically just
+
+135
+00:08:19,370 --> 00:08:23,400
+swapped the roles of
+active and passive nodes.
+
+136
+00:08:23,400 --> 00:08:30,050
+Again, it's easy to check that
+this can't be solved in 0 rounds.
+
+137
+00:08:30,050 --> 00:08:31,050
+Active nodes must use
+
+138
+00:08:31,050 --> 00:08:34,430
+the same color for both
+of their incident edges.
+
+139
+00:08:34,430 --> 00:08:37,530
+And if you apply
+any deterministic rule,
+
+140
+00:08:37,530 --> 00:08:38,650
+the only possible algorithm is
+
+141
+00:08:38,650 --> 00:08:40,930
+something like
+"color everything red".
+
+142
+00:08:40,930 --> 00:08:44,390
+And this will clearly fail.
+
+143
+00:08:44,390 --> 00:08:46,630
+So we already know something.
+
+144
+00:08:46,630 --> 00:08:51,450
+X1 can't be solved in 0 rounds.
+
+145
+00:08:51,450 --> 00:08:57,090
+So the original problem X0
+can't be solved in 1 round.
+
+146
+00:08:57,090 --> 00:09:01,650
+You need at least 2 rounds
+to solve X0.
+
+147
+00:09:01,650 --> 00:09:06,300
+Let's do round elimination
+again, now we'll get problem X2.
+
+148
+00:09:06,300 --> 00:09:10,980
+Now this problem is something
+lot more interesting.
+
+149
+00:09:10,980 --> 00:09:13,400
+Here is one interpretation of it.
+
+150
+00:09:13,400 --> 00:09:20,430
+In this problem your task is to
+label edges with sets of colors.
+
+151
+00:09:20,430 --> 00:09:23,000
+Active nodes have
+the following constraint:
+
+152
+00:09:23,000 --> 00:09:29,460
+there has to be one set that
+doesn't contain red,
+
+153
+00:09:29,460 --> 00:09:32,340
+one set that
+doesn't contain green,
+
+154
+00:09:32,340 --> 00:09:36,750
+and one set that
+doesn't contain blue.
+
+155
+00:09:36,750 --> 00:09:39,340
+So for example this is fine.
+
+156
+00:09:39,340 --> 00:09:41,330
+And so is this.
+
+157
+00:09:41,330 --> 00:09:43,400
+But this isn't.
+
+158
+00:09:43,400 --> 00:09:47,270
+Here we have got
+green in all sets.
+
+159
+00:09:47,270 --> 00:09:49,830
+Passive nodes have
+the following constraint:
+
+160
+00:09:49,830 --> 00:09:54,950
+the sets must have
+a non-empty intersection.
+
+161
+00:09:54,950 --> 00:09:56,820
+So for example this is fine.
+
+162
+00:09:56,820 --> 00:09:58,260
+And this.
+
+163
+00:09:58,260 --> 00:10:02,220
+But this isn't,
+there are no common elements.
+
+164
+00:10:02,220 --> 00:10:08,150
+Now, can you solve
+this problem in 0 rounds?
+
+165
+00:10:08,150 --> 00:10:14,330
+This takes some thought,
+but it turns out it is possible!
+
+166
+00:10:14,330 --> 00:10:17,380
+Active nodes can always
+pick a solution like this:
+
+167
+00:10:17,380 --> 00:10:20,840
+red-green on one edge,
+
+168
+00:10:20,840 --> 00:10:23,420
+red-blue on one edge,
+
+169
+00:10:23,420 --> 00:10:25,710
+green-blue on one edge.
+
+170
+00:10:25,710 --> 00:10:27,960
+Why is this good?
+
+171
+00:10:27,960 --> 00:10:31,650
+Well, it's clearly fine
+for active nodes,
+
+172
+00:10:31,650 --> 00:10:38,050
+as for each color there's
+one set that doesn't contain it.
+
+173
+00:10:38,050 --> 00:10:41,180
+And it's also fine
+for passive nodes!
+
+174
+00:10:41,180 --> 00:10:44,200
+If you get some
+two-element set here
+
+175
+00:10:44,200 --> 00:10:46,839
+and another
+two-element set here,
+
+176
+00:10:46,839 --> 00:10:48,100
+no matter what they are,
+
+177
+00:10:48,100 --> 00:10:51,520
+they have to contain
+some common element.
+
+178
+00:10:51,520 --> 00:10:52,940
+Like here.
+
+179
+00:10:52,940 --> 00:10:55,150
+Or here.
+
+180
+00:10:55,150 --> 00:11:01,310
+So X2 is solvable in 0 rounds,
+while X1 isn't.
+
+181
+00:11:01,310 --> 00:11:03,380
+It turns out this means that
+
+182
+00:11:03,380 --> 00:11:07,630
+the complexity of X1
+is exactly 1 round.
+
+183
+00:11:07,630 --> 00:11:11,990
+And the complexity of X0
+is exactly 2 rounds.
+
+184
+00:11:11,990 --> 00:11:16,890
+Now how do you solve X0
+in 2 rounds?
+
+185
+00:11:16,890 --> 00:11:19,180
+We can work backwards!
+
+186
+00:11:19,180 --> 00:11:23,560
+We start with
+a 0-round algorithm for X2,
+
+187
+00:11:23,560 --> 00:11:29,380
+and spend 1 round to turn
+it into a solution for X1.
+
+188
+00:11:29,380 --> 00:11:35,230
+And then another round to turn
+it into a solution for X0.
+
+189
+00:11:35,230 --> 00:11:39,629
+You will fill in the details
+in one of this week's exercises!
+

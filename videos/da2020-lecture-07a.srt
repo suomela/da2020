@@ -1,0 +1,563 @@
+1
+00:00:00,640 --> 00:00:02,380
+Hello everyone,
+
+2
+00:00:02,380 --> 00:00:05,759
+So far we have focused
+on the positive:
+
+3
+00:00:05,759 --> 00:00:09,580
+what can be computed
+with distributed algorithms.
+
+4
+00:00:09,580 --> 00:00:12,370
+Now we will look
+at the negative:
+
+5
+00:00:12,370 --> 00:00:17,070
+what cannot be computed
+with distributed algorithms.
+
+6
+00:00:17,070 --> 00:00:20,579
+We will start with
+the port numbering model.
+
+7
+00:00:20,579 --> 00:00:23,329
+This is a weak model,
+and there are lots of problems
+
+8
+00:00:23,329 --> 00:00:27,679
+that cannot be solved at all
+in the port-numbering model.
+
+9
+00:00:27,679 --> 00:00:29,640
+And this week we'll learn
+
+10
+00:00:29,640 --> 00:00:34,699
+a very powerful technique
+for proving such results.
+
+11
+00:00:34,699 --> 00:00:37,719
+The key concept is called
+covering maps.
+
+12
+00:00:37,719 --> 00:00:41,829
+You'll find the precise
+mathematical definition
+
+13
+00:00:41,829 --> 00:00:44,469
+in the lecture notes,
+but in this short video
+
+14
+00:00:44,469 --> 00:00:50,000
+I'll try to explain the
+intuition behind this approach.
+
+15
+00:00:50,000 --> 00:00:55,030
+Let's look at some port-numbered
+network N, like this one here.
+
+16
+00:00:55,030 --> 00:00:56,370
+And imagine you've got
+
+17
+00:00:56,370 --> 00:01:00,410
+some deterministic
+distributed algorithm A.
+
+18
+00:01:00,410 --> 00:01:02,120
+It doesn't matter
+what the algorithm does,
+
+19
+00:01:02,120 --> 00:01:04,559
+or what problems it solves.
+
+20
+00:01:04,559 --> 00:01:05,670
+It's enough that it's
+
+21
+00:01:05,670 --> 00:01:09,299
+a well-defined algorithm
+in our formalism,
+
+22
+00:01:09,299 --> 00:01:13,299
+there's an init function, send
+function, and receive function.
+
+23
+00:01:13,299 --> 00:01:17,370
+Now once you fix
+algorithm A and network N,
+
+24
+00:01:17,370 --> 00:01:22,840
+you have also uniquely defined
+the execution of the algorithm.
+
+25
+00:01:22,840 --> 00:01:24,729
+You can just simulate
+the algorithm here and
+
+26
+00:01:24,729 --> 00:01:27,720
+see what messages nodes
+send in each round
+
+27
+00:01:27,720 --> 00:01:30,189
+and how they update
+their states.
+
+28
+00:01:30,189 --> 00:01:32,259
+You can find out, for example,
+
+29
+00:01:32,259 --> 00:01:36,000
+what's the state of
+node a after round 5.
+
+30
+00:01:36,000 --> 00:01:37,540
+OK, good.
+
+31
+00:01:37,540 --> 00:01:40,869
+Now let's take two identical
+copies of the network.
+
+32
+00:01:40,869 --> 00:01:44,000
+We duplicated
+all nodes and all edges.
+
+33
+00:01:44,000 --> 00:01:45,270
+Let's call this new network X.
+
+34
+00:01:45,270 --> 00:01:49,299
+Now we run the same algorithm A
+in network X.
+
+35
+00:01:49,299 --> 00:01:50,330
+What happens?
+
+36
+00:01:50,330 --> 00:01:51,869
+Well, obviously
+
+37
+00:01:51,869 --> 00:01:56,290
+we'll get exactly the same thing
+as in network N,
+
+38
+00:01:56,290 --> 00:01:58,289
+everything was just doubled.
+
+39
+00:01:58,289 --> 00:02:02,650
+So if in network N
+in round 5 node a sent
+
+40
+00:02:02,650 --> 00:02:05,430
+message m to its first port,
+
+41
+00:02:05,430 --> 00:02:10,060
+then in network X
+in round 5 node a1 sends
+
+42
+00:02:10,060 --> 00:02:15,560
+the same message m to its
+first port, and so does node a2.
+
+43
+00:02:15,560 --> 00:02:16,840
+And whatever was
+
+44
+00:02:16,840 --> 00:02:22,280
+the state of node a
+after round 5 in network N,
+
+45
+00:02:22,280 --> 00:02:26,970
+then the states of a1 and a2
+are going to be the same.
+
+46
+00:02:26,970 --> 00:02:29,820
+OK, this was of course trivial.
+
+47
+00:02:29,820 --> 00:02:32,720
+Now comes the interesting part.
+
+48
+00:02:32,720 --> 00:02:35,050
+Let's modify X slightly.
+
+49
+00:02:35,050 --> 00:02:38,069
+Let's, for example, replace
+
+50
+00:02:38,069 --> 00:02:44,060
+these two straight edges
+with edges that go across.
+
+51
+00:02:44,060 --> 00:02:47,599
+And let's run algorithm A
+in this new network Y.
+
+52
+00:02:47,599 --> 00:02:49,650
+Now what happened?
+
+53
+00:02:49,650 --> 00:02:54,500
+Well, if you think about it,
+before the first round
+
+54
+00:02:54,500 --> 00:02:57,690
+all nodes in Y
+have the same states
+
+55
+00:02:57,690 --> 00:03:00,769
+as the corresponding nodes in X.
+
+56
+00:03:00,769 --> 00:03:05,280
+And therefore all nodes also
+send the same messages
+
+57
+00:03:05,280 --> 00:03:08,720
+in the first round
+in X and in Y.
+
+58
+00:03:08,720 --> 00:03:15,390
+And the messages sent by a1
+and a2 were identical in X,
+
+59
+00:03:15,390 --> 00:03:21,250
+and so were the messages
+sent by b1 and b2.
+
+60
+00:03:21,250 --> 00:03:22,560
+So if you just look at
+
+61
+00:03:22,560 --> 00:03:27,480
+what messages the nodes receive
+in the first round,
+
+62
+00:03:27,480 --> 00:03:30,970
+you won't see any differences
+between X and Y.
+
+63
+00:03:30,970 --> 00:03:32,400
+For example, it doesn't matter
+
+64
+00:03:32,400 --> 00:03:37,420
+if the message b1 received
+came from a1 or a2,
+
+65
+00:03:37,420 --> 00:03:39,230
+as both of the nodes
+were identical,
+
+66
+00:03:39,230 --> 00:03:45,750
+they were in the same state,
+and they sent the same messages.
+
+67
+00:03:45,750 --> 00:03:51,909
+So everyone received
+the same messages in X and Y,
+
+68
+00:03:51,909 --> 00:03:55,750
+and hence everyone in Y
+ended up in the same states
+
+69
+00:03:55,750 --> 00:04:01,500
+as the corresponding nodes of X
+after the first round.
+
+70
+00:04:01,500 --> 00:04:05,610
+Whatever was the state of a1
+in X after one round
+
+71
+00:04:05,610 --> 00:04:11,079
+is equal to the state of a1
+in Y after one round.
+
+72
+00:04:11,079 --> 00:04:16,730
+And we can repeat the same
+reasoning for each round.
+
+73
+00:04:16,730 --> 00:04:20,070
+Before the second round,
+nodes a1 and a2 in Y were
+
+74
+00:04:20,070 --> 00:04:23,540
+in the same states as
+nodes a1 and a2 in X,
+
+75
+00:04:23,540 --> 00:04:30,960
+and both of them were in
+the same state as node a in N.
+
+76
+00:04:30,960 --> 00:04:33,980
+So they send the same messages,
+and therefore
+
+77
+00:04:33,980 --> 00:04:37,010
+it doesn't matter whether
+we are in network X or Y.
+
+78
+00:04:37,010 --> 00:04:42,470
+So during the second round
+all nodes in Y receive
+
+79
+00:04:42,470 --> 00:04:47,070
+the same messages
+as the corresponding nodes in X,
+
+80
+00:04:47,070 --> 00:04:51,020
+and they end up
+in the same states.
+
+81
+00:04:51,020 --> 00:04:57,800
+To summarize, after each round,
+nodes a1 and a2 in Y
+
+82
+00:04:57,800 --> 00:05:02,500
+are in the same state
+as nodes a1 and a2 in X,
+
+83
+00:05:02,500 --> 00:05:05,070
+which are in the same state
+as node a in N.
+
+84
+00:05:05,070 --> 00:05:10,350
+Basically, if we imagine that
+
+85
+00:05:10,350 --> 00:05:14,380
+we run algorithm A
+simultaneously in parallel
+
+86
+00:05:14,380 --> 00:05:19,530
+in these three networks, we will
+see exactly the same messages,
+
+87
+00:05:19,530 --> 00:05:23,160
+and exactly the same state
+transitions
+
+88
+00:05:23,160 --> 00:05:26,370
+between corresponding nodes.
+
+89
+00:05:26,370 --> 00:05:27,870
+And if, for example,
+
+90
+00:05:27,870 --> 00:05:31,390
+a1 in Y ever stops
+and produces some output,
+
+91
+00:05:31,390 --> 00:05:34,360
+then all these other nodes
+
+92
+00:05:34,360 --> 00:05:40,960
+will also stop in the same round
+and produce the same output.
+
+93
+00:05:40,960 --> 00:05:47,300
+So no matter which algorithm you
+use, no matter how clever it is,
+
+94
+00:05:47,300 --> 00:05:54,150
+it can't tell the difference
+between networks N, X, and Y.
+
+95
+00:05:54,150 --> 00:05:58,880
+It can't tell the difference
+between nodes a1 and a2 in X.
+
+96
+00:05:58,880 --> 00:06:04,250
+And it can't tell the difference
+between a1 and a2 in Y.
+
+97
+00:06:04,250 --> 00:06:07,050
+So if your task is to,
+for example,
+
+98
+00:06:07,050 --> 00:06:12,000
+tell if a connected graph has
+got 4 or 8 nodes,
+
+99
+00:06:12,000 --> 00:06:14,520
+this is not solvable at all.
+
+100
+00:06:14,520 --> 00:06:15,910
+Or if you need to label
+
+101
+00:06:15,910 --> 00:06:19,680
+nodes in this graph
+with unique identifiers,
+
+102
+00:06:19,680 --> 00:06:23,100
+you can't do it in
+the port numbering model at all.
+
+103
+00:06:23,100 --> 00:06:28,720
+Formally, what you saw here is
+an example of covering maps.
+
+104
+00:06:28,720 --> 00:06:33,220
+In this case there is
+a covering map from X to N,
+
+105
+00:06:33,220 --> 00:06:37,050
+and also a covering map
+from Y to N.
+
+106
+00:06:37,050 --> 00:06:40,280
+And we can show that whenever
+there is a covering map
+
+107
+00:06:40,280 --> 00:06:45,180
+between two networks, then no
+matter which algorithm you run,
+
+108
+00:06:45,180 --> 00:06:52,380
+the node and its image will be in
+the same state after each round.
+
+109
+00:06:52,380 --> 00:06:56,470
+The proof is basically what
+you already saw in this video:
+
+110
+00:06:56,470 --> 00:07:01,160
+we just argue that
+the nodes are in the same states
+
+111
+00:07:01,160 --> 00:07:05,500
+before each round, so they
+send the same messages,
+
+112
+00:07:05,500 --> 00:07:09,840
+and therefore they also
+receive the same messages
+
+113
+00:07:09,840 --> 00:07:14,890
+and it follows that their
+new states are also identical.
+
+114
+00:07:14,890 --> 00:07:17,630
+The punchline is that
+covering maps
+
+115
+00:07:17,630 --> 00:07:21,040
+preserve everything
+in port-numbered networks.
+
+116
+00:07:21,040 --> 00:07:24,940
+They preserve
+the original local states,
+
+117
+00:07:24,940 --> 00:07:30,160
+they preserve outgoing messages,
+they preserve incoming messages,
+
+118
+00:07:30,160 --> 00:07:35,440
+and therefore they also preserve
+new local states for all nodes.
+
