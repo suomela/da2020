@@ -1,0 +1,392 @@
+Hello everyone,
+
+Today we will talk about
+
+the all-pairs shortest path
+problem, or APSP for short.
+
+The problem is simply this:
+
+everyone needs to know
+their distance to everyone else.
+
+This is the ultimate
+routing primitive.
+
+You have got some data
+to send to any destination,
+
+you now know how far
+the destination is from you.
+
+And if you also have got
+
+this information
+for all of your neighbors,
+
+then you'll also immediately know
+which way to forward the data
+
+so that you move it
+closer to the destination.
+
+It will be useful to contrast
+
+the all-pairs shortest path
+problem with a much easier task,
+
+single-source shortest path
+problem, or SSSP for short.
+
+Here you've got a special
+starting node s,
+
+and it is enough that everyone
+knows their distance to s.
+
+This is enough if you are
+
+for example only routing data
+towards some sink node s.
+
+Now how do we solve these problems
+in a distributed setting?
+
+In the familiar LOCAL model,
+we could trivially solve
+
+both of these problems
+in O(diameter) many rounds.
+
+Just gather everything and
+
+then all nodes know
+the entire input graph
+
+and they can locally compute
+distances to all other nodes.
+
+But this is heavily
+abusing the assumption
+
+that in one round we can send
+arbitrarily large messages.
+
+This week we're studying
+a new model, the CONGEST model,
+
+which is exactly the same as
+the LOCAL model,
+
+except for one restriction:
+messages have to be small.
+
+So we can no longer send
+messages that contain,
+
+for example, a full description
+of the entire input graph.
+
+We can only send around
+small numbers,
+
+for example, unique identifiers
+or distances.
+
+So how to solve APSP
+in the CONGEST model fast?
+
+As a warm-up,
+
+let's look at single-source
+shortest paths first.
+
+This turns out to be really
+simple also with small messages.
+
+If you have specified
+one node as the source,
+
+you can simply flood
+information about distances
+
+from this node to everyone.
+
+The node itself knows
+it's at distance 0, and
+
+it just sends a small message
+to each neighbor
+
+informing that they are
+at distance 1,
+
+they inform their neighbors that
+they are at distance at most 2,
+
+and so on.
+
+When a node first receives
+message x from any neighbor,
+
+it knows it is at distance x,
+
+it can inform its
+other neighbors and stop.
+
+Basically, we create waves
+that propagate at constant speed
+
+in the graph outwards, until
+they have reached all nodes.
+
+This works fine,
+for any given starting point,
+
+and it takes only
+O(diameter) many rounds
+
+until everyone knows
+their distances to the source.
+
+Now what we could try to do
+is to do the same thing
+
+for every possible source,
+in sequence.
+
+The first challenge
+would be figuring out
+
+how to coordinate this,
+as we'd need to take turns
+
+in some distributed manner.
+
+But even worse,
+even if we could do this,
+
+it would take
+n times diameter many rounds
+
+if we initiate one wave,
+wait for it to reach everyone,
+
+and only then launch
+the second wave.
+
+Now another idea would be to
+try to do all this in parallel.
+
+Just initiate a wave starting
+from each node simultaneously.
+
+Each node tells all its neighbors
+the distance to itself,
+
+plus its identifier, and
+this information is forwarded.
+
+We'd have n waves
+in progress simultaneously.
+
+Well, if this was the LOCAL
+model, it would be just fine.
+
+But in the CONGEST model
+this won't work.
+
+There would be
+
+potentially huge congestion
+at some communication links.
+
+We might have almost n waves
+that would like to
+
+make progress
+over the same edge.
+
+And if we somehow take turns
+between different waves,
+
+we'd increase the running time
+by a factor of n
+
+and we are back to something
+like n times diameter.
+
+But we can do better!
+
+There is a linear-time algorithm
+
+for finding all-pairs shortest
+paths in the CONGEST model,
+
+and it's really simple.
+
+I'd like to emphasize we won't
+get diameter time this way,
+
+but at least the running time
+will be linear in n,
+
+and not something like
+n times diameter.
+
+So what do we do.
+
+We first pick a leader s and
+construct a tree rooted at s.
+
+This is pretty easy to do fast
+in the CONGEST model,
+
+as we can for example first
+
+find the node s with
+the smallest identifier,
+
+and then initiate a wave
+from s to form the tree.
+
+Here is a neat way to do
+both of these in one step.
+
+Everyone first thinks
+they are leaders and
+
+start to construct trees
+rooted at them.
+
+And then we just ignore messages
+coming from one root if we have
+
+already seen messages coming from
+a root with a smaller identifier.
+
+Basically we initiate n waves,
+
+but other waves just die out
+as they get ignored and the one
+
+initiated by the node with
+the smallest identifier wins.
+
+There's no congestion
+on any link:
+
+in each round each node only
+forwards the wave
+
+related to the smallest root
+it has seen so far.
+
+Good, we have now somehow
+
+picked a leader and
+formed a tree rooted at it.
+
+Now how do we use this?
+The basic idea is simple.
+
+We create n waves,
+one starting at each node.
+
+But we do it so that
+many waves can be
+
+in progress simultaneously,
+without any congestion!
+
+To do this, we initiate a token
+and move it around in the tree.
+
+The token will traverse the tree
+in a depth-first manner.
+
+Visit new children
+if any are left.
+
+Otherwise come back
+towards the root.
+
+And we do this at half speed.
+
+Move token.
+Wait for one round.
+
+Move token.
+Wait for one round.
+
+This will be important.
+
+Now please note that
+
+this token will traverse
+the entire tree in linear time.
+
+Roughly 4n steps are needed
+until we have visited all nodes.
+
+And what do we do
+with this token?
+
+The idea is really simple.
+
+When we visit a new node,
+we initiate a wave there.
+
+And that's it.
+
+We create n waves,
+one per node.
+
+And we managed to create
+all the waves in linear time.
+
+And each wave takes only
+diameter time
+
+to propagate through
+the network.
+
+So if there are no collisions
+between the wavefronts,
+
+everything will be nice and
+smooth and everyone will
+
+learn their distance to
+everyone else in linear time.
+
+And if you look at
+this animation,
+
+you'll see something curious.
+
+The wavefronts are always
+properly nested.
+
+A new wave will never cross
+a wave created earlier.
+
+There is no congestion, we have
+always got enough bandwidth
+
+on each edge to forward
+new distance information.
+
+And this was just
+a random network,
+
+not specifically constructed
+so that this would happen.
+
+The algorithm guarantees that
+
+two wavefronts that it creates
+will never collide.
+
+Can you see why this is
+always the case?

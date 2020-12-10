@@ -1,0 +1,330 @@
+Hi everyone,
+
+this week we will start to
+formally define
+
+the models of
+distributed computing
+
+that we will study
+in this course.
+
+We will start with
+the simplest and weakest model:
+
+deterministic distributed
+algorithms
+
+in the port-numbering model,
+or PN model for short.
+
+Then in the coming weeks we will
+add new features on top of this,
+
+to define stronger models.
+
+So basically everything
+that we do in this course
+
+builds on top of
+what we discuss this week,
+
+so let's be careful
+to get this right.
+
+The idea is simple.
+
+Nodes can talk to other nodes
+through communication ports.
+
+The ports are numbered.
+
+For example, here we have
+a node with three neighbors,
+
+so it has got communication
+ports number 1, 2, and 3.
+
+So instead of a graph,
+we have a port-numbered network.
+
+Basically, the only difference
+
+between graphs and
+port-numbered networks
+
+is that we have labeled
+the endpoints of the edges
+
+with port numbers.
+
+Here is one possible
+port numbering of this graph.
+
+Here is another.
+And another.
+
+For each node you can
+arbitrarily choose
+
+how its incident ports
+are labeled.
+
+Any labeling is fine.
+
+You can have edges like this
+
+where endpoints have
+different port numbers.
+
+And you can have edges
+like this
+
+where endpoints have
+the same number.
+
+Anything is fine.
+
+We can draw port-numbered
+networks like this,
+
+as a graph with
+port numbers added.
+
+Or we can be a bit more explicit
+
+and represent nodes
+as boxes with ports,
+
+and draw connections
+from port to port.
+
+Both are fine,
+
+but mathematically what we have
+is a structure like this.
+
+There is a set of nodes.
+And a set of ports.
+
+And a function p that indicates
+which port is connected to which.
+
+Notice that this function
+is its own inverse.
+
+If p(x) = y, then p(y) = x.
+
+If there is a connection
+from port x to y,
+
+then there is a connection
+from port y to x.
+
+Now let's move on
+
+from port-numbered networks
+to distributed algorithms.
+
+We assume that
+all nodes are identical
+
+and they run
+the same algorithm.
+
+A node knows its own degree,
+
+that is, how many
+communication ports there are.
+
+So this node here knows
+it has got three ports.
+
+But that's it,
+
+unless we explicitly assume
+some additional knowledge,
+
+all nodes of degree three are
+initially in the same state.
+
+There are no unique identifiers.
+
+We don't have access
+to randomness.
+
+Each node has a local state.
+
+We initiate the local state
+based on the degree of the node,
+
+and any additional local input
+that we might have.
+
+Then computation proceeds
+in synchronous rounds.
+
+In each round,
+
+a node constructs
+one outgoing message per port.
+
+The message is some function of
+
+the current local state and
+the outgoing port number.
+
+So everyone in parallel
+
+constructs a vector of
+outgoing messages.
+
+Then in the same round,
+
+the messages will move along
+the edges to their destinations.
+
+And then everyone will have
+
+exactly one incoming message
+per port.
+
+And now each node can
+update its state.
+
+The new state is
+some function of the old state
+
+and the vector of messages
+that you received.
+
+And this is what we
+repeat forever.
+
+Construct outgoing messages.
+
+Wait for messages to
+reach their destinations.
+
+Update state based on
+incoming messages.
+
+Construct outgoing messages.
+
+Wait for messages to
+reach their destinations.
+
+Update state based on
+incoming messages.
+
+And so on.
+
+Some of the states are
+stopping states,
+
+and once a node reaches
+a stopping state
+
+it won't change
+its state anymore.
+
+And we say that
+the algorithm has stopped
+
+when all nodes are in
+stopping states,
+
+and then whatever are
+their final states
+
+will be the output
+of the algorithm.
+
+And the running time is the
+number of communication rounds
+
+until all nodes have stopped.
+
+Formally an algorithm is
+
+just three functions,
+init, send, and receive:
+
+init tells how to choose
+the initial states of the nodes,
+
+send tells how to construct
+outgoing messages,
+
+and receive tells
+how to update the state
+
+based on incoming messages.
+
+That's it.
+
+And notice that everything
+is deterministic;
+
+if you run a given algorithm in
+a given port-numbered network,
+
+it will always produce
+exactly the same output.
+
+Good, so now we know these:
+
+what is a port-numbered network,
+
+what is a distributed algorithm
+in the PN model,
+
+and exactly what happens
+
+if we run a given algorithm A
+in a given network N.
+
+But we'd like to be able
+
+to apply algorithms in
+all kinds of networks.
+
+And this is where things get
+really interesting.
+
+We will focus here
+on graph problems.
+
+Something like graph coloring.
+
+We say that algorithm A
+solves some graph problem X
+
+in graph family F
+if all of the following holds:
+
+I can take any graph
+from the graph family.
+
+And I can choose any
+port-numbering for the graph.
+
+And I can run algorithm A
+in this port-numbered network,
+
+and it will stop and
+produce the right output.
+
+The local outputs of the nodes
+will form a feasible solution
+
+for problem X
+in the underlying graph.
+
+That's it.
+
+So now you are familiar
+with the model of computing,
+
+have fun designing
+algorithms for it!

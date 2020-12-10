@@ -1,0 +1,197 @@
+Today we will look
+at the following question:
+
+what can you do at best
+in T rounds in the LOCAL model?
+
+We didn't restrict
+message size,
+
+we didn't restrict
+local computation.
+
+So in each round everyone
+
+could tell everything they know
+to all of their neighbors!
+
+And this is also the best thing
+that you could do,
+
+you can't tell something
+you don't know,
+
+and telling less won't help.
+
+Let's see what this means.
+
+Before the first round
+each node knows only
+
+its own identifier
+and its own degree and
+
+whatever local inputs it had.
+
+So basically you know
+only your radius-0 neighborhood.
+
+And this is all that you can
+tell your neighbors in round 1.
+
+But now if everyone
+tells this to each neighbor,
+
+everyone will know
+who their neighbors are.
+
+So after 1 round,
+
+all nodes are aware of their
+radius-1 neighborhoods.
+
+And in the second round
+
+everyone will tell this
+to all their neighbors.
+
+So everyone will learn
+
+what is the radius-1
+neighborhood of each neighbor.
+
+And if you put together
+this information,
+
+you will have a full picture
+of your radius-2 neighborhood!
+
+And you can continue this way.
+
+After round 3, everyone knows
+their radius-3 neighborhood.
+
+After round 4, everyone knows
+their radius-4 neighborhood.
+
+And so on.
+
+So at best in T rounds
+you can learn everything
+
+up to distance T,
+and nothing more.
+
+And if you stop after T rounds
+and announce your local output,
+
+then whatever you output
+has to be a function
+
+of the information
+that was there
+
+in the network within
+distant T from you.
+
+So now we have another
+equivalent way
+
+to define algorithms
+in the LOCAL model:
+
+an algorithm that runs
+in time T is simply a mapping
+
+from radius-T neighborhoods
+to local outputs!
+
+This means that
+time and distance are
+
+interchangeable
+in the LOCAL model.
+
+And therefore
+
+fast distributed algorithms
+are also highly localized.
+
+If we have a fast algorithm,
+
+each node makes decisions
+based on the information
+
+that was available
+in its local neighborhood.
+
+So let's recap,
+
+all these notions are
+the same in the LOCAL model:
+
+What is the running time?
+
+Or how many communication
+rounds are needed?
+
+Or what is the locality
+of the problem?
+
+Or how far do you need
+to see in the graph?
+
+Something as simple as
+coloring a path with 2 colors
+
+is an example of
+a global problem.
+
+Let's quickly prove it.
+
+Assume you had some way of
+solving it in sublinear time.
+
+So along a long path,
+
+these two nodes could pick
+their own colors based on
+
+the information in their
+local neighborhood only.
+
+Let's assume the distance
+between the nodes is even,
+
+so they pick the same color,
+let's say black.
+
+But let's then modify
+the input graph like this.
+
+We just move this one node
+to a new place,
+
+keep everything else the same,
+including all unique identifiers.
+
+These two local neighborhoods
+don't change.
+
+So the local outputs of these
+two nodes won't change, either.
+
+So both nodes will still output
+the same color.
+
+But the distance between
+the nodes is now odd,
+
+so somewhere along the path
+the coloring can't be right.
+
+So any sublinear-time
+algorithm will fail.
+
+Linear-time brute force algorithms
+are the only possibility here.

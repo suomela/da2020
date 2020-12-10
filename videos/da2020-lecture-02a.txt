@@ -1,0 +1,668 @@
+Our course is about
+distributed algorithms,
+
+but this week we won't talk
+
+about distributed things or
+algorithmic things.
+
+We will study graph theory,
+
+because we will later need
+plenty of it in this course.
+
+In this lecture,
+I'll introduce some basic
+
+graph-theoretic concepts
+with the help of an example.
+
+In the course material you'll
+find the formal definitions
+
+of everything we use here,
+but I hope you can follow
+
+this presentation as long as
+you are familiar with
+
+the basic concepts
+like graphs, nodes, and edges.
+
+I'd like to emphasize that here
+
+all graphs are simple,
+undirected graphs.
+
+There is a finite,
+nonempty set of nodes,
+
+and a set of edges, and each
+edge is a set of 2 nodes.
+
+To illustrate some key ideas,
+I'll prove the following theorem:
+
+In any d-regular graph
+(where d is at least 1),
+
+a minimum vertex cover is always
+
+a d-approximation of
+a minimum dominating set.
+
+Let me decompose this and
+explain all words here,
+
+so that we understand
+what we claim here.
+
+The degree of a node
+is the number of neighbors.
+
+And a graph is d-regular if
+all nodes have degree d.
+
+So we are focusing here
+on graphs in which
+
+all nodes have the same
+number of neighbors.
+
+Here are some examples
+of 1-regular graphs,
+
+2-regular graphs,
+and 3-regular graphs.
+
+For example, this graph here is
+3-regular: if you look at
+
+any node, you'll see that
+it has got exactly 3 neighbors.
+
+Good, so now we
+understand this part.
+
+Then what about vertex covers?
+
+Let's assume C is
+a subset of nodes.
+
+We say that C is a vertex cover
+
+if, for each edge, we have got
+at least 1 endpoint in set C.
+
+For example, here this set of
+nodes is a vertex cover.
+
+If you take any edge,
+
+you will see that at least one
+endpoint is in set C.
+
+You can have both endpoints in C.
+But you must have at least 1.
+
+For example, this set of nodes
+is not a vertex cover, as we've
+
+got this edge here that doesn't
+have any endpoint selected.
+
+So you can think about
+vertex covers so that
+
+each node covers all
+of its incident edges.
+
+And a set of nodes is a vertex
+cover if it covers all edges.
+
+And we say that C is
+a minimum vertex cover
+
+if it is a vertex cover
+
+that has the smallest
+possible number of nodes.
+
+So for example this one here
+is a minimum vertex cover.
+
+It is a vertex cover
+with 2 nodes,
+
+and for this graph there is no
+vertex cover with fewer nodes.
+
+This one is not
+a minimum vertex cover,
+
+because it has got 3 nodes,
+
+while 2 nodes are enough
+to cover the graph.
+
+Good, so now we know
+what this part means.
+
+Then let's look at this part,
+dominating sets.
+
+Let's assume that D
+is a subset of nodes.
+
+We say that D is
+a dominating set
+
+if each node is in D or has got
+at least one neighbors in D.
+
+For example, here this set of
+nodes is a dominating set.
+
+If you take any node, either
+it is already selected,
+
+or at least 1 of its neighbors
+is selected.
+
+For example, this set of nodes
+is not a dominating set,
+
+as we've got this node here
+
+that is not selected, and none
+of its neighbors are selected.
+
+The intuition here is that
+
+a node can dominate
+all of its neighbors.
+
+And a set of nodes is
+
+a dominating set if
+all nodes are dominated.
+
+And now D is
+a minimum dominating set
+
+if it is a dominating set
+
+that has the smallest possible
+number of nodes.
+
+So for example this one here is
+a minimum dominating set.
+
+It is a dominating set
+with 2 nodes,
+
+and for this graph there is no
+dominating set with fewer nodes.
+
+And this one is not
+a minimum dominating set,
+
+because it has got 3 nodes,
+
+while 2 nodes are enough
+to dominate the graph.
+
+Good, we are making progress, we
+know also what this part means.
+
+Finally, we need to understand
+approximations.
+
+When we say that set D is
+
+a k-approximation of
+a minimum dominating set,
+
+we mean the following.
+
+First, D is a dominating set.
+
+Second, the size of D is
+
+at most k times the size of
+the minimum dominating set.
+
+That's it. That's the full
+definition, nothing more.
+
+Please note that
+
+approximations have to be
+feasible dominating sets.
+
+It isn't roughly
+a dominating set.
+
+It has to be exactly
+a dominating set.
+
+The only sloppiness is
+in the size.
+
+It doesn't need to be
+a minimum-size dominating set,
+
+it can be larger by some factor.
+
+For example, this is an example
+
+of a 2-approximation of
+a minimum dominating set.
+
+In this graph the minimum
+dominating set is 3 nodes.
+
+And here we have
+a dominating set with 6 nodes.
+
+Six is at most 2 times 3.
+So this is a 2-approximation.
+
+So now we understand all terms.
+
+Let's rephrase the claim
+so that it is easier to follow.
+
+We can take any
+positive integer d.
+
+And we can take any graph G
+that is d-regular.
+
+And we can take any
+minimum vertex cover X.
+
+And the claim is that X is also
+
+a d-approximation of
+a minimum dominating set.
+
+And to make it more clear,
+let's expand it a bit.
+
+Consider any minimum
+vertex cover X and
+
+any minimum dominating set Y.
+
+Then we claim that X is
+also a dominating set,
+
+and its size is not more than
+d times the size of Y.
+
+Does this claim make any sense?
+
+Let's quickly go through
+some examples.
+
+Here d = 1.
+We have a 1-regular graph.
+
+Here is a minimum vertex cover X
+with 1 node,
+
+and a minimum dominating set Y
+with 1 node.
+
+It's easy to check that X is
+also a dominating set,
+
+and indeed its size is
+1 times the size of Y.
+
+Here d = 2.
+We have a 2-regular graph.
+
+Here is a minimum vertex cover X
+with 2 nodes,
+
+and a minimum dominating set Y
+with 1 node.
+
+We can check that X is
+also a dominating set,
+
+and its size is 2 times the size
+of Y, just like it should be.
+
+And another example for d = 2.
+Another 2-regular graph.
+
+A minimum vertex cover X
+with 3 nodes,
+
+and a minimum dominating set Y
+with 2 nodes.
+
+Again, X is a also
+a dominating set,
+
+and its size is at most
+2 times the size of Y.
+
+Please note that here we are
+doing a bit better,
+
+the size of X is only 1.5 times
+the size of Y, but that's fine.
+
+And here d is 3.
+
+And here is an example of
+a graph where
+
+a minimum vertex cover
+has 3 nodes
+
+and a minimum dominating set
+has got 1 node.
+
+Again, the size of X is
+at most 3 times the size of Y,
+
+and X is also a dominating set.
+
+And a yet another example here.
+
+A minimum vertex cover
+with 4 nodes.
+
+A minimum dominating set
+with 2 nodes.
+
+Factor-2 difference,
+which is at most 3.
+
+Good, so the claim
+at least seems to make sense
+
+in these examples,
+and we know also that
+
+the claim is basically
+the strongest possible.
+
+In the previous examples we saw
+
+that sometimes the ratio is
+exactly d, sometimes less.
+
+Now let's prove this claim!
+We need to prove 2 things.
+
+First, we need to prove that
+
+a minimum vertex cover
+is also a dominating set.
+
+Second, we need to prove that
+a minimum vertex cover is not
+
+that much larger than
+the smallest dominating set.
+
+Let's start with the first part.
+
+Let X be any vertex cover.
+
+We don't need to use
+
+the property that it is
+a minimum vertex cover here,
+
+so we can just look at
+any vertex cover.
+
+We need to show that
+X dominates all nodes, that is,
+
+all nodes not in X have at
+least one neighbor in X.
+
+To do this, consider any node u.
+
+The graph is d-regular and
+d is at least 1,
+
+so node u has got at least one
+neighbor, let's call it v.
+
+So in the graph there is
+an edge {u,v}.
+
+And X is a vertex cover,
+
+so it contains at least one
+of the endpoints of this edge.
+
+So u is in X, or
+
+if this is not the case,
+its neighbor v is in X.
+
+So we are done:
+X is a dominating set.
+
+Now comes the more
+interesting part.
+
+We need to bound the size of X
+in comparison with the size of Y.
+
+We don't need to use
+the property that Y is
+
+a minimum dominating set here,
+it is enough to show that X
+
+is at most d times as large as
+any dominating set,
+
+and then it of course also holds
+
+for the specific case of
+a minimum dominating set.
+
+Let's use n to denote the total
+number of nodes in the graph.
+
+We will first compare
+the size of Y with n,
+
+and then compare
+the size of X with n,
+
+and this will give what we want.
+
+Let's start by analyzing set Y,
+
+which is assumed to be
+some dominating set.
+
+Let's put some tokens on
+the nodes as follows.
+
+Each node in Y puts
+one token on itself and
+
+one token on each of
+its neighbors.
+
+Because Y is a dominating set,
+each node got at least 1 token.
+
+And because all nodes in Y
+have exactly d neighbors,
+
+we used d+1 tokens
+per node in Y.
+
+So in total the number of
+tokens we used
+
+was d+1 times the size of Y.
+
+And because each node
+got at least 1 token,
+
+we must have used
+at least n tokens.
+
+So n is at most d+1 times
+size of Y.
+
+Good, let's keep this inequality
+in mind, we'll use it soon.
+
+Let's next analyze set X,
+
+which is assumed to be
+a minimum vertex cover.
+
+We'll again put some tokens
+but with a twist.
+
+Let's define set A that
+
+consists of those nodes that
+are not in the vertex cover.
+
+Now each node in A puts
+one token on itself
+
+and one on each neighbor.
+
+So the total number of tokens
+is d+1 times the size of A.
+
+And I'm claiming that each node
+got at least one token,
+
+so we had to use
+at least n tokens.
+
+Why is this the case?
+
+Well, let's image that
+
+there was a node v
+that didn't get any tokens.
+
+So v itself has to be
+in the vertex cover,
+
+otherwise it would give
+a token to itself.
+
+And all neighbors of v have to
+be also in the vertex cover,
+
+otherwise they would
+give us tokens.
+
+But what would this mean?
+All of these edges incident to v
+
+have both endpoints
+in the vertex cover X.
+
+If X is a vertex cover,
+we could remove v from X,
+
+and it would still be
+a vertex cover.
+
+So we could construct
+
+another vertex cover
+that is smaller than X.
+
+But we assumed X is
+a minimum vertex cover,
+
+so this cannot happen.
+
+So it has to be the case that
+all nodes got at least 1 token,
+
+and the number of tokens
+is therefore at least n.
+
+So we have that the size of A
+is at least n over d+1.
+
+And now we know enough about
+the size of X.
+
+It's the complement of A, so its
+size is n minus the size of A.
+
+And using this gives this,
+
+so the size of X is at most
+d over d+1 times n.
+
+Now let's recall what
+I told you to remember.
+
+We already proved that n is
+at most d+1 times the size of Y.
+
+So the size of X is
+at most d times the size of Y,
+
+which is exactly what
+we were supposed to prove!
+
+So a theorem proved.
+Why did we do this?
+
+Not because this is an important
+result in graph theory,
+
+it certainly isn't.
+
+But because this proof
+demonstrates both key concepts
+
+and some useful proof techniques
+that we will use in this course.
+
+By the way, it's good to note
+that  we didn't really ever need
+
+the property that
+X is a minimum vertex cover.
+
+We only need to assume that
+
+if you remove any node from X,
+it is no longer a vertex cover.
+
+So it was enough to assume that
+X is a minimal vertex cover,
+
+that is, you can't remove
+any nodes from it.
+
+On the other hand,
+if you only assumed
+
+that X is a vertex cover,
+this claim is no longer true.
+
+Can you see why?
+
+What's the simplest
+counterexample?

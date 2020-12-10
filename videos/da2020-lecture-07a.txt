@@ -1,0 +1,325 @@
+Hello everyone,
+
+So far we have focused
+on the positive:
+
+what can be computed
+with distributed algorithms.
+
+Now we will look
+at the negative:
+
+what cannot be computed
+with distributed algorithms.
+
+We will start with
+the port numbering model.
+
+This is a weak model,
+and there are lots of problems
+
+that cannot be solved at all
+in the port-numbering model.
+
+And this week we'll learn
+
+a very powerful technique
+for proving such results.
+
+The key concept is called
+covering maps.
+
+You'll find the precise
+mathematical definition
+
+in the lecture notes,
+but in this short video
+
+I'll try to explain the
+intuition behind this approach.
+
+Let's look at some port-numbered
+network N, like this one here.
+
+And imagine you've got
+
+some deterministic
+distributed algorithm A.
+
+It doesn't matter
+what the algorithm does,
+
+or what problems it solves.
+
+It's enough that it's
+
+a well-defined algorithm
+in our formalism,
+
+there's an init function, send
+function, and receive function.
+
+Now once you fix
+algorithm A and network N,
+
+you have also uniquely defined
+the execution of the algorithm.
+
+You can just simulate
+the algorithm here and
+
+see what messages nodes
+send in each round
+
+and how they update
+their states.
+
+You can find out, for example,
+
+what's the state of
+node a after round 5.
+
+OK, good.
+
+Now let's take two identical
+copies of the network.
+
+We duplicated
+all nodes and all edges.
+
+Let's call this new network X.
+
+Now we run the same algorithm A
+in network X.
+
+What happens?
+
+Well, obviously
+
+we'll get exactly the same thing
+as in network N,
+
+everything was just doubled.
+
+So if in network N
+in round 5 node a sent
+
+message m to its first port,
+
+then in network X
+in round 5 node a1 sends
+
+the same message m to its
+first port, and so does node a2.
+
+And whatever was
+
+the state of node a
+after round 5 in network N,
+
+then the states of a1 and a2
+are going to be the same.
+
+OK, this was of course trivial.
+Now comes the interesting part.
+
+Let's modify X slightly.
+
+Let's, for example, replace
+
+these two straight edges
+with edges that go across.
+
+And let's run algorithm A
+in this new network Y.
+
+Now what happened?
+
+Well, if you think about it,
+before the first round
+
+all nodes in Y
+have the same states
+
+as the corresponding nodes in X.
+
+And therefore all nodes also
+send the same messages
+
+in the first round
+in X and in Y.
+
+And the messages sent by a1
+and a2 were identical in X,
+
+and so were the messages
+sent by b1 and b2.
+
+So if you just look at
+
+what messages the nodes receive
+in the first round,
+
+you won't see any differences
+between X and Y.
+
+For example, it doesn't matter
+
+if the message b1 received
+came from a1 or a2,
+
+as both of the nodes
+were identical,
+
+they were in the same state,
+and they sent the same messages.
+
+So everyone received
+the same messages in X and Y,
+
+and hence everyone in Y
+ended up in the same states
+
+as the corresponding nodes of X
+after the first round.
+
+Whatever was the state of a1
+in X after one round
+
+is equal to the state of a1
+in Y after one round.
+
+And we can repeat the same
+reasoning for each round.
+
+Before the second round,
+nodes a1 and a2 in Y were
+
+in the same states as
+nodes a1 and a2 in X,
+
+and both of them were in
+the same state as node a in N.
+
+So they send the same messages,
+and therefore
+
+it doesn't matter whether
+we are in network X or Y.
+
+So during the second round
+all nodes in Y receive 
+
+the same messages
+as the corresponding nodes in X,
+
+and they end up
+in the same states.
+
+To summarize, after each round,
+nodes a1 and a2 in Y
+
+are in the same state
+as nodes a1 and a2 in X,
+
+which are in the same state
+as node a in N.
+
+Basically, if we imagine that
+
+we run algorithm A
+simultaneously in parallel
+
+in these three networks, we will
+see exactly the same messages,
+
+and exactly the same state
+transitions
+
+between corresponding nodes.
+
+And if, for example,
+
+a1 in Y ever stops
+and produces some output,
+
+then all these other nodes
+
+will also stop in the same round
+and produce the same output.
+
+So no matter which algorithm you
+use, no matter how clever it is,
+
+it can't tell the difference
+between networks N, X, and Y.
+
+It can't tell the difference
+between nodes a1 and a2 in X.
+
+And it can't tell the difference
+between a1 and a2 in Y.
+
+So if your task is to,
+for example,
+
+tell if a connected graph has
+got 4 or 8 nodes,
+
+this is not solvable at all.
+
+Or if you need to label
+
+nodes in this graph
+with unique identifiers,
+
+you can't do it in
+the port numbering model at all.
+
+Formally, what you saw here is
+an example of covering maps.
+
+In this case there is
+a covering map from X to N,
+
+and also a covering map
+from Y to N.
+
+And we can show that whenever
+there is a covering map
+
+between two networks, then no
+matter which algorithm you run,
+
+the node and its image will be in
+the same state after each round.
+
+The proof is basically what
+you already saw in this video:
+
+we just argue that
+the nodes are in the same states
+
+before each round, so they
+send the same messages,
+
+and therefore they also
+receive the same messages
+
+and it follows that their
+new states are also identical.
+
+The punchline is that
+covering maps
+
+preserve everything
+in port-numbered networks.
+
+They preserve
+the original local states,
+
+they preserve outgoing messages,
+they preserve incoming messages,
+
+and therefore they also preserve
+new local states for all nodes.

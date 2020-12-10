@@ -1,0 +1,308 @@
+Hi everyone,
+
+Today I'll present
+a simple and efficient
+
+distributed algorithm
+for graph coloring.
+
+Or more precisely,
+one algorithm that you can use
+
+as a subroutine when designing
+fast graph coloring algorithms.
+
+Let q be any prime number.
+The only requirement is that
+
+q is more than 2 times
+the maximum degree of the graph.
+
+We will show how to reduce
+
+the number of colors from
+q² to q in only q rounds.
+
+So for example, if q is 7,
+we can reduce
+
+the number of colors
+from 49 to 7 in only 7 rounds.
+
+I'll use q = 7 to
+illustrate the idea.
+
+Our input colors are
+pairs (a, b), where
+
+both a and b are numbers
+between 0 and 6.
+
+So we can handle 7 × 7
+possible input colors.
+
+And our output colors are
+pairs of the form (0, b).
+
+So there are only 7 possible
+output colors when we are done.
+
+Color reduction from 49 to 7.
+
+It's best to visualize nodes
+as clocks with one hand.
+
+Value (a, b) means that the hand
+
+is moving at speed a and
+it is currently in position b.
+
+So in each step we change
+(a, b) to (a, b + a mod 7).
+
+And the algorithm is
+really simple:
+
+you stop the clock when you can
+do it in a conflict-free manner.
+
+You just switch from (a, b)
+to (0, b) whenever this is safe,
+
+when no neighbor is
+in position b.
+
+And that's it.
+
+So our possible input colors are
+
+these 49 configurations,
+7 speeds, 7 positions.
+
+And when the nodes are running,
+their colors change like this.
+
+Clocks are ticking.
+
+Hands are moving at
+constant speed.
+
+And neighbors have by assumption
+different input colors
+
+so they will start in
+different configurations.
+
+Either they start in
+different positions.
+
+Or move at different speeds.
+Or both.
+
+And our final configurations
+are these 7 possibilities.
+
+Clocks are stopped, hands are
+in one of 7 possible position.
+
+This is what we are
+trying to achieve.
+
+A proper coloring where
+all clocks are stopped.
+
+Let's see how the algorithm
+works in practice.
+
+Here is a complete graph
+with four nodes.
+
+Our input configuration might
+look for example like this.
+
+First round.
+Check for conflicts.
+
+The top two nodes have their
+hands in the same positions,
+
+but the bottom nodes
+don't have any conflicts.
+
+Bottom nodes can stop, they set
+their speeds to 0, they are done.
+
+Nodes that are still running
+move to the next position.
+
+Second round.
+Check for conflicts.
+
+Bad luck,
+
+both of the running nodes are
+still in conflict with someone,
+
+this time with the nodes
+that are already stopped.
+
+No progress.
+Advance to the next position.
+
+Third round.
+Check for conflicts.
+
+No conflicts left.
+Both of the nodes can stop.
+
+We are done.
+
+We have got a new coloring from
+a color palette of only 7 colors.
+
+Let's look at another example.
+
+We start like this.
+Check for conflicts,
+
+everyone has got conflicts,
+everyone moves their hands.
+
+Check for conflicts,
+
+two nodes on the right
+conflict with each other,
+
+but the nodes on the left
+can stop.
+
+Move hands,
+check for conflicts, still bad!
+
+Move hands, check for conflicts,
+still bad for the top right node!
+
+The bottom right node can stop.
+
+Move hands, check for conflicts,
+now we are finally done.
+
+Good, you get the algorithm.
+But does it work correctly?
+
+In the previous example
+it already took a while;
+
+could it be the case
+
+that we just keep getting
+conflicts forever?
+
+Let's think about this.
+
+Let's look at a node and
+one of its neighbors.
+
+Let's first assume that
+both of the nodes are running.
+
+As these are neighbors,
+
+their starting positions
+or speeds must differ.
+
+Now no matter what are
+the speeds of these nodes,
+
+in 7 rounds their hands
+are aligned at most once!
+
+If they have different speeds
+
+their hands are aligned
+exactly once.
+
+If they run at the same speed,
+
+their hands will be
+never aligned.
+
+So if you and your neighbor
+are both running, in 7 rounds
+
+you'll have conflicts with
+this neighbor at most once.
+
+But what if your neighbor
+has stopped?
+
+Well, the same thing,
+
+in 7 rounds you'll have
+conflicts with it only once.
+
+So in 7 rounds,
+you'll have conflicts
+
+with any specific neighbor
+at most twice,
+
+even if it happens to stop
+in the middle.
+
+You'll get conflicts at most once
+while your neighbor is running.
+
+And at most once
+when it's stopped.
+
+And for example here
+each node had 3 neighbors.
+
+So let's think about this from
+the perspective of any given node.
+
+In 7 rounds,
+you'll have conflicts
+
+with each of your neighbors
+at most twice.
+
+So there can be
+
+at most 6 rounds in which you
+have conflicts with someone.
+
+In 7 rounds you'll find
+
+at least one round that is
+completely conflict-free.
+
+And then we are done
+and we can stop!
+
+That's the whole algorithm.
+
+Pick any prime number q
+
+that is more than two times
+the maximum number of neighbors.
+
+And in q rounds, you can turn
+
+a coloring with q² colors into
+a coloring with only q colors.
+
+And if we combine this with
+the other building blocks
+
+that we have in this week's
+course material,
+
+we will get an algorithm that
+
+finds a coloring with Δ+1 colors
+in any graph of maximum degree Δ,
+
+and the running time is
+O(log* n + Δ).

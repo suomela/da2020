@@ -1,0 +1,248 @@
+Hi everyone,
+
+Two weeks ago
+we learned how to find
+
+a coloring with Δ+1 colors
+with a deterministic algorithm.
+
+The running time was
+O(Δ + log* n).
+
+Now we will solve the same problem
+with a randomized algorithm.
+
+The running time will be simply
+O(log n), with high probability.
+
+The algorithm and
+its analysis are really easy.
+
+Let's start with the simplest
+possible idea one could imagine.
+
+Each node just checks
+
+which colors are currently free
+in its local neighborhood.
+
+Then each node picks a random
+color from the set of free colors.
+
+And then it checks
+if there were any conflicts.
+
+If I managed to pick a color
+
+different from the colors
+of my neighbors, I can stop.
+
+Now this sounds
+really promising,
+
+but when you try to analyze it,
+it's not so simple any more.
+
+So let's make a tiny change
+in the algorithm.
+
+Running nodes flip coins
+
+to decide if they are active
+in this round.
+
+And only active nodes try
+to pick random free colors.
+
+And you keep your color
+if you are successful.
+
+That's it,
+this is the whole algorithm!
+
+And it's clear that
+
+if it ever stops,
+coloring has to be proper.
+
+But why does it stop fast,
+with high probability?
+
+It turns out it's enough
+to prove the following claim:
+
+if at any point you consider
+any node that is still running,
+
+it will stop in this round
+with probability at least 1/4.
+
+This holds for any graph,
+
+for any node, and
+for any communication round,
+
+no matter what other nodes
+have already done!
+
+And this means that
+
+the probability that
+a given node is still running
+
+after T rounds gets
+exponentially small.
+
+And then it isn't hard to see
+
+that after only a logarithmic
+number of rounds,
+
+with high probability
+
+not only this node but also
+all other nodes have stopped.
+
+So the interesting part
+is this lemma.
+
+How to prove it?
+
+Well, let's imagine
+
+I'm a node somewhere
+in the middle of the graph.
+
+Let's say I have got k neighbors
+that are still running.
+
+But because I had originally
+more colors than neighbors,
+
+there have to be still more than
+k colors left to choose from.
+
+Now what's the probability
+that I can stop in this round?
+
+Let's first consider
+what happens if I'm active.
+
+Now the only reason why I might
+not stop is that I would pick
+
+a random free color that
+conflicts with one of my neighbors.
+
+We will first consider
+one specific neighbor v.
+
+We have no idea
+how many neighbors and
+
+how many free colors
+v has got.
+
+But we don't care
+about that, either.
+
+In the algorithm,
+I'm making my random choices
+
+simultaneously
+in parallel with v.
+
+But to analyze what happens,
+we can imagine that
+
+I roll dice first and
+v rolls dice after that,
+
+or vice versa.
+
+So let's do the analysis so that
+v makes its random choices first,
+
+and see what's the probability
+that my choice conflicts with it.
+
+With probability one half,
+
+v is passive and doesn't
+do anything, no conflicts.
+
+With probability one half,
+
+v is active
+and it picks some color.
+
+But I had more than
+k free colors to choose from.
+
+At most one of those can be
+the color picked by v.
+
+So the probability
+that I make a choice
+
+that conflicts with v
+is less than 1/k.
+
+So overall the probability that
+v is active and managed to pick
+
+a color that conflicts with me
+is less than 1/(2k).
+
+This was for
+a specific neighbor v.
+
+I have got k neighbors, and
+using the union bound
+
+we quickly get that
+the probability that
+
+at least one of them conflicts
+with me is
+
+less than k times 1/(2k),
+which is less than one half.
+
+So if I'm active,
+
+I'll have a conflict with
+probability less than one half.
+
+So I'll stop with probability
+more than one half.
+
+And I was active
+with probability one half,
+
+so overall I'll stop with
+probability more than 1/4.
+
+And this is exactly
+what we wanted to prove!
+
+So the algorithm was this,
+flip coins to decide
+
+if you are active, and
+then pick a random free color.
+
+Now I recommend that you go back
+to this earlier algorithm idea
+
+that I showed first
+where everyone is active.
+
+What would happen
+if your tried to do
+
+exactly the same analysis
+for this algorithm?
+
+What kind of a running time
+would you get?

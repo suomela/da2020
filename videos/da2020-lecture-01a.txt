@@ -1,0 +1,611 @@
+Welcome to the
+Distributed Algorithms course
+at Aalto University!
+
+I'm Jukka Suomela and
+I'm teaching this course
+
+together with Juho Hirvonen.
+
+Hello everyone, I'm Juho Hirvonen,
+welcome also on my behalf!
+
+In this course we will study
+theoretical computer science
+
+from a new perspective.
+
+Imagine you are a node
+in the middle of a large graph.
+
+For example, think about 
+a computer network:
+
+each node is a computer,
+each edge is a communication link.
+
+Or maybe it's a social network:
+each node is a human being, and
+
+there are edges between
+two people who know each other.
+
+Or maybe it's
+a multicellular organism:
+
+each node is a cell, and
+there is an edge between two cells
+
+that can exchange biochemical
+signals with each other.
+
+No matter what's
+the specific scenario,
+
+we will represent it as a graph,
+in the usual mathematical sense.
+
+There is a set of nodes,
+and there is a set of edges.
+
+And working together,
+
+the nodes are trying
+to accomplish something.
+
+Maybe we need to find a tree
+that can be used
+
+for spreading information,
+for routing, and for navigation.
+
+Or maybe we need to form pairs for
+collaboration and sharing resources.
+
+Or maybe we need to find
+a coloring of the nodes.
+
+That is, label the nodes
+
+with colors so that neighboring
+nodes have different colors.
+
+Why would we need to do this?
+
+It turns out that coloring
+
+is a very important primitive
+especially in distributed systems.
+
+A coloring gives a schedule.
+
+For example, here we have
+
+a coloring with three colors,
+red, green, and blue.
+
+We can first make red nodes active,
+all other nodes are passive.
+
+Notice that the red nodes
+form an independent set.
+
+If you look at any active node,
+all of its neighbors are passive.
+
+So we will never have two
+active nodes next to each other.
+
+Active nodes can safely do
+whatever they want,
+
+without any risk that
+
+the actions of their neighbors
+would conflict with them.
+
+Then we can make green nodes active,
+all other nodes are passive.
+
+Then blue nodes are active,
+all other nodes passive.
+
+And now we are done, each node
+had an opportunity to be active.
+
+If we have a coloring with k colors,
+
+we can go through all color
+classes in k time steps this way.
+
+So a coloring gives a schedule
+
+that we can use to coordinate
+the actions of the nodes.
+
+And a coloring with a small
+number of colors is good,
+
+because it gives a short schedule;
+we can complete work quickly.
+
+So let's recap.
+
+We have a graph that
+consists of nodes and edges.
+
+The nodes need to work together
+to accomplish something.
+
+And we are
+theoretical computer scientists,
+
+so we interpret this so that
+
+the nodes need to solve
+some computational problem.
+
+Usually it's a graph problem.
+
+Finding a spanning tree.
+
+Finding a matching.
+
+Finding a proper vertex coloring.
+And so on.
+
+And we take
+a distributed perspective.
+
+Initially, each node is
+only aware of itself.
+
+And eventually
+
+each node needs to figure out
+its own part of the solution.
+
+For example,
+if we do graph coloring,
+
+each node needs to know
+its own color.
+
+Let's go through this more
+carefully, this is critical.
+
+This is the key difference
+
+between the theory of
+distributed computing and
+
+the theory of classical,
+centralized sequential computing.
+
+As I said, in the beginning
+each node is only aware of itself.
+
+Nobody knows the whole graph.
+
+Here I know that I'm here a node
+with five neighbors, that's it.
+
+I can exchange messages
+with my neighbors to learn more.
+
+And of course
+all other nodes can do the same.
+
+Everyone can talk to their
+own neighbors to learn more.
+
+But we don't want to waste
+too much time doing communication.
+
+Each communication step
+takes some time.
+
+And we want to minimize
+the number of communication rounds.
+
+So after some, ideally small
+number of communication rounds
+
+we want to stop.
+
+And when we stop,
+
+each node has to figure out
+its own part of the solution.
+
+If we are forming pairs,
+
+each node needs to know which
+of the neighbors is its pair.
+
+If we do graph coloring,
+
+each node needs to know
+its own color.
+
+And this is already enough for
+each node to know what to do.
+
+For example, if we use
+graph coloring for scheduling,
+
+if I know that my color is five,
+I know that
+
+I can be safely active
+during time slot number five.
+
+I don't need to know
+everyone's colors,
+
+knowing my own color is enough
+to know when to act.
+
+So this is what we study
+in distributed algorithms.
+
+We are solving graph problems
+
+so that all nodes
+take part in the computation.
+
+Both input and output
+are distributed.
+
+Nobody knows the whole input.
+
+And each node only needs to know
+its own part of the output.
+
+This is very different
+
+from classical theoretical
+computer science, where
+
+we think that the whole input
+is stored in one place,
+
+it is given to one computer
+to be processed,
+
+and the whole output
+is then returned back.
+
+Usually we don't even pay
+any attention to this,
+
+but please note that this is
+a very strong assumption.
+
+We assume someone knows perfectly
+the entire state of the world!
+
+Someone knows the structure
+of the whole Internet,
+
+or the structure of the global
+social network, and so on.
+
+Also please note that
+
+this is different from
+traditional parallel computing,
+
+where we may use multiple
+processors to solve the problem,
+
+but we nevertheless have
+
+the full input stored
+somewhere in one place
+
+and eventually we will store
+the whole solution in one place.
+
+So in pretty much all other
+areas of computer science
+
+you take an outsider's view.
+
+You are an all-seeing entity,
+sitting somewhere outside your input.
+
+You know everything.
+
+The only question is what
+to do with this information.
+
+While in distributed algorithms
+we take an insider's view.
+
+We are sitting somewhere
+in the middle of a graph,
+
+we are one of possibly
+millions of nodes.
+
+And we have no idea
+about the whole input.
+
+We can learn a bit more
+by talking to our neighbors.
+
+But since we'd like to
+solve problems fast,
+
+we usually don't want to wait
+until everyone knows everything.
+
+So we'd like to be able to
+produce at least our own part of
+
+the solution based on whatever
+we see in our local neighborhood.
+
+And this turns out to be one of
+the key concept that we want to
+
+understand in this course:
+locality.
+
+Fast distributed algorithms are
+necessarily highly localized.
+
+In a small number of
+communication steps you can only
+
+get some information
+from your local neighborhood.
+
+Why is this?
+
+Well, just imagine an algorithm
+where in each round everyone
+
+tells all of its neighbors
+everything it knows so far.
+
+Initially, everyone
+just knows about itself.
+
+Then after one round
+
+everyone knows about everything
+within distance one.
+
+After two rounds
+
+everyone knows about everything
+within distance two.
+
+After three rounds
+
+everyone knows about everything
+within distance three.
+
+And so on.
+
+So in T rounds everyone can know
+
+at best everything up to
+distance T, and nothing more.
+
+If you stop after
+a small number of rounds,
+
+whatever you output
+
+will only depend on
+what you see close to you.
+
+Fast distributed algorithms are
+necessarily also highly localized.
+
+And this is a key questions
+we are going to ask,
+
+over and over again
+during this course:
+
+When is this enough?
+
+What can you do
+with only local information?
+
+And what cannot be
+solved locally?
+
+Which graph problems are local?
+
+And which graph problems
+are global?
+
+Or put otherwise,
+
+which problems can be solved
+fast in a distributed setting,
+
+with only a small number of
+communication rounds?
+
+And which problems necessarily
+require a large number of rounds?
+
+So you can approach
+these questions
+
+from a purely graph-theoretic
+perspective if you prefer that.
+
+Or you can think about computers,
+network connections,
+
+messages that you pass
+between nodes,
+
+and algorithms that process
+the messages, and so on.
+
+Whichever you do,
+
+you will get a new perspective
+on the theory of computing.
+
+You will learn
+to think like an insider,
+
+instead of thinking
+like an outsider.
+
+So far in many other courses
+
+you have been reasoning about
+computational operations.
+
+Like, how many arithmetic
+operations or memory lookups
+
+or Turing machine steps
+are needed to solve something.
+
+The key resource
+has been computation.
+
+In this course we will study
+
+an entirely different kind of
+resource: communication.
+
+We will look at questions like
+
+how many communication steps
+are needed to solve something.
+
+And, if you look at
+
+real-world computer networks
+in practice,
+
+you can see that communication
+steps are usually very expensive
+
+in comparison with
+computational steps.
+
+If you just try to get one bit
+of data from another computer
+
+sitting in your local network,
+
+it'll take something like
+half a millisecond.
+
+Half a millisecond
+may not sound like much,
+
+until you check how many
+arithmetic operations
+
+your computer could do
+in half a millisecond.
+
+And even for your
+old desktop computer
+
+the answer can be easily
+one billion!
+
+So there can be a factor
+one billion difference
+
+between the cost talking to
+other computers
+
+and doing some number-crunching
+inside one computer!
+
+So if you have a bunch of nodes
+that are sitting in a network
+
+and that want to solve
+something together,
+
+the key limitation is often
+communication, not computation.
+
+And this is one of
+the key reasons
+
+why I want to make sure
+you learn
+
+how to design algorithms that
+are communication-efficient.
+
+And we will also learn how to
+prove negative results
+
+that tell us about
+the fundamental limitations of
+
+computation in large networks.
+
+We will learn how to prove
+
+that some problems
+are inherently global;
+
+we show that there is no way to
+solve them in a small number of
+
+communication rounds, by using
+only local information around you.
+
+And such results tell us something
+fundamental about nature,
+
+as they apply to any system that
+
+consists of entities
+that talk to each other.
+
+Not just about man-made systems,
+like telecommunication networks.
+
+We can use the same principles to
+
+reason about biological systems
+or social networks.
+
+We can apply what we learn here
+
+to study job markets
+or animal populations.
+
+In particular, we can use
+what we learn here to study
+
+the fundamental limitations
+of such systems:
+
+what are things that
+you cannot do quickly,
+
+no matter what kind of
+a mechanism we use.
+
+So distributed computing
+is not only about computers,
+
+it is very much about
+
+understanding the
+mathematical foundations of
+
+all kinds of systems that
+consist of interacting entities.

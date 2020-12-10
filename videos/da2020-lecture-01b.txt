@@ -1,0 +1,249 @@
+Hi everyone!
+
+We'll now have a look at 
+
+a very fast distributed algorithm
+for graph coloring.
+
+We will look at a very simple
+setting first: our graph is a cycle.
+
+And not just a cycle but
+we assume it's a directed cycle.
+
+Each node has got
+
+exactly one successor and
+exactly one predecessor.
+
+And when I say graph coloring,
+
+we are talking about proper
+vertex colorings with k colors.
+
+That is,
+
+the nodes need to be labeled
+with numbers from 0 to k − 1,
+
+and the label of a node
+
+is always different from
+the labels of its neighbors.
+
+We will assume that the cycle
+
+is already colored with
+some large number of colors.
+
+For example, assume that
+the nodes are initially labeled
+
+with some unique identifiers
+from a large set of identifiers.
+
+Think about something like
+IP addresses here.
+
+The identifiers
+form a proper coloring,
+
+but the number of colors
+is large.
+
+And we'd like to reduce
+the number of colors, so that
+
+we would have a new coloring
+with a smaller number of colors.
+
+Let's say we've got already
+
+a coloring with 256 colors,
+using numbers from 0 to 255.
+
+And we'd like to reduce
+the number of colors.
+
+Now there's a simple thing
+you can always do.
+
+Just eliminate colors
+one by one.
+
+We can, for example,
+eliminate color number 255.
+
+Just consider
+all nodes of color 255.
+
+They check
+
+what are the current colors
+of their two neighbors,
+
+
+and they then pick the smallest
+free color in their neighborhood.
+
+This node here
+can pick color 0.
+
+This node here
+can pick color 1.
+
+This node here can
+pick color 2. And so on.
+
+All nodes that had color 255 will
+have a new color between 0 and 2.
+
+And all other nodes
+kept their original colors.
+
+So all nodes have got now
+colors between 0 and 254.
+
+So we made progress,
+but only very little.
+
+We got from 256 colors
+to 255 colors.
+
+You could repeat this
+for 253 times and
+
+eventually you'd have
+a coloring with only 3 colors.
+
+But this takes a lot of time.
+And we can do much better!
+
+If we are given a coloring
+with 256 colors,
+
+we can in one step reduce
+the number of colors to 16!
+
+Let's see how it goes.
+
+Let's look at some fragment
+of the cycle here.
+
+Our original colors are
+numbers between 0 and 255.
+
+We can represent these using
+binary numbers with 8 bits.
+
+Nothing happened yet, we just
+wrote the colors in base 2.
+
+Now I'm a node somewhere
+in the middle of the cycle.
+
+I'll compare my own color
+with the color of my successor.
+
+I've got two binary strings,
+
+and of course the binary strings
+are different.
+
+So there is at least one bit
+that differs.
+
+Let's find the index of
+the lowest bit that differs.
+
+For example,
+here bit number 0 is the same.
+
+And bit number 1 is the same.
+
+But bit number 2 differs.
+And the value of this bit is 0.
+
+So I'll take note of these two
+numbers, index 2 and bit value 0.
+
+My new color will be this pair,
+(index, bit value) = (2, 0).
+
+Of course we can represent this
+again as a binary number,
+
+for example, just write index
+in binary,
+
+and concatenate it
+with the bit value.
+
+The index is something between
+0 and 7, so it fits in 3 bits.
+
+We write 2 in binary, its 010,
+and add the bit value 0.
+
+And that's it, my new color is
+in binary 0100.
+
+And everyone does the same.
+
+For example this node here
+will also see that
+
+bit number 2 differs
+from its successor.
+
+But now the value
+of the bit is 1,
+
+so the new color is (2, 1).
+Or in binary 0101.
+
+And this node here will see
+that bit number 6 differs.
+
+And the value of the bit is 0,
+so the new color is (6, 0).
+
+Or in binary 1100.
+
+So we started with a coloring
+
+in which the colors were
+binary string with 8 bits.
+
+And we got a new coloring
+
+in which the colors are
+binary strings with only 4 bits.
+
+So we started with 256 colors.
+
+And we pushed the number of
+colors down to 16, in just one step.
+
+Each node simply labels itself
+with the index and value
+
+of the first bit that
+differs from its successor.
+
+And the amazing thing is that
+
+if all nodes follow
+these simple rules,
+
+the new labels are guaranteed
+to form a proper coloring.
+
+My new color is always
+going to be different
+
+from the new color
+of my successor.
+
+Can you see why this is the case?
+How would you prove it?

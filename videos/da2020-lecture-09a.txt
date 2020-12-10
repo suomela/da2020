@@ -1,0 +1,492 @@
+Let's say we want to prove that
+solving some problem X requires,
+
+for example,
+at least 5 communication rounds.
+
+We could, in principle,
+do this as follows:
+
+Consider any algorithm A
+that runs in 4 rounds.
+
+Then show that algorithm A
+fails to solve X.
+
+But it's often very hard
+to reason about
+
+what an algorithm might do
+in 4 rounds.
+
+Of course a 4-round algorithm
+is just a mapping
+
+from radius-4 neighborhoods
+to local outputs.
+
+But there is a huge number
+of possible mappings.
+
+How could we argue that
+all of them will fail?
+
+It would be much easier
+
+to argue that X can't be
+solved in 0 rounds.
+
+0-round algorithms are
+very restrictive.
+
+There are not
+that many possibilities;
+
+it is often very quick to show
+
+that a 0-round algorithm
+will necessarily fail.
+
+But how do we connect these two?
+
+We'd like to prove that
+4-round algorithms will fail.
+
+We can easily prove that
+0-round algorithms will fail.
+
+We will apply here a technique
+called round elimination.
+
+We start with problem X0.
+We assume that
+
+there is an algorithm A0
+that solves X0 in 4 rounds.
+
+We apply round elimination to X0.
+We get a new problem X1.
+
+And if our assumption is right,
+
+we also get an algorithm A1
+that solves X1 in 3 rounds.
+
+We eliminated one round
+in the running time.
+
+Notice that X1 is
+a different problem.
+
+We are interested in X0,
+but we got a new problem X1.
+
+But let's not worry about this.
+We can just continue.
+
+We apply round elimination to X1.
+We get a new problem X2.
+
+And if our assumptions are right,
+
+we also get an algorithm A2
+that solves X2 in 2 rounds.
+
+Repeat.
+We get a new problem X3.
+
+And we also get an algorithm A3
+that solves X3 in 1 round.
+
+Repeat.
+We get a new problem X4.
+
+And we also get an algorithm A4
+that solves X4 in 0 rounds.
+
+And now this is what we wanted.
+
+Assuming X0 can be solved
+in 4 rounds,
+
+we can solve X4 in 0 rounds.
+
+And now it is enough to show that
+X4 can't be solved in 0 rounds.
+
+If we can show that all possible
+0-round algorithms for X4 fail,
+
+then we have a contradiction.
+
+Therefore
+X3 can't be solved in 1 round.
+
+X2 can't be solved in 2 rounds.
+
+X1 can't be solved in 3 rounds.
+
+X0 can't be solved in 4 rounds.
+
+And this is exactly
+what we wanted to prove.
+
+Of course there is nothing magic
+about the value 4 here.
+
+If we can do 10 steps of
+round elimination and
+
+still arrive at a problem that
+is not 0-round solvable, we know
+
+that the original problem
+cannot be solved in 10 rounds.
+
+If we can do any number of
+round elimination steps,
+
+then the original problem cannot
+be solved in constant time.
+
+And so on.
+
+So to recap, round elimination
+is a technique that turns
+
+a problem X0 into a new problem X1
+that can be solved 1 round faster.
+
+It can only be used when
+a problem is in the right form.
+
+We must have a so-called bipartite
+locally verifiable problem.
+
+Few problems are directly
+given in this form,
+
+but many problems can be turned
+into this form,
+
+and then
+round elimination works.
+
+Informally, if the problem is
+
+defined in terms of local
+constraints, it is good.
+
+For example, graph coloring
+is such a problem.
+
+There is a constraint
+on each edge:
+
+the endpoints must have
+different colors.
+
+And there are
+no other constraints.
+
+If a coloring looks good
+in all local neighborhoods,
+
+then it is indeed
+a valid solution.
+
+A maximal independent set
+is also something you can
+
+define using local constraints.
+
+Independence can be checked
+by looking at each edge.
+
+Maximality can be checked
+by looking
+
+at the local neighborhood
+of each node.
+
+On the other hand,
+
+connectivity and acyclicity
+are global properties,
+
+so we can't study problems like
+spanning trees using these tools.
+
+OK, so
+
+what does a "bipartite locally
+verifiable problem" look like?
+
+We will look at problems
+in regular trees.
+
+But this isn't usually
+any real restriction,
+
+as we are trying
+to prove negative results.
+
+If we can show that
+the problem can't be solved
+
+fast in regular trees,
+then certainly
+
+it can't be solved fast
+in general graphs.
+
+And it turns out that
+
+regular trees are the worst case
+for many problems.
+
+In the lecture notes you'll
+find the general definitions,
+
+here I'll just give one example.
+
+This is a problem
+that we call weak 3-labeling.
+
+This problem is defined in trees
+in which nodes are partitioned
+
+in two roles:
+active and passive.
+
+These roles form a proper
+2-coloring of the tree.
+
+Each edge is connecting
+an active node and a passive node.
+
+We will ignore the leaf nodes.
+They are unconstrained.
+
+We only care about what happens
+in the middle of the tree.
+
+And here all active nodes
+have degree 3, and
+
+all passive nodes
+have degree 2.
+
+And what is the task.
+
+Each active node has to label
+its incident edges
+
+with colors red, green, and blue.
+And there are two constraints.
+
+Active nodes must
+not be monochromatic.
+
+That is, all three edges
+around an active node
+
+can't have the same color.
+
+For example, this is good.
+
+And so is this.
+
+But this is forbidden.
+
+Conversely, passive nodes must
+be monochromatic.
+
+Both of the edges
+around a passive node
+
+must have the same color.
+
+For example, this is good.
+
+But this is forbidden.
+
+Now this is problem X0.
+
+We would like to understand
+how fast this can be solved.
+
+It's easy to check that this
+can't be solved in 0 rounds.
+
+Active nodes must use
+at least two different colors.
+
+But then if you do it
+without any coordination,
+
+there is a risk that
+a passive node gets
+
+two incident edges
+with different colors.
+
+Let's do round elimination once
+and see what's the problem X1 we get.
+
+You can look at the lecture notes
+for how to do it with pen and paper,
+
+or you can just ask computers.
+
+Either way,
+we will get this problem.
+
+It's very similar
+to what we already had;
+
+it turns out we basically just
+
+swapped the roles of
+active and passive nodes.
+
+Again, it's easy to check that
+this can't be solved in 0 rounds.
+
+Active nodes must use
+
+the same color for both
+of their incident edges.
+
+And if you apply
+any deterministic rule,
+
+the only possible algorithm is
+
+something like
+"color everything red".
+
+And this will clearly fail.
+
+So we already know something.
+X1 can't be solved in 0 rounds.
+
+So the original problem X0
+can't be solved in 1 round.
+
+You need at least 2 rounds
+to solve X0.
+
+Let's do round elimination
+again, now we'll get problem X2.
+
+Now this problem is something
+lot more interesting.
+
+Here is one interpretation of it.
+
+In this problem your task is to
+label edges with sets of colors.
+
+Active nodes have
+the following constraint:
+
+there has to be one set that
+doesn't contain red,
+
+one set that
+doesn't contain green,
+
+and one set that
+doesn't contain blue.
+
+So for example this is fine.
+
+And so is this.
+
+But this isn't.
+
+Here we have got
+green in all sets.
+
+Passive nodes have
+the following constraint:
+
+the sets must have
+a non-empty intersection.
+
+So for example this is fine.
+
+And this.
+
+But this isn't,
+there are no common elements.
+
+Now, can you solve
+this problem in 0 rounds?
+
+This takes some thought,
+but it turns out it is possible!
+
+Active nodes can always
+pick a solution like this:
+
+red-green on one edge,
+
+red-blue on one edge,
+
+green-blue on one edge.
+
+Why is this good?
+
+Well, it's clearly fine
+for active nodes,
+
+as for each color there's
+one set that doesn't contain it.
+
+And it's also fine
+for passive nodes!
+
+If you get some
+two-element set here
+
+and another
+two-element set here,
+
+no matter what they are,
+
+they have to contain
+some common element.
+
+Like here.
+
+Or here.
+
+So X2 is solvable in 0 rounds,
+while X1 isn't.
+
+It turns out this means that
+
+the complexity of X1
+is exactly 1 round.
+
+And the complexity of X0
+is exactly 2 rounds.
+
+Now how do you solve X0
+in 2 rounds?
+
+We can work backwards!
+
+We start with
+a 0-round algorithm for X2,
+
+and spend 1 round to turn
+it into a solution for X1.
+
+And then another round to turn
+it into a solution for X0.
+
+You will fill in the details
+in one of this week's exercises!

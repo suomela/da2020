@@ -1,0 +1,290 @@
+Hi everyone,
+
+Already in the first week of
+this course we saw that
+
+in the LOCAL model
+it is possible to color
+
+a directed cycle with 3 colors
+in log-star many rounds.
+
+We can start with
+the unique identifiers,
+
+which form a coloring with
+a polynomial number of colors.
+
+And then we repeatedly
+reduce the number of colors.
+
+In one round we can reduce
+
+the number of colors from
+2^k colors to only 2k colors.
+
+And if we repeat this for
+log-star many times,
+
+the number of colors will be
+a small constant.
+
+But is this the best
+that we can do?
+
+For example, could there be
+
+a clever way to find
+a 3-coloring in constant time,
+
+independent of the number
+of nodes in the network?
+
+This week we will see
+that the answer is "no".
+
+And we will use round
+elimination to show that.
+
+In a sense, we will show
+
+almost the exact opposite of
+what we saw in the first week.
+
+In the first week,
+
+we saw that if you can
+find a coloring
+
+with 2^k colors
+in T − 1 rounds, then
+
+you can find a coloring with
+2k colors in T rounds.
+
+Now using round elimination
+we can work backwards,
+
+we just lose
+a factor of two here.
+
+Basically we show that
+if you can find
+
+a coloring with k colors
+in T rounds,
+
+then you can also find
+
+a coloring with 2^k colors
+in T − 1 rounds.
+
+And now the high-level
+idea is this.
+
+We start with
+some hypothetical algorithm
+
+that finds a proper
+3-coloring in T rounds,
+
+where T is much less
+than log-star.
+
+Then we repeat round
+elimination for T times,
+
+and we get an algorithm that
+finds a c-coloring in 0 rounds.
+
+Here c is, roughly speaking
+a power tower of height T, and
+
+if T is much less than log-star,
+then c will be much less than n.
+
+Notice that this is
+a nontrivial coloring.
+
+For example, unique identifiers
+won't give such a coloring.
+
+So we can show that this
+isn't possible in 0 rounds.
+
+So we have a contradiction
+and conclude that
+
+3-coloring cannot be done in
+less than log-star many rounds.
+
+Well, that's the idea at least.
+
+Too bad we can't do it
+directly like this.
+
+The way we described round
+elimination in the previous weeks,
+
+it can only be applied
+in the PN model.
+
+We can't do round elimination
+in the LOCAL model.
+
+And there is a good
+reason for that.
+
+Round elimination heavily
+relies on independence.
+
+You consider
+all possible inputs here.
+
+And all possible inputs here.
+And conclude that also
+
+all possible combinations
+of these inputs are possible.
+
+But if you have unique
+identifiers, this no longer holds.
+
+Identifier 1 might be here,
+
+or here,
+
+but not in both places
+simultaneously.
+
+So we can't directly do round
+elimination in the LOCAL model.
+
+We have to get there indirectly.
+
+We will first consider randomized
+algorithms in the PN model.
+
+In the lecture notes,
+we will see how to do
+
+round elimination
+for randomized PN algorithms.
+
+We will need to be
+a bit more careful.
+
+A randomized algorithm A0
+for solving problem X0 still
+
+implies a randomized algorithm A1
+that solves X1 one round faster.
+
+But we lost something,
+the probability that A1 fails
+
+will be somewhat higher than
+the probability that A0 fails.
+
+Fortunately it isn't
+too bad in our application.
+
+We can still conclude that
+
+if we had a randomized algorithm
+that finds a 3-coloring
+
+in less than log-star time
+and works with high probability,
+
+then we will get
+a randomized algorithm
+
+that finds a coloring with
+less than n colors in 0 rounds
+
+and still has got a pretty good
+success probability.
+
+So good that we can rule out
+the existence of such algorithms.
+
+So we have now a negative result
+for 3-coloring
+
+in the randomized PN model.
+
+But we wanted to understand it
+in the LOCAL model.
+
+Well, if you had
+
+a fast randomized algorithm A
+for the LOCAL model
+
+that you would like to run
+in the PN model,
+
+you could first pick large
+enough random labels
+
+and use them as
+unique identifiers.
+
+So you could simulate A
+in the randomized PN model.
+
+And you would get an equally fast
+randomized PN algorithm this way,
+
+with almost the same
+success probability.
+
+And we concluded that
+
+randomized PN algorithms
+can't run in sub-log-star time,
+
+so the same has to hold for
+randomized LOCAL algorithms, too!
+
+And now we are already done.
+
+Deterministic LOCAL algorithms
+
+are just a special case of
+randomized LOCAL algorithms,
+
+so they can't find coloring
+in sub-log-star time, either.
+
+So this is the high-level plan
+that we are following this week.
+
+There are fairly many technicalities
+we need to worry about,
+
+but the good news is that once
+you learn to use these tools,
+
+you can apply the same ideas in
+the study of many other problems:
+
+First use round elimination
+
+to prove a negative result
+in the deterministic PN model.
+
+Then take into account
+probabilities
+
+to prove the same result
+for randomized PN algorithms.
+
+And then you can easily conclude
+
+that the same result also holds
+for the LOCAL model,
+
+both for randomized and
+deterministic algorithms.
