@@ -322,7 +322,7 @@ It is enough to just list the three unique identifiers (in decimal); there is no
 \end{ex}
 
 \begin{ex}[undirected paths]\label{ex:intro-undir-path}
-    The fast 3-coloring algorithm from Section~\ref{sec:algo-p3cbit} finds a $3$-coloring very fast in any directed path. Design an algorithm that is almost as fast and works in any path, even if the edges are not directed.
+    The fast 3-coloring algorithm from Section~\ref{sec:algo-p3cbit} finds a $3$-coloring very fast in any directed path. Design an algorithm that is almost as fast and works in any path, even if the edges are not directed. You can assume that the range of identifiers is known.
 
     \hint{Use the local maxima and minima to partition the path in subpaths so that within each subpath we have unique identifiers given in an increasing order. Use this ordering to orient each subpath. Then we can apply the fast color reduction algorithm in each subpath. Finally, combine the solutions.}
 \end{ex}
