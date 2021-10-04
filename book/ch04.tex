@@ -293,7 +293,7 @@ The coloring algorithm is based on the existence of non-covering families of set
 
 A family $J$ of $n$ subsets of $\{1, \dots, m \}$ is \emph{$k$-cover-free} if for every $S \in J$ and every collection of $k$ sets $S_1, \dots, S_k \in J$ distinct from $S$ we have that
 \[
-  S \subsetneq \bigcup_{i=1}^{k} S_i.
+  S \nsubseteq \bigcup_{i=1}^{k} S_i.
 \]
 See Figure~\ref{fig:cover-free-sets} for an example.
 
@@ -349,7 +349,7 @@ Let $f$ denote the input $x$-coloring and $g$ the output $y$-coloring. Assume th
   \item Each node $v \in V$ sends its current color $f(v)$ to each of its neighbors.
   \item Each node receives the colors $f(u)$ of its neighbors $u \in N(v)$. Then it constructs the set $S_{f(v)}$, and the sets $S_{f(u)}$ for all $u \in N(v)$. Since $f(v) \neq f(u)$ for all $u\in N(v)$, and $J$ is a $\Delta$-cover-free family, we have that
   \[
-    S_{f(v)} \subsetneq \bigcup_{u \in N(v)} S_{f(u)}.
+    S_{f(v)} \nsubseteq \bigcup_{u \in N(v)} S_{f(u)}.
   \]
   In particular, there exists at least one $c \in S_{f(v)} \setminus \cup_{u \in N(v)} S_{f(u)}$. Node $v$ sets $g(v) = c$ for the smallest such $c$.
 \end{enumerate}
