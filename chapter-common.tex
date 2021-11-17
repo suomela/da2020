@@ -1,0 +1,42 @@
+%!TEX root = da2020-01.tex
+
+\input{common}
+
+\usepackage[papersize={150mm,200mm},margin=18mm,footskip=12mm]{geometry}
+
+\titlespacing*{\chapter}        {0pt}{0pt}{15pt}
+\titlespacing*{\section}        {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\subsection}     {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\paragraph}      {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+
+\setenotez{
+    list-heading = {\section{#1}},
+    totoc = false
+}
+
+\renewcommand{\Chapter}[2]{\setcounter{chapter}{#1}{
+\raggedright
+\color{titlecolor}
+
+{\small Juho Hirvonen and Jukka Suomela:\par}
+
+\vspace{-1.5mm}
+{\huge Distributed Algorithms 2020\par}
+
+\vspace{-1.5mm}
+\rule[0mm]{\textwidth}{1pt}
+
+\vspace{0.5mm}
+{\small \url{https://jukkasuomela.fi/da2020/} · \today \par}
+
+\vspace{10mm}
+{\Large\chaptertitlename\ \thechapter\par}
+
+\vspace{-1.5mm}
+{\Huge #2\par}
+
+\vspace{5mm}
+}\noindent}
+
+\renewcommand{\longref}[2]{#1}
+\renewcommand{\chapterref}[1]{#1}

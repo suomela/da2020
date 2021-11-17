@@ -1,0 +1,48 @@
+\Appendix{Mathematical Preliminaries}\label{sec:intro-app}
+
+In the analysis of distributed algorithms, we will encounter power towers and iterated logarithms.
+
+\subsection{Power Tower}
+
+We write power towers with the notation
+\[
+    {}^i 2 = 2^{2^{\cdot^{\cdot^2}}},
+\]
+where there are $i$ twos in the tower. Power towers grow very fast; for example,
+\begin{align*}
+    {}^1 2 &= 2,\\
+    {}^2 2 &= 4,\\
+    {}^3 2 &= 16,\\
+    {}^4 2 &= 65536,\\
+    {}^5 2 &= 2^{65536} > 10^{19728}.
+\end{align*}
+
+\subsection{Iterated Logarithm}
+
+The iterated logarithm of $x$, in notation $\log^* x$ or $\log^*(x)$, is defined recursively as follows:
+\[
+    \log^*(x) = \begin{cases}
+        0 & \text{ if $x \le 1$}, \\
+        1 + \log^*(\log_2 x) & \text{ otherwise}.
+    \end{cases}
+\]
+In essence, this is the inverse of the power tower function. For all positive integers $i$, we have
+\[
+    \log^*({}^i 2) = i.
+\]
+As power towers grow very fast, iterated logarithms grow very slowly; for example,
+\begin{align*}
+    \log^* 2 &= 1, &
+    \log^* 16 &= 3, &
+    \log^* 10^{10} &= 5, \\
+    \log^* 3 &= 2, &
+    \log^* 17 &= 4, &
+    \log^* 10^{100} &= 5, \\
+    \log^* 4 &= 2, &
+    \log^* 65536 &= 4, &
+    \log^* 10^{1000} &= 5, \\
+    \log^* 5 &= 3, &
+    \log^* 65537 &= 5, &
+    \log^* 10^{10000} &= 5, \dotsc
+\end{align*}
+
