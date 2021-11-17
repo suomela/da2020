@@ -6,8 +6,6 @@ Online textbook by Juho Hirvonen and Jukka Suomela.
 This repository contains the full source code of the textbook, and
 the source material used to prepare the lecture slides and videos.
 
-Latest version is compiled automatically to the branch [`gh-pages`](https://github.com/suomela/da2020/blob/gh-pages/da2020.pdf).
-
 For more information, see:
 https://jukkasuomela.fi/da2020/
 
