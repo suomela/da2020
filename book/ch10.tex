@@ -65,7 +65,7 @@ The proof of Lemma~\ref{lem:so-hard-paths} shows that it is impossible to solve 
 \begin{proof}
 	The idea of the algorithm is the following: initially send messages from the leaves towards the middle of the path. Orient edges against the incoming messages, i.e., toward the closest leaf. Once the messages reach the midpoint of the path, all edges have been correctly oriented away from the midpoint.
 
-	The algorithm works as follows. Initially all non-leaf nodes wait. The leaf nodes send a message to their neighbor and stop. If they are active, they output $\mO$ on their incident edge. 
+	The algorithm works as follows. Initially all non-leaf nodes wait. The leaf nodes send a message to their neighbor and stop. If they are active, they output $\mI$ on their incident edge. 
 	Whenever a node receives a message for the first time, in the next round it sends a message to the other port and stops. If it is an active node, it outputs $\mO$ in the port from which it received the message, and $\mI$ in the other port. That is, it orients its incident edges towards the closer leaf. If a node receives two messages in the same round, it is the midpoint of the path; it does not send any further messages. If it is an active node, it outputs $\mO$ on both of its incident edges.
 
 	The algorithm runs in $\lfloor n/2 \rfloor$ rounds: on paths with an even number of nodes, all nodes have received a message in round $n/2 - 1$, and thus stop in the next round. On paths with an odd number of nodes, the middle node receives two messages in round $\lfloor n/2 \rfloor$ and stops.
