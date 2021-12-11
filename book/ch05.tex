@@ -29,7 +29,7 @@ Assume that we have an algorithm $A$ that is designed for the $\LOCAL$ model. Mo
 \end{itemize}
 Now it is easy to see that we can encode all of this as a binary string with $O(\log n)$ bits. Hence $A$ is not just an algorithm for the $\LOCAL$ model, but it is also an algorithm for the $\CONGEST$ model.
 
-Many algorithms that we have encountered in this book so far are of the above form, and hence they are also $\CONGEST$ algorithms (see Exercise~\ref{ex:congest-prior}). However, there is a notable exception: the algorithm for gathering the entire network Section~\longref{4.2}{sec:gather}. In this algorithm, we need to send messages of size up to $\Theta(n^2)$ bits:
+Many algorithms that we have encountered in this book so far are of the above form, and hence they are also $\CONGEST$ algorithms (see Exercise~\ref{ex:congest-prior}). However, there is a notable exception: the algorithm for gathering the entire network from Section~\longref{4.2}{sec:gather}. In this algorithm, we need to send messages of size up to $\Theta(n^2)$ bits:
 \begin{itemize}
     \item To encode the set of nodes, we may need up to $\Theta(n \log n)$ bits (a list of $n$ identifiers, each of which is $\Theta(\log n)$ bits long).
     \item To encode the set of edges, we may need up to $\Theta(n^2)$ bits (the adjacency matrix).

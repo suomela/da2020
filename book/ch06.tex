@@ -24,7 +24,7 @@ Note that all probabilities here are over the random choices in the state transi
 We may occasionally want to emphasize the distinction between ``Monte Carlo'' and ``Las Vegas'' type algorithms:
 \begin{itemize}
     \item Monte Carlo: Algorithm $A$ always stops in time $T(n)$; the output is a correct solution to problem $\Pi$ with probability $p$.
-    \item Las Vegas: Algorithm $A$ stops in time $T(n)$ with probability $p$; when it stops, the output is always a correct solutions to problem $\Pi$.
+    \item Las Vegas: Algorithm $A$ stops in time $T(n)$ with probability $p$; when it stops, the output is always a correct solution to problem $\Pi$.
 \end{itemize}
 However, Monte Carlo algorithms are not as useful in the field of distributed computing as they are in the context of classical centralized algorithms. In centralized algorithms, we can usually take a Monte Carlo algorithm and just run it repeatedly until it produces a feasible solution; hence we can turn a Monte Carlo algorithm into a Las Vegas algorithm. This is not necessarily the case with distributed algorithms: verifying the output of an algorithm may require global information on the entire output, and gathering such information may take a long time. In this chapter, we will mainly focus on Las Vegas algorithms, i.e., algorithms that are always correct but may occasionally be slow, but in the exercises we will also encounter Monte Carlo algorithms.
 

@@ -23,7 +23,7 @@ where the coefficients $f_i$ are elements of $\GF(q)$. A polynomial is non-trivi
   
   Now assume that $d \geq 2$ and that the claim holds for smaller degrees. If polynomial $f$ has no zeros, the claim holds. Therefore assume that $f$ has at least one zero $a \in \GF(q)$. We will show that there exists a polynomial $g$ of degree $d-1$ such that $f = (X-a)g$. By the induction hypothesis $g$ has at most $d-1$ zeros, $X-a$ has one zero, and we know that the product equals zero if and only if either $X-a = 0$ or $g[X] = 0$.
   
-  We show that $g$ exits by induction. If $d=1$, we can select $a = -(f_0)(f_1)^{-1}$ and $g = f_1$ to get $f[X] = (X + (f_0)(f_1)^{-1})f_1$.
+  We show that $g$ exists by induction. If $d=1$, we can select $a = -(f_0)(f_1)^{-1}$ and $g = f_1$ to get $f[X] = (X + (f_0)(f_1)^{-1})f_1$.
   
   For $d \geq 2$, we again make the induction assumption. Define
   \[

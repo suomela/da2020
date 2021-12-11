@@ -481,7 +481,7 @@ Please give the answer by listing the four original color pairs of the nodes in 
         \item Maximal matching.
         \item Edge coloring with $O(\Delta)$ colors.
     \end{subex}
-    You can assume that all nodes get the value of $n$ as input; also the parameter $c$ in the identifier space is a known constant, so all nodes know the range of unique identifiers.
+    You can assume that all nodes get the value of $n$ (the number of nodes) as input; also the parameter $c$ in the identifier space is a known constant, so all nodes know the range of unique identifiers.
 \end{ex}
 
 \begin{ex}[vertex cover]
@@ -517,7 +517,7 @@ Please give the answer by listing the four original color pairs of the nodes in 
 
     Let $\Delta$ be a known constant, and let $\calF$ be the family of graphs of maximum degree at most $\Delta$. Design a fast distributed algorithm that finds a distance-$2$ coloring with $O(\Delta^2)$ colors for any graph $G \in \calF$ in the $\LOCAL$ model.
 
-    You can assume that all nodes get the value of $n$ as input; also the parameter $c$ in the identifier space is a known constant, so all nodes know the range of unique identifiers.
+    You can assume that all nodes get the value of $n$ (the number of nodes) as input; also the parameter $c$ in the identifier space is a known constant, so all nodes know the range of unique identifiers.
 
     \hint{Given a graph $G \in \calF$, construct a virtual graph $G^2 = (V, E')$ as follows: $\{u,v\} \in E'$ if $u \ne v$ and $\dist_G(u,v) \le 2$. Prove that the maximum degree of $G^2$ is $O(\Delta^2)$. Simulate a fast graph coloring algorithm on $G^2$.}
 \end{ex}
@@ -547,7 +547,7 @@ Please give the answer by listing the four original color pairs of the nodes in 
         2 \cdot 10 = 20 &= h(3), \\
         2 \cdot 3 = 6 &= h(2).
     \end{align*}
-    In particular, the algorithm does not get stuck at six colors; we can use the same algorithm to reduce the number of colors to four. Moreover, at least in this case the algorithm seems to be much more efficient\mydash it can reduce the number of colors from $184756$ to $6$ in two rounds, while the prior algorithm requires at three rounds to achieve the same reduction.
+    In particular, the algorithm does not get stuck at six colors; we can use the same algorithm to reduce the number of colors to four. Moreover, at least in this case the algorithm seems to be much more efficient\mydash it can reduce the number of colors from $184756$ to $6$ in two rounds, while the prior algorithm requires three rounds to achieve the same reduction.
     
     The basic structure of the new algorithm follows the fast color reduction algorithm\mydash in particular, we use one communication round to compute the values $s(v)$ for all nodes $v \in V$. However, the technique for choosing the new color is different: as the name suggests, we will not interpret colors as bit strings but as \emph{sets}.
     
