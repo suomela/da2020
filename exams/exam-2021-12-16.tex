@@ -1,0 +1,62 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{amsmath,amsthm,enumitem,titlesec,xcolor}
+\usepackage{microtype}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[unicode]{hyperref}
+
+\hypersetup{
+    hidelinks,
+    pdftitle={Distributed Algorithms},
+    pdfauthor={Jukka Suomela},
+}
+
+\definecolor{titlecolor}{HTML}{0088cc}
+\definecolor{hlcolor}{HTML}{f26924}
+
+\newcommand{\q}[2]{\paragraph{\mbox{Question #1: }#2.}}
+\newcommand{\sep}{{\centering \raisebox{-3mm}[0mm][0mm]{$*\quad*\quad*$}\par}}
+\newcommand{\hl}[1]{\textbf{\emph{#1}}}
+\newcommand{\cemph}[1]{\textcolor{hlcolor}{\textbf{\emph{\boldmath #1}}}}
+
+\DeclareMathOperator{\diam}{diam}
+
+\setitemize{noitemsep,leftmargin=3ex}
+
+\titleformat{\paragraph}[runin] {\normalfont\normalsize\bfseries\color{titlecolor}}{\theparagraph}{1em}{}
+
+\begin{document}
+
+\noindent
+\emph{CS-E4510 Distributed Algorithms / Jukka Suomela\\
+exam, 16 December 2021}
+
+\paragraph{Instructions.}
+
+There are three questions; please \cemph{try to answer something in each of them}. If you cannot solve a problem entirely, please at least explain what you tried and what went wrong. Do not spend too much time with one problem; the problems are not listed in order of difficulty and they do not depend on each other. All questions refer to problems that we studied in the previous exam, you can find the old exam here:
+\begin{center}
+\url{https://jukkasuomela.fi/da2020/exam-2021-10-27.pdf}
+\end{center}
+
+You are free to look at any source material (this includes lecture notes, textbooks, and anything you can find with Google), but you are not allowed to collaborate with anyone else or ask for anyone's help (this includes collaboration with other students and asking for help in online forums). You are free to use any results from the lecture notes directly without repeating the details.
+
+Please note that we are looking for mathematical proofs here. The proof can be brief and a bit sketchy, but the proof idea has to be solid. Please give enough details so that a friendly, cooperative reader can understand your proof idea correctly and see why it makes sense. Illustrations are probably going to be very helpful.
+
+\q{1}{PN}
+
+Recall question 1 in the previous exam. There you were allowed to label edges with arbitrary \cemph{integers}, and you showed that the problem was solvable with a deterministic algorithm in the PN model. Now let us make the problem slightly more challenging: the edge labels must be integers from the set \cemph{$\{-1, 0, +1\}$}; everything else remains the same (adjacent edges have different labels, and the sum of the labels is $0$). Prove that the new problem \hl{cannot} be solved with any deterministic algorithms in the PN model.
+
+\medskip
+\noindent\hl{Hint:} You are expected to use an argument that uses covering maps.
+
+\q{2}{LOCAL}
+
+Recall question 2 in the previous exam. There we specified a graph problem, and you designed an algorithm that solves the problem in \cemph{$o(n)$} rounds. Prove that the same problem \hl{cannot} be solved with any deterministic algorithm in the LOCAL model in \cemph{$O(1)$} rounds.
+
+\q{3}{CONGEST}
+
+Recall question 3 in the previous exam. There we specified a graph problem, and you designed a deterministic CONGEST model algorithm that solves the problem in \cemph{$O(\diam(G))$} rounds. Prove that the same problem \hl{cannot} be solved with any deterministic algorithm in the CONGEST model in \cemph{$0$} rounds (i.e., without any communication). Prove that this holds even if the unique identifiers are numbers from $\{1,2,\dotsc,n^2\}$, and the nodes get the value of $n$ as input.
+
+\end{document}
