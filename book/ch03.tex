@@ -470,8 +470,8 @@ In summary, the minimum vertex cover algorithm finds a \Apx{3} of a minimum vert
 
 Construct a simple port-numbered network $N = (V,P,p)$ and its underlying graph $G = (V,E)$ that has \emph{as few nodes as possible} and that satisfies the following properties:
 \begin{itemize}[noitemsep]
-    \item Set $E$ is nonempty.
-    \item If $M \subseteq E$ consists of the edges $\{u,v\} \in E$ with $p(u,1) = (v,2)$, then $M$ is a perfect matching of graph $G$.
+    \item We have $E \ne \emptyset$.
+    \item The set $M = \bigl\{ \{u,v\} \in E : p(u,1) = (v, 2) \bigr\}$ is a perfect matching in graph $G$.
 \end{itemize}
 Please answer by listing all elements of sets $V$, $E$, and $P$, and by listing all values of $p$. For example, you might specify a network with two nodes as follows: $V = \{1,2\}$, $E = \{ \{1,2\} \}$, $P = \{ (1,1), (2,1) \}$, $p(1,1) = (2,1)$, and $p(2,1) = (1,1)$.
 
