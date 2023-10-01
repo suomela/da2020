@@ -181,7 +181,7 @@ Hence we have an algorithm $\algo{APSP}$ that is able to trigger all $\Wave_v$ p
 
 \section{Quiz}
 
-Give an example of a graph problem that \emph{can} be solved in $O(1)$ rounds in the $\LOCAL$ model and \emph{cannot} be solved in $O(n)$ rounds in the $\CONGEST$ model. The input has to be an unlabeled graph; that is, the nodes will not have any inputs (beyond their own degree and their unique identifier). The output can be anything; you are free to construct an artificial graph problem. It is enough to give a brief definition of the graph problem; no further explanations are needed.
+Consider the algorithm in Section~\ref{sec:apsp} in a tree. Assume your tree $T$ has 6 nodes, numbered from 1 to 6, and you have already elected node 1 as the leader. You have also already constructed the BFS tree rooted at the leader, which in this case is the original tree $T$. You would like to know how long it takes in the worst case to run the rest of the algorithms, i.e., let the token walk in tree $T$ and let the waves propagate throughout the tree. Your task is to construct a worst-case example of a tree $T$ so that the process takes as long as possible (i.e., you maximize the time until the final node learns about its distance to some other node).
 
 
 \section{Exercises}
