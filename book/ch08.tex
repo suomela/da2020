@@ -117,12 +117,7 @@ We conclude that algorithm $A$ fails to find a proper $2$-coloring in at least o
 
 \section{Quiz}
 
-The caption of Figure~\ref{fig:same-neigh} says: ``However, at time $t = 3, 4, \dotsc$ this does not necessarily hold.'' Design some deterministic algorithm $A$ that demonstrates this for the $\PN$ model. When you run algorithm $A$ in the network of Figure~\ref{fig:same-neigh}, the following should happen:
-\begin{itemize}[noitemsep]
-    \item At time $t = 0, 1, 2$, nodes $u$ and $v$ have the same local state.
-    \item At time $t = 3, 4, \dotsc$, nodes $u$ and $v$ have different local states.
-\end{itemize}
-Please try to design your algorithm so that its behavior does not depend on the choice of the port numbering: for each node $x$ and each time step~$t$, the state of $x$ has to be the same regardless of how you choose the port numbers. A short, informal description of the algorithm is enough.
+Let $N$ a simple port-numbered network with $1000$ nodes, such that the underlying graph of $N$ is a cycle. Form another network $N'$ by adding one edge to $N$. Let $A$ be a LOCAL-model algorithm that runs in $100$ rounds. Let $f$ be the output of $A$ in network $N$, and let $f'$ be the output of $A$ in network $N'$. At most how many nodes there can be such that their output differs in $f$ and $f'$?
 
 \section{Exercises}
 
