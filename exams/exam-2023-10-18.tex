@@ -1,0 +1,96 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{amsmath,amsthm,enumitem,titlesec,xcolor}
+\usepackage{microtype}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[unicode]{hyperref}
+
+\hypersetup{
+    hidelinks,
+    pdftitle={Distributed Algorithms},
+    pdfauthor={Jukka Suomela},
+}
+
+\newcommand{\q}[2]{\paragraph{\mbox{Question #1: }#2.}}
+\newcommand{\sep}{{\centering \raisebox{-3mm}[0mm][0mm]{$*\quad*\quad*$}\par}}
+\newcommand{\hl}[1]{\textbf{\emph{#1}}}
+\newcommand{\cemph}[1]{\textbf{\emph{\boldmath #1}}}
+
+\DeclareMathOperator{\diam}{diam}
+
+\setitemize{noitemsep,leftmargin=3ex}
+
+\titleformat{\paragraph}[runin] {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+
+\begin{document}
+
+\noindent
+\emph{CS-E4510 Distributed Algorithms / Jukka Suomela\\
+exam, 18 October 2023}
+
+\paragraph{Material.}
+
+You can bring one A4 paper (two-sided), with any content you want. No other material or equipment is allowed in the exam.
+
+\paragraph{Instructions.}
+
+There are three questions; please \cemph{try to answer something in each of them}. If you cannot solve a problem entirely, please try to solve at least some special case or simpler version of the problem (see the hints for suggestions), or failing that, please at least explain what you tried and what went wrong.
+
+For question 1, we expect a \cemph{mathematical proof} (it can be short and informal). For questions 2--3, it is sufficient to give a \cemph{brief, informal description} of the algorithm, and a \cemph{brief, informal explanation} of why it solves the problem correctly. You do not need to specify algorithms in the state-machine formalism, or give a complete proof of correctness. You are free to refer to algorithms and results that we discussed in the lectures, course material, and exercises; there is no need to repeat any of their details. In all questions it is enough that a friendly, cooperative reader can understand your idea correctly and see why it makes sense.
+
+\paragraph{Definitions.}
+
+Let $G=(V,E)$ be a graph. As usual, $n$ denotes the number of nodes in the input graph. Recall the usual definitions:
+\begin{itemize}
+    \item $X \subseteq V$ is a \emph{dominating set} of $G$ if for each node $v \in V \setminus X$ there is a neighbor $u \in X$.
+    \item $X \subseteq V$ is a \emph{vertex cover} of $G$ if for each edge $e \in E$ we have $e \cap X \ne \emptyset$.
+    \item The \emph{diameter} of $G$ is $\ell$ if there exists a pair of nodes $u, v \in V$ such that the distance between $u$ and $v$ is $\ell$, and for all nodes $x, y \in V$ the distance between $x$ and $y$ is at most~$\ell$.
+    \item $G$ is a \emph{tree} if it is connected and acyclic.
+    \item $G$ is a \emph{cycle graph} if it is connected and $2$-regular.
+\end{itemize}
+Now we introduce the following new definition: $X \subseteq V$ is a \hl{flimsy set} of $G$ if $X$ is a dominating set of $G$ and $X$ is \hl{not} a vertex cover of $G$.
+
+Please read the definition carefully. A flimsy set has to be a dominating set, but it cannot be a vertex cover.
+
+
+\newpage
+
+\q{1}{Graph theory}
+
+Prove these claims:
+\begin{enumerate}[label=(\alph*)]
+\item If $G$ is a connected graph with diameter at least $3$, there exists a flimsy set of $G$.
+
+    \emph{Hint:} Try to solve the problem first for path graphs and/or trees.
+\item If $G$ is a tree with diameter at most $2$, there does not exist a flimsy set of $G$.
+
+    \emph{Hint:} Try to solve the problem first for path graphs.
+\item There exists a connected graph $G$ with diameter $2$ such that there exists a flimsy set of~$G$.
+
+    \emph{Hint:} Maybe consider graphs with diameter $1$ first.
+\end{enumerate}
+
+
+\q{2}{PN}
+
+Give a deterministic distributed algorithm that finds a flimsy set in the following setting in the PN model (any running time is fine):
+\begin{itemize}
+    \item Graph family: \cemph{trees} with diameter at least $3$.
+    \item Local inputs: nothing.
+    \item Local outputs: a flimsy set.
+\end{itemize}
+\emph{Hint:} Try to first solve the problem in path graphs of diameter at least $3$.
+
+\q{3}{LOCAL}
+
+Give a deterministic distributed algorithm that finds a flimsy set in the following setting in the LOCAL model in \cemph{$o(n)$} rounds:
+\begin{itemize}
+    \item Graph family: \cemph{cycle graphs}.
+    \item Local inputs: unique identifier and the value of $n$. You can assume that the unique identifiers are chosen from $\{1,2,\dotsc,n^2\}$.
+    \item Local outputs: a flimsy set.
+\end{itemize}
+\emph{Hints:} Please note that the running time has to be $o(n)$, this is little-$o$, not big-$O$. So for example $\log n$ or $\log^* n$ or any constant is good, while $n$ or $n/100$ is not enough. Also note that we did not promise that the cycle is directed---but if you cannot solve the general case, please try to solve at least the case of a directed cycle. If you cannot design a deterministic algorithm, try to design a randomized algorithm.
+
+\end{document}
