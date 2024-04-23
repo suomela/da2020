@@ -373,17 +373,17 @@ Assume that $x > 4(\Delta+1)^2 \log^2 \Delta$. Repeated iterations of the color 
 \intertext{In the next step, we reduce colors as follows:}
   x_2 \mapsto  x_3 &\leq 4(\Delta+1)^2 \log^2 \bigl(36(\Delta+1)^2 (\log \log x)^2\bigr) \\
   & = 4(\Delta+1)^2 \bigl(\log 36 + 2\log (\Delta+1) + 2\log \log \log x\bigr)^2.
-\intertext{If $\log \log \log x \geq \log 36 + 2\log (\Delta+1) \}$, we have that}
+\intertext{If $\log \log \log x \geq \log 36 + 2\log (\Delta+1)$, we have that}
   x_3 &\leq 4(\Delta+1)^2(3\log \log \log x)^2 \\
   &= \bigl(6(\Delta+1) \log \log \log x\bigr)^2.
 \end{align*}
 Now we can see the pattern: as long as 
 \[
-\log^{(i)} x \geq \log 36 + 2\log (\Delta+1) \},
+\log^{(i)} x \geq \log 36 + 2\log (\Delta+1),
 \] 
 where $\log^{(i)} x$ is the $i$ times iterated logarithm of $x$, we reduce colors from $(6(\Delta+1)\log^{(i-1)} x)^2$ to $(6(\Delta+1)\log^{(i)} x)^2$ in the $i$th step.
 
-Once $\log^{(i)} x \geq \log 36 + 2\log (\Delta+1) \}$ no longer holds, we have a coloring with at most 
+Once $\log^{(i)} x \geq \log 36 + 2\log (\Delta+1)$ no longer holds, we have a coloring with at most 
 \[
 c_{\Delta} = 4(\Delta+1)^2 \bigl(3(\log 36 + 2\log (\Delta+1))\bigr)^2
 \] 
