@@ -32,7 +32,7 @@ In the $\LOCAL$ model, if the underlying graph $G = (V,E)$ is connected, all nod
 In the gathering algorithm, each node $v \in V$ will construct sets $V(v,r)$ and $E(v,r)$, where $r = 1, 2, \dotsc$. For all $v \in V$ and $r \ge 1$, these sets will satisfy
 \begin{align}
     V(v,r) &= \ball_G(v,r), \label{eq:gather1} \\
-    E(v,r) &= \bigl\{ \{s,t\} : s \in \ball_G(v,r),\, t\in \ball_G(v,r{-}1) \bigr\}. \label{eq:gather2}
+    E(v,r) &= \bigl\{ \{s,t\} \in E : s \in \ball_G(v,r),\, t\in \ball_G(v,r{-}1) \bigr\}. \label{eq:gather2}
 \intertext{Now define the graph}
     G(v,r) &= (V(v,r), E(v,r)).  \label{eq:gather3}
 \end{align}
