@@ -203,7 +203,7 @@ Let $q$ be a prime number with $q > 2\Delta$. We assume that we are given a colo
 
 If we have an input coloring with $q^2$ colors, we can represent the color of node $v$ as a pair $f(v) = \langle f_1(v), f_2(v) \rangle$ where $f_1(v)$ and $f_2(v)$ are integers between $0$ and $q-1$.
 
-Using the clock analogue, $v$ can be seen as a clock with the hand at position $f_2(v)$, turning at speed $f_1(v)$. In the algorithm we will stop clocks by setting $f_1(v) = 0$ whenever this is possible in a conflict-free manner. When all clocks have stopped, all nodes have colors of the form $\langle 0, f_2(v) \rangle$ where $f_2(v)$ is between $0$ and $q-1$, and hence we have got a proper coloring with $q$ colors.
+Using the clock analogy, $v$ can be seen as a clock with the hand at position $f_2(v)$, turning at speed $f_1(v)$. In the algorithm we will stop clocks by setting $f_1(v) = 0$ whenever this is possible in a conflict-free manner. When all clocks have stopped, all nodes have colors of the form $\langle 0, f_2(v) \rangle$ where $f_2(v)$ is between $0$ and $q-1$, and hence we obtain a proper coloring with $q$ colors.
 
 We say that two colors $\langle a_1, a_2 \rangle$ and $\langle b_1, b_2 \rangle$ are in \emph{conflict} if $a_2 = b_2$. The algorithm repeatedly performs the following steps:
 \begin{itemize}[noitemsep]

@@ -3,7 +3,7 @@
 \Chapter{1}{Warm-Up}
 
 \noindent
-We will start this course with an informal introduction to distributed algorithms. We will formalize the model of computing later but for now the intuitive idea of computers that can exchange messages with each others is sufficient.
+We will start this course with an informal introduction to distributed algorithms. We will formalize the model of computing later but for now the intuitive idea of computers that can exchange messages with each other is sufficient.
 
 \section{Running Example: Coloring Paths}
 
@@ -18,7 +18,7 @@ In this example, the task is to find a proper \emph{coloring} of the path with $
     \includegraphics[page=\PIntroCol]{figs.pdf}
 \end{center}
 
-\section{Challenges of Distributed Algorithm}\label{sec:intro-challenges}
+\section{Challenges of Distributed Algorithms}\label{sec:intro-challenges}
 
 With a bird's-eye view of the entire network, coloring a path looks like a very simple task: just start from one endpoint and assign colors $1$ and $2$ alternately. However, in a real-world computer network we usually do not have all-powerful entities that know everything about the network and can directly tell each computer what to do.
 
@@ -38,7 +38,7 @@ Obviously, the nodes have to exchange \emph{messages} with each other in order t
 \end{center}
 If we have two \emph{identical} computers connected to each other with a single communication link, both computers are started simultaneously, and both of them run the same deterministic algorithm, how could they ever end up in \emph{different} states?
 
-The answer is that it is not possible, without some additional assumptions. In practice, we could try to rely on some real-world imperfections (e.g., the computers are seldom perfectly synchronized), but in the theory of distributed algorithms we often assume that there is some \emph{explicit} way to \emph{break symmetry} between otherwise identical computers. In this chapter, we will have a brief look at two common assumption:
+The answer is that it is not possible, without some additional assumptions. In practice, we could try to rely on some real-world imperfections (e.g., the computers are seldom perfectly synchronized), but in the theory of distributed algorithms we often assume that there is some \emph{explicit} way to \emph{break symmetry} between otherwise identical computers. In this chapter, we will have a brief look at two common assumptions:
 \begin{itemize}[noitemsep]
     \item each computer has a unique name,
     \item each computer has a source of random bits.

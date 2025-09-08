@@ -488,7 +488,7 @@ Please answer by listing all elements of sets $V$, $E$, and $P$, and by listing 
 \end{ex}
 
 \begin{ex}[stopped nodes]\label{ex:stopped}
-    In the formalism of this chapter, a node that stops will repeatedly send messages to its neighbors. Show that this detail is irrelevant, and we can always re-write algorithms so that such messages are ignored. Put otherwise, a node that stops can also stop sending messages.
+    In the formalism of this chapter, a node that stops will repeatedly send messages to its neighbors. Show that this detail is irrelevant, and we can always rewrite algorithms so that such messages are ignored. Put otherwise, a node that stops can also stop sending messages.
     
     More precisely, assume that $A$ is a distributed algorithm that solves problem $\Pi$ on family $\calF$ given $\Pi'$ in time $T$. Show that there is another algorithm $A'$ such that (i)~$A'$ solves problem $\Pi$ on family $\calF$ given $\Pi'$ in time $T + O(1)$, and (ii)~in $A'$ the state transitions never depend on the messages that are sent by nodes that have stopped.
 \end{ex}

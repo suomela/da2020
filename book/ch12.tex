@@ -37,7 +37,7 @@ Many other models have been developed to study big data systems. From our perspe
   \item We work in the $\CONGEST$ model, as defined in Chapter~\chapterref{5}.
   \item We assume that the underlying graph $G$ is the complete graph on $n$ nodes, i.e., an $n$-clique. That is, every node is within one hop from everyone else.
 \end{itemize}
-Here it would not make much sense to study graph problems related to $G$ itself, as the graph is fixed. However, here each node $v$ gets some local input $f(v)$, and it has to produce some local output $g(v)$. The local inputs may encode e.g.\ some input graph $H \ne G$ (for example, $f(v)$ indicates which nodes are adjacent to $v$ in $H$), but here it makes also perfect sense to study other computational problem that are not related to graphs. Consider, for example, the task of computing the matrix product $X = AB$ of two $n \times n$ matrices $A$ and $B$. Here we may assume that initially each node knows one column of $A$ and one column of $B$, and when the algorithms stops, each node has to hold one column of $X$.
+Here it would not make much sense to study graph problems related to $G$ itself, as the graph is fixed. However, here each node $v$ gets some local input $f(v)$, and it has to produce some local output $g(v)$. The local inputs may encode e.g.\ some input graph $H \ne G$ (for example, $f(v)$ indicates which nodes are adjacent to $v$ in $H$), but here it also makes perfect sense to study other computational problems that are not related to graphs. Consider, for example, the task of computing the matrix product $X = AB$ of two $n \times n$ matrices $A$ and $B$. Here we may assume that initially each node knows one column of $A$ and one column of $B$, and when the algorithm stops, each node has to hold one column of $X$.
 
 \paragraph{Other Big Data Models.}
 
@@ -47,7 +47,7 @@ There are many other models of big data algorithms that have similar definitions
   \item \emph{MPC model} (massively parallel computation)~\cite{Karloff2010}, and
   \item \emph{$k$-machine model}~\cite{Klauck2015}.
 \end{itemize}
-Note that when we limit the amount of local memory, we also implicitly limit communication bandwidth (you can only send what you have in your memory). Conversely, if you have limited communication bandwidth and a fast algorithm, you do not have time to accumulate a large amount of data in your local memory, even if it was unbounded. Hence all of these model and their variants often lead to similar algorithm design challenges.
+Note that when we limit the amount of local memory, we also implicitly limit communication bandwidth (you can only send what you have in your memory). Conversely, if you have limited communication bandwidth and a fast algorithm, you do not have time to accumulate a large amount of data in your local memory, even if it was unbounded. Hence all of these models and their variants often lead to similar algorithm design challenges.
 
 
 \subsection{Asynchronous and Fault-Tolerant Algorithms}
