@@ -230,7 +230,7 @@ Consider the algorithm in Section~\ref{sec:apsp} in a tree. Assume your tree $T$
 \end{exs}
 
 \begin{exs}[APSP lower bounds]\label{ex:apsp-lb}
-    Assume that the input graph is connected. Prove that there is no algorithm that solves the APSP problem in time $o(|V|)$ in the $\CONGEST$ model.
+    Assume that the input graph is connected. Prove that there is no algorithm that solves the APSP problem in $o(|V|) + O(\diam(G))$ rounds in the $\CONGEST$ model. Put otherwise, show that even if the diameter of the graph is small, you will still need $\Omega(|V|)$ rounds to solve the APSP problem.
 \end{exs}
 
 
