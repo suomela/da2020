@@ -87,7 +87,7 @@ In Section~\ref{sec:so-paths} we saw that if we require that degree-$2$ nodes ha
 
 However, what happens if we relax the problem slightly and allow any orientation around degree-$2$ nodes? The proof of hardness from Section~\ref{ssec:so-hard-paths} no longer works, but does the problem get easier to solve?
 
-For concreteness, let us consider \emph{trees of maximum degree $3$}, that is, both active and passive nodes have degree at most $3$; the case of higher degrees is very similar. We define the problem so that nodes of degree $1$ and $2$ are unconstrained, but nodes of degree $3$ must have at least one outgoing edge. We can encode it as follows as a bipartite locally verifiable problem $\Pi_0 = (\Sigma_0, \collA_0, \collP_0)$:
+For concreteness, let us consider \emph{trees of maximum degree $3$}, that is, both active and passive nodes have degree at most $3$; the case of higher degrees is very similar. We define the problem so that nodes of degree $1$ and $2$ are unconstrained, but nodes of degree $3$ must have at least one outgoing edge. We can encode it as a bipartite locally verifiable problem $\Pi_0 = (\Sigma_0, \collA_0, \collP_0)$ as follows:
 \begin{align*}
 	\Sigma_0 &= \{ \mO, \mI \}, \\
 	\collA_0 &= \bigl\{ \, [\mO],\,[\mI],\,[\mO, \mO],\,[\mO,\mI],\,[\mI,\mI],\,[\mO,\mI,\mI],\,[\mO,\mO,\mI],\,[\mO,\mO,\mO] \, \bigr\}, \\
