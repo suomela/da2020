@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{amsmath,amsthm,enumitem,titlesec,xcolor}
+\usepackage{microtype}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[unicode]{hyperref}
+
+\hypersetup{
+    hidelinks,
+    pdftitle={Distributed Algorithms},
+    pdfauthor={Jukka Suomela},
+}
+
+\newcommand{\q}[2]{\paragraph{\mbox{Question #1: }#2.}}
+\newcommand{\sep}{{\centering \raisebox{-3mm}[0mm][0mm]{$*\quad*\quad*$}\par}}
+\newcommand{\hl}[1]{\textbf{\emph{#1}}}
+\newcommand{\cemph}[1]{\textbf{\emph{\boldmath #1}}}
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\ball}{ball}
+\DeclareMathOperator{\weight}{weight}
+
+\setitemize{noitemsep,leftmargin=3ex}
+
+\titleformat{\paragraph}[runin] {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+
+\begin{document}
+
+\noindent
+\emph{CS-E4510 Distributed Algorithms / Jukka Suomela\\
+exam, 1 December 2025}
+
+\paragraph{Material.}
+
+You can bring one A4 paper (two-sided), with any content you want. No other material or equipment is allowed in the exam.
+
+\paragraph{Instructions.}
+
+There are three questions; please \cemph{try to answer something in each of them}. If you cannot solve a problem entirely, please try to solve at least some special case or simpler version of the problem (see the hints for suggestions), or failing that, please at least explain what you tried and what went wrong.
+
+Your mathematical proofs can be short and informal. It is enough that a friendly, cooperative reader can understand your idea correctly and see why it makes sense. You are free to refer to algorithms and results that we discussed in the lectures, course material, and exercises; there is no need to repeat any of their details.
+
+\paragraph{Definitions (exactly the same as in the first exam).}
+
+Let $G=(V,E)$ be a graph. As usual, $n$ denotes the number of nodes in the input graph. For each node $v \in V$, let
+\[
+    N(v) = \{ u \in V : \dist(u,v) \le 1 \} = \ball_G(v, 1)
+\]
+denote the set of nodes within the radius-$1$ neighborhood of $v$. That is, $N(v)$ consists of $v$ itself and its neighbors. For a set $X \subseteq V$ and a node $v \in V$, let
+\[
+    \weight(v,X) = \left| N(v) \cap X \right|
+\]
+denote the number of nodes in $X$ that are within radius-$1$ neighborhoods of $v$. Finally, we define that $X \subseteq V$ is a \emph{one-two-happy set} if
+\[
+1 \le \weight(v,X) \le 2
+\]
+holds for all nodes $v \in V$. That is, every node must have exactly $1$ or $2$ nodes of $X$ in its radius-$1$ neighborhood.
+
+Recall also the usual definitions:
+\begin{itemize}
+    \item $G$ is a \emph{tree} if it is connected and acyclic.
+    \item $G$ is a \emph{path graph} if it is a tree where all nodes have degree at most $2$.
+    \item $G$ is a \emph{cycle graph} if it is connected and $2$-regular.
+\end{itemize}
+
+
+\newpage
+
+\q{1}{Covering maps}
+
+Prove: There is no deterministic distributed algorithm that finds a one-two-happy set in the following setting in the PN model:
+\begin{itemize}
+    \item Graph family: \cemph{cycle graphs}.
+    \item Local inputs: nothing.
+    \item Local outputs: a one-two-happy set.
+\end{itemize}
+\emph{Hint:} Use an argument based on covering maps. Alternatively, use a reduction (cf.\ question~3).
+
+\q{2}{Local neighborhoods}
+
+Prove: There is no deterministic distributed algorithm that finds a one-two-happy set in the following setting in the PN model in \cemph{$o(n)$} rounds:
+\begin{itemize}
+    \item Graph family: \cemph{path graphs}.
+    \item Local inputs: nothing.
+    \item Local outputs: a one-two-happy set.
+\end{itemize}
+\emph{Hint:} Use an argument based on local neighborhoods.
+
+\q{3}{Reductions}
+
+Prove: There is no deterministic distributed algorithm that finds a one-two-happy set in the following setting in the LOCAL model in \cemph{$O(1)$} rounds:
+\begin{itemize}
+    \item Graph family: \cemph{cycle graphs}.
+    \item Local inputs: unique identifier and the value of $n$. You can assume that the unique identifiers are chosen from $\{1,2,\dotsc,n^2\}$.
+    \item Local outputs: a one-two-happy set.
+\end{itemize}
+\emph{Hint:} Use a reduction: show that if you can find a one-two-happy set in constant time, you can also find a $3$-coloring in constant time. You can use the result from the textbook that shows that $3$-coloring in cycles is not possible in constant time; you do not need to prove it.
+
+\end{document}
